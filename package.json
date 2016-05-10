@@ -1,0 +1,46 @@
+{
+  "name": "FriendFinity",
+  "version": "1.0.0",
+  "description": "Social networking website for friends times infinity!!",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhatho89/FriendFinity.git"
+  },
+  "engines": {
+    "node": "5.6.0",
+    "npm": "3.6.x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhatho89/FriendFinity/issues"
+  },
+  "homepage": "https://github.com/nhatho89/FriendFinity#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "babel-core": "^6.2.0",
+    "babel-loader": "^6.2.0",
+    "babel-preset-react": "^6.1.18",
+    "bootstrap": "^3.3.6",
+    "bootstrap-slider": "^6.0.16",
+    "compass": "^0.1.1",
+    "flux": "^2.1.1",
+    "history": "^1.13.1",
+    "jquery": "^2.1.4",
+    "react": "^0.14.2",
+    "react-addons-linked-state-mixin": "^0.14.2",
+    "react-datepicker": "^0.23.2",
+    "react-dom": "^0.14.2",
+    "react-modal": "^0.6.1",
+    "react-router": "^1.0.0-rc4",
+    "webpack": "^1.12.2"
+  }
+}

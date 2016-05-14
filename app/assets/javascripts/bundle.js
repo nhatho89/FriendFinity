@@ -24051,6 +24051,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var LeftNavigation = __webpack_require__(213);
+	var Newsfeed = __webpack_require__(212);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
@@ -24059,8 +24061,17 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Home Page'
+	      { className: 'home-page-container row' },
+	      React.createElement(
+	        'div',
+	        { className: 'left-navigation' },
+	        React.createElement(LeftNavigation, null)
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'newsfeed' },
+	        React.createElement(Newsfeed, null)
+	      )
 	    );
 	  }
 	
@@ -24261,6 +24272,50 @@
 	});
 	
 	module.exports = SignUp;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Newsfeed = React.createClass({
+	  displayName: 'Newsfeed',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Newsfeed'
+	    );
+	  }
+	
+	});
+	
+	module.exports = Newsfeed;
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var LeftNavigation = React.createClass({
+	  displayName: 'LeftNavigation',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Left Navigation'
+	    );
+	  }
+	
+	});
+	
+	module.exports = LeftNavigation;
 
 /***/ }
 /******/ ]);

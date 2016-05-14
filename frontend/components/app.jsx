@@ -16,6 +16,7 @@ var App = React.createClass({
   },
 
   userChange: function() {
+    
   },
 
   render: function() {

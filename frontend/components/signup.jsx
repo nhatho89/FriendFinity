@@ -2,7 +2,7 @@ var React = require('react');
 
 var SignUp = React.createClass({
   handleSubmit: function() {
-
+    
   },
 
   render: function() {
@@ -56,7 +56,7 @@ var SignUp = React.createClass({
               required
               />
         </div>
-      
+
 
         <div className="checkbox" id="signUpCheckbox">
           <div className="remember-me-container">

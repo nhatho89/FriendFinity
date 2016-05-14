@@ -48,11 +48,22 @@
 	var ReactDom = __webpack_require__(158);
 	var ReactRouter = __webpack_require__(159);
 	var Router = __webpack_require__(159).Router;
+	var IndexRoute = ReactRouter.IndexRoute;
 	var Route = __webpack_require__(159).Route;
 	var hashHistory = __webpack_require__(159).hashHistory;
 	var Redirect = ReactRouter.Redirect;
 	var App = __webpack_require__(206);
-	var routes = React.createElement(Route, { component: App, path: '/' });
+	var Homepage = __webpack_require__(207);
+	var LandingPage = __webpack_require__(208);
+	var FriendsIndex = __webpack_require__(209);
+	
+	var routes = React.createElement(
+	  Route,
+	  { component: App, path: '/' },
+	  React.createElement(IndexRoute, { component: LandingPage }),
+	  React.createElement(Route, { path: 'home', component: Homepage }),
+	  React.createElement(Route, { path: 'friends', component: FriendsIndex })
+	);
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  var root = document.querySelector('#content');
@@ -24027,12 +24038,229 @@
 	    return React.createElement(
 	      "div",
 	      { className: "app" },
-	      "App"
+	      "App",
+	      this.props.children
 	    );
 	  }
 	});
 	
 	module.exports = App;
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Homepage = React.createClass({
+	  displayName: 'Homepage',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Home Page'
+	    );
+	  }
+	
+	});
+	
+	module.exports = Homepage;
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var SignUp = __webpack_require__(211);
+	
+	var LandingPage = React.createClass({
+	  displayName: 'LandingPage',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'landing-page-container row' },
+	      React.createElement(
+	        'div',
+	        { className: 'left-page' },
+	        React.createElement(
+	          'div',
+	          { className: 'landing-slogan' },
+	          React.createElement(
+	            'p',
+	            { className: 'slogan' },
+	            'Forge friendships that will last to infinity and beyond!'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'p',
+	            null,
+	            React.createElement(
+	              'strong',
+	              null,
+	              'Share photos'
+	            ),
+	            ' from friends!'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            React.createElement(
+	              'strong',
+	              null,
+	              'Share whats new'
+	            ),
+	            ' in your life on your timeline!'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            React.createElement(
+	              'strong',
+	              null,
+	              'Keep up with friends '
+	            ),
+	            ' using your news feed!'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'right-page' },
+	        React.createElement(SignUp, null)
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = LandingPage;
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PropTypes = React.PropTypes;
+	
+	var FriendsIndex = React.createClass({
+	  displayName: 'FriendsIndex',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Friends'
+	    );
+	  }
+	
+	});
+	
+	module.exports = FriendsIndex;
+
+/***/ },
+/* 210 */,
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var SignUp = React.createClass({
+	  displayName: 'SignUp',
+	
+	  handleSubmit: function () {},
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'signup-container col' },
+	      React.createElement(
+	        'form',
+	        { className: 'form-auth', onSubmit: this.handleSubmit },
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input row' },
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'firstname',
+	            className: 'auth-control',
+	            placeholder: 'First name',
+	            required: true,
+	            autoFocus: true
+	          }),
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'lastname',
+	            className: 'auth-control',
+	            placeholder: 'Last name',
+	            required: true,
+	            autoFocus: true
+	          })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'email',
+	            id: 'email',
+	            className: 'auth-control',
+	            placeholder: 'Email',
+	            required: true
+	          })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'password',
+	            id: 'password',
+	            className: 'auth-control',
+	            placeholder: 'Password',
+	            required: true
+	          }),
+	          React.createElement('input', {
+	            type: 'password',
+	            id: 'passwordConfirmation',
+	            className: 'auth-control',
+	            placeholder: 'Confirm Password',
+	            required: true
+	          })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'checkbox', id: 'signUpCheckbox' },
+	          React.createElement(
+	            'div',
+	            { className: 'remember-me-container' },
+	            React.createElement(
+	              'label',
+	              { className: 'remember-me' },
+	              React.createElement('input', { type: 'checkbox', value: 'agreement', required: true }),
+	              'I agree to the terms and conditions.'
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'button',
+	          {
+	            className: 'auth-button',
+	            type: 'submit' },
+	          'Sign Up'
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = SignUp;
 
 /***/ }
 /******/ ]);

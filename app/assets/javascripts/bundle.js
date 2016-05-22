@@ -24020,9 +24020,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var Navbar = __webpack_require__(214);
 	
 	var App = React.createClass({
-	  displayName: "App",
+	  displayName: 'App',
 	
 	  getInitialState: function () {
 	    return {};
@@ -24036,9 +24037,9 @@
 	
 	  render: function () {
 	    return React.createElement(
-	      "div",
-	      { className: "app" },
-	      "App",
+	      'div',
+	      { className: 'app' },
+	      React.createElement(Navbar, null),
 	      this.props.children
 	    );
 	  }
@@ -24096,7 +24097,7 @@
 	      { className: 'landing-page-container row' },
 	      React.createElement(
 	        'div',
-	        { className: 'left-page' },
+	        { className: 'left-page col' },
 	        React.createElement(
 	          'div',
 	          { className: 'landing-slogan' },
@@ -24188,6 +24189,8 @@
 	
 	  handleSubmit: function () {},
 	
+	  handleDemo: function () {},
+	
 	  render: function () {
 	    return React.createElement(
 	      'div',
@@ -24246,6 +24249,64 @@
 	        ),
 	        React.createElement(
 	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'auth-input' },
+	            React.createElement(
+	              'input',
+	              {
+	                type: 'radio',
+	                value: 'male',
+	                required: true
+	              },
+	              'Male'
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'auth-input' },
+	            React.createElement(
+	              'input',
+	              {
+	                type: 'radio',
+	                value: 'female',
+	                required: true
+	              },
+	              'Female'
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input row' },
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'month',
+	            className: 'auth-control',
+	            placeholder: 'month',
+	            required: true,
+	            autoFocus: true
+	          }),
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'day',
+	            className: 'auth-control',
+	            placeholder: 'day',
+	            required: true,
+	            autoFocus: true
+	          }),
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'year',
+	            className: 'auth-control',
+	            placeholder: 'year',
+	            required: true,
+	            autoFocus: true
+	          })
+	        ),
+	        React.createElement(
+	          'div',
 	          { className: 'checkbox', id: 'signUpCheckbox' },
 	          React.createElement(
 	            'div',
@@ -24264,6 +24325,14 @@
 	            className: 'auth-button',
 	            type: 'submit' },
 	          'Sign Up'
+	        ),
+	        React.createElement(
+	          'button',
+	          {
+	            className: 'demo-button',
+	            onClick: this.handleDemo,
+	            type: 'button' },
+	          'Demo'
 	        )
 	      )
 	    );
@@ -24278,6 +24347,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var StatusUpdate = __webpack_require__(215);
+	var Feed = __webpack_require__(216);
 	
 	var Newsfeed = React.createClass({
 	  displayName: 'Newsfeed',
@@ -24287,7 +24358,9 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      'Newsfeed'
+	      'Newsfeed',
+	      React.createElement(StatusUpdate, null),
+	      React.createElement(Feed, null)
 	    );
 	  }
 	
@@ -24316,6 +24389,97 @@
 	});
 	
 	module.exports = LeftNavigation;
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(159).History;
+	
+	var Navbar = React.createClass({
+	  displayName: 'Navbar',
+	
+	  mixins: [History],
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'navbar' },
+	      React.createElement(
+	        'a',
+	        { className: 'logo', href: '/#' },
+	        'Landing'
+	      ),
+	      React.createElement(
+	        'a',
+	        { className: 'logo', href: '/#/home' },
+	        'Home'
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Navbar;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var StatusUpdate = React.createClass({
+	  displayName: 'StatusUpdate',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'form',
+	        { className: 'status-auth', onSubmit: this.handleSubmit },
+	        React.createElement(
+	          'div',
+	          { className: 'status-udate' },
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'status',
+	            placeholder: 'What\'s on your mind?',
+	            required: true,
+	            autoFocus: true
+	          })
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = StatusUpdate;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Feed = React.createClass({
+	  displayName: 'Feed',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Feed'
+	    );
+	  }
+	
+	});
+	
+	module.exports = Feed;
 
 /***/ }
 /******/ ]);

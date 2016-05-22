@@ -2,7 +2,11 @@ var React = require('react');
 
 var SignUp = React.createClass({
   handleSubmit: function() {
-    
+
+  },
+
+  handleDemo: function() {
+
   },
 
   render: function() {
@@ -56,6 +60,53 @@ var SignUp = React.createClass({
               required
               />
         </div>
+        <div className="row">
+          <div className="auth-input">
+            <input
+              type="radio"
+              value="male"
+              required
+              >Male</input>
+
+          </div>
+          <div className="auth-input">
+            <input
+              type="radio"
+              value="female"
+              required
+              >Female</input>
+
+          </div>
+        </div>
+
+        <div className="auth-input row">
+            <input
+                type="text"
+                id="month"
+                className="auth-control"
+                placeholder='month'
+                required
+                autoFocus
+            />
+            <input
+                type="text"
+                id="day"
+                className="auth-control"
+                placeholder='day'
+                required
+                autoFocus
+            />
+            <input
+                type="text"
+                id="year"
+                className="auth-control"
+                placeholder='year'
+                required
+                autoFocus
+            />
+        </div>
+
+
 
 
         <div className="checkbox" id="signUpCheckbox">
@@ -70,6 +121,12 @@ var SignUp = React.createClass({
           className="auth-button"
           type="submit">
           Sign Up
+        </button>
+        <button
+          className="demo-button"
+          onClick={this.handleDemo}
+          type="button">
+          Demo
         </button>
       </form>
       </div>

@@ -1,5 +1,5 @@
 .landing-page-container {
-
+  margin: 8px;
 }
 
 .left-page {
@@ -8,4 +8,12 @@
 
 .right-page {
   width: 50%;
+}
+
+#email {
+  width: 506px;
+}
+
+.auth-control {
+  width: 250px;
 }

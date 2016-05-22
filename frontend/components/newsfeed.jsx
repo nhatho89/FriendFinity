@@ -1,4 +1,6 @@
 var React = require('react');
+var StatusUpdate = require('./statusUpdate');
+var Feed = require('./feed');
 
 var Newsfeed = React.createClass({
 
@@ -6,6 +8,8 @@ var Newsfeed = React.createClass({
     return (
       <div>
         Newsfeed
+        <StatusUpdate/>
+        <Feed/>
       </div>
     );
   }

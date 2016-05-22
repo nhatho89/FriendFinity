@@ -6,7 +6,7 @@ var LandingPage = React.createClass({
   render: function() {
     return (
       <div className="landing-page-container row">
-        <div className="left-page">
+        <div className="left-page col">
           <div className="landing-slogan">
             <p className="slogan">
               Forge friendships that will last to infinity and beyond!

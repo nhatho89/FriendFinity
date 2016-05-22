@@ -1,4 +1,5 @@
 var React = require('react');
+var Navbar = require('./navbar');
 
 var App = React.createClass({
   getInitialState: function() {
@@ -16,13 +17,13 @@ var App = React.createClass({
   },
 
   userChange: function() {
-    
+
   },
 
   render: function() {
     return (
       <div className="app">
-        App
+        <Navbar/>
         {this.props.children}
       </div>
     );

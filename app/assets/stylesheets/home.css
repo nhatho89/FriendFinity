@@ -1,8 +1,10 @@
 .left-navigation {
+  margin: 8px;
   width: 20%;
   height: 100%;
 }
 
 .newsfeed {
+  margin: 8px;
   width: 80%;
 }

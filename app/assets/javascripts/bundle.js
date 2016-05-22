@@ -53,9 +53,9 @@
 	var hashHistory = __webpack_require__(159).hashHistory;
 	var Redirect = ReactRouter.Redirect;
 	var App = __webpack_require__(206);
-	var Homepage = __webpack_require__(207);
-	var LandingPage = __webpack_require__(208);
-	var FriendsIndex = __webpack_require__(209);
+	var Homepage = __webpack_require__(208);
+	var LandingPage = __webpack_require__(213);
+	var FriendsIndex = __webpack_require__(215);
 	
 	var routes = React.createElement(
 	  Route,
@@ -24020,7 +24020,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Navbar = __webpack_require__(214);
+	var Navbar = __webpack_require__(207);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -24052,8 +24052,41 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var LeftNavigation = __webpack_require__(213);
-	var Newsfeed = __webpack_require__(212);
+	var History = __webpack_require__(159).History;
+	
+	var Navbar = React.createClass({
+	  displayName: 'Navbar',
+	
+	  mixins: [History],
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'navbar' },
+	      React.createElement(
+	        'a',
+	        { className: 'logo', href: '/#' },
+	        'Landing'
+	      ),
+	      React.createElement(
+	        'a',
+	        { className: 'logo', href: '/#/home' },
+	        'Home'
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Navbar;
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var LeftNavigation = __webpack_require__(209);
+	var Newsfeed = __webpack_require__(210);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
@@ -24081,11 +24114,117 @@
 	module.exports = Homepage;
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var SignUp = __webpack_require__(211);
+	
+	var LeftNavigation = React.createClass({
+	  displayName: 'LeftNavigation',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Left Navigation'
+	    );
+	  }
+	
+	});
+	
+	module.exports = LeftNavigation;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StatusUpdate = __webpack_require__(211);
+	var Feed = __webpack_require__(212);
+	
+	var Newsfeed = React.createClass({
+	  displayName: 'Newsfeed',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Newsfeed',
+	      React.createElement(StatusUpdate, null),
+	      React.createElement(Feed, null)
+	    );
+	  }
+	
+	});
+	
+	module.exports = Newsfeed;
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var StatusUpdate = React.createClass({
+	  displayName: 'StatusUpdate',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'form',
+	        { className: 'status-auth', onSubmit: this.handleSubmit },
+	        React.createElement(
+	          'div',
+	          { className: 'status-udate' },
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'status',
+	            placeholder: 'What\'s on your mind?',
+	            required: true,
+	            autoFocus: true
+	          })
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = StatusUpdate;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Feed = React.createClass({
+	  displayName: 'Feed',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Feed'
+	    );
+	  }
+	
+	});
+	
+	module.exports = Feed;
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var SignUp = __webpack_require__(214);
 	
 	var LandingPage = React.createClass({
 	  displayName: 'LandingPage',
@@ -24155,31 +24294,7 @@
 	module.exports = LandingPage;
 
 /***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var PropTypes = React.PropTypes;
-	
-	var FriendsIndex = React.createClass({
-	  displayName: 'FriendsIndex',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      'Friends'
-	    );
-	  }
-	
-	});
-	
-	module.exports = FriendsIndex;
-
-/***/ },
-/* 210 */,
-/* 211 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -24343,143 +24458,27 @@
 	module.exports = SignUp;
 
 /***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var StatusUpdate = __webpack_require__(215);
-	var Feed = __webpack_require__(216);
-	
-	var Newsfeed = React.createClass({
-	  displayName: 'Newsfeed',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      'Newsfeed',
-	      React.createElement(StatusUpdate, null),
-	      React.createElement(Feed, null)
-	    );
-	  }
-	
-	});
-	
-	module.exports = Newsfeed;
-
-/***/ },
-/* 213 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	
-	var LeftNavigation = React.createClass({
-	  displayName: 'LeftNavigation',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      'Left Navigation'
-	    );
-	  }
-	
-	});
-	
-	module.exports = LeftNavigation;
-
-/***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var History = __webpack_require__(159).History;
-	
-	var Navbar = React.createClass({
-	  displayName: 'Navbar',
-	
-	  mixins: [History],
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'navbar' },
-	      React.createElement(
-	        'a',
-	        { className: 'logo', href: '/#' },
-	        'Landing'
-	      ),
-	      React.createElement(
-	        'a',
-	        { className: 'logo', href: '/#/home' },
-	        'Home'
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Navbar;
-
-/***/ },
 /* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var PropTypes = React.PropTypes;
 	
-	var StatusUpdate = React.createClass({
-	  displayName: 'StatusUpdate',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'form',
-	        { className: 'status-auth', onSubmit: this.handleSubmit },
-	        React.createElement(
-	          'div',
-	          { className: 'status-udate' },
-	          React.createElement('input', {
-	            type: 'text',
-	            id: 'status',
-	            placeholder: 'What\'s on your mind?',
-	            required: true,
-	            autoFocus: true
-	          })
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = StatusUpdate;
-
-/***/ },
-/* 216 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	
-	var Feed = React.createClass({
-	  displayName: 'Feed',
+	var FriendsIndex = React.createClass({
+	  displayName: 'FriendsIndex',
 	
 	
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      null,
-	      'Feed'
+	      'Friends'
 	    );
 	  }
 	
 	});
 	
-	module.exports = Feed;
+	module.exports = FriendsIndex;
 
 /***/ }
 /******/ ]);

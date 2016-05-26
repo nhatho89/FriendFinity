@@ -1,6 +1,28 @@
 var React = require('react');
+var PostAction = require('../actions/postAction');
+var SessionStore = require('../stores/sessionStore');
 
 var StatusUpdate = React.createClass({
+  getInitialState: function() {
+    return {
+      body: "Something is wrong"
+    }
+  },
+
+  handleSubmit: function(e) {
+    debugger
+    e.preventDefault();
+    PostAction.createNewPost({
+      authorId: SessionStore.currentUser().id,
+      body: this.state.body
+    })
+  },
+
+  statusHandler: function(e) {
+    this.setState({
+      body: e.target.value
+    })
+  },
 
   render: function() {
     return (
@@ -11,6 +33,7 @@ var StatusUpdate = React.createClass({
               type="text"
               id="status"
               placeholder="What's on your mind?"
+              onChange={this.statusHandler}
               required
               autoFocus
             />

@@ -18,7 +18,19 @@ User.create!(
   gender: "M",
   cover_pic: "",
   profile_pic: ""
+  )
 
+User.create!(
+  email: "test2@gmail.com",
+  password: "qweasd",
+  first_name: "test",
+  last_name: "account",
+  day: 12,
+  month: "May",
+  year: 1989,
+  gender: "M",
+  cover_pic: "",
+  profile_pic: ""
   )
 
 Post.create!(

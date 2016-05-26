@@ -1,14 +1,17 @@
 class Api::PostsController < ApplicationController
   def index
     @posts = Post.all
-    if params[:user_id]
-      @posts = @posts.where(user_id: params[:author_id].to_i).order(created_at: :desc)
+
+    if post_params[:author_id]
+      @posts = @posts.where(author_id: post_params[:author_id].to_i).order(created_at: :desc)
     end
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author_id = current_user.id
+    @post = Post.new(
+      author_id: post_params[:author_id].to_i,
+      body: post_params[:body]
+    )
 
     if @post.save!
       render :show

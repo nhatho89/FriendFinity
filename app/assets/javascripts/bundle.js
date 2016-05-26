@@ -34131,10 +34131,32 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var PostAction = __webpack_require__(271);
+	var SessionStore = __webpack_require__(220);
 	
 	var StatusUpdate = React.createClass({
 	  displayName: 'StatusUpdate',
 	
+	  getInitialState: function () {
+	    return {
+	      body: "Something is wrong"
+	    };
+	  },
+	
+	  handleSubmit: function (e) {
+	    debugger;
+	    e.preventDefault();
+	    PostAction.createNewPost({
+	      authorId: SessionStore.currentUser().id,
+	      body: this.state.body
+	    });
+	  },
+	
+	  statusHandler: function (e) {
+	    this.setState({
+	      body: e.target.value
+	    });
+	  },
 	
 	  render: function () {
 	    return React.createElement(
@@ -34150,6 +34172,7 @@
 	            type: 'text',
 	            id: 'status',
 	            placeholder: 'What\'s on your mind?',
+	            onChange: this.statusHandler,
 	            required: true,
 	            autoFocus: true
 	          })
@@ -34690,8 +34713,12 @@
 	var PostAction = {
 	
 	  getAllPosts: function (userId) {
-	    debugger;
 	    PostUtil.fetchAllPosts(userId, this.receiveAllPosts);
+	  },
+	
+	  createNewPost: function (post) {
+	    debugger;
+	    PostUtil.createNewPost(post, this.receiveNewPost);
 	  },
 	
 	  receiveAllPosts: function (posts) {
@@ -34701,7 +34728,7 @@
 	    });
 	  },
 	
-	  createNewPost: function (post) {
+	  receiveNewPost: function (post) {
 	    AppDispatcher.dispatch({
 	      actionType: PostConstants.POST_CREATED,
 	      post: post
@@ -34719,13 +34746,38 @@
 	var PostUtil = {
 	
 	  fetchAllPosts: function (userId, receiveAllPosts) {
+	    debugger;
 	    $.ajax({
 	      url: "api/posts",
 	      method: "get",
-	      data: { author_id: userId },
+	      data: { post: {
+	          author_id: userId,
+	          body: ""
+	        }
+	      },
 	      success: function (posts) {
 	        debugger;
 	        receiveAllPosts(posts);
+	      },
+	      error: function (error, status) {
+	        debugger;
+	      }
+	    });
+	  },
+	
+	  createNewPost: function (post, receiveNewPost) {
+	    debugger;
+	    $.ajax({
+	      url: "api/posts",
+	      method: "post",
+	      data: { post: {
+	          author_id: post.authorId,
+	          body: post.body
+	        }
+	      },
+	      success: function (posts) {
+	        debugger;
+	        receiveNewPost(posts);
 	      },
 	      error: function (error, status) {
 	        debugger;

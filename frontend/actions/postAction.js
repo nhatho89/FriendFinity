@@ -5,8 +5,12 @@ var AppDispatcher = require('../dispatchers/dispatcher');
 var PostAction = {
 
   getAllPosts: function(userId){
-    debugger
     PostUtil.fetchAllPosts(userId, this.receiveAllPosts);
+  },
+
+  createNewPost: function(post) {
+    debugger
+    PostUtil.createNewPost(post, this.receiveNewPost);
   },
 
   receiveAllPosts: function (posts) {
@@ -16,7 +20,7 @@ var PostAction = {
     });
   },
 
-  createNewPost: function (post) {
+  receiveNewPost: function (post) {
     AppDispatcher.dispatch({
       actionType: PostConstants.POST_CREATED,
       post: post

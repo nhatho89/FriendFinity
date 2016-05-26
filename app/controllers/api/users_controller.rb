@@ -10,7 +10,8 @@ class Api::UsersController < ApplicationController
     day: user_params[:day].to_i,
     month: user_params[:month],
     year: user_params[:year].to_i,
-    gender: user_params[:gender],)
+    gender: user_params[:gender]
+    )
     if @user.save
       sign_in(@user)
       render json: current_user

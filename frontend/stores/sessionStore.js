@@ -9,7 +9,6 @@ var SessionStore = new Store(AppDispatcher);
 var _currentUser = {};
 
 var receiveUser = function(user) {
-  debugger
   _currentUser = user;
 };
 

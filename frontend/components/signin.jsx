@@ -1,8 +1,10 @@
 var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var SessionActions = require('../actions/sessionAction.js');
+var History = require('react-router').History;
 
 var LoginModalForm = React.createClass({
+  mixins: [History],
   mixins: [LinkedStateMixin],
 
   getInitialState: function() {
@@ -19,6 +21,7 @@ var LoginModalForm = React.createClass({
       email: this.state.email,
       password: this.state.password
     });
+
   },
 
   fillOutLogin: function() {
@@ -29,6 +32,7 @@ var LoginModalForm = React.createClass({
       email: 'test@gmail.com',
       password: 'qweasd'
     });
+    
     // this.props.closeModal();
 
   },

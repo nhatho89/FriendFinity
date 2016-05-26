@@ -20,3 +20,8 @@ User.create!(
   profile_pic: ""
 
   )
+
+Post.create!(
+  body: "this app is pretty empty",
+  author_id: 1
+)

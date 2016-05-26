@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :posts,
+    foreign_key: :author_id,
+    primary_key: :id,
+    class_name: "Post"
+
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     return nil unless user && user.is_password?(password)

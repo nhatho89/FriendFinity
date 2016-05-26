@@ -48,7 +48,6 @@ var SignUp = React.createClass({
   validateInputs: function() {
     var password = this.state.password;
     var passwordConfirm = this.state.passwordConfirm
-    debugger
     if (password.length < 6){
       this.errors.push("Password length too short (minimum: 6 characters)!");
     }
@@ -62,7 +61,6 @@ var SignUp = React.createClass({
 
   handleDemo: function(e) {
     e.preventDefault();
-    debugger
   },
 
   handleFirstName: function(e) {

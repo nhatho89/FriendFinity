@@ -4,7 +4,6 @@ var SessionStore = require('../stores/sessionStore');
 
 var UserUtil = {
   createUserAccount: function(credentials, receiveNewUser) {
-    debugger
     $.ajax({
       url: 'api/users',
       method: "post",
@@ -14,7 +13,6 @@ var UserUtil = {
                 receiveNewUser(user);
               },
       error: function(error, status){
-                debugger;
                 // console.log(status)
               }
     });

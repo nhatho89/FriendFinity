@@ -5,7 +5,6 @@ var UserUtil = require('../util/userUtil.js');
 var SessionActions = {
 
   signUp: function(userInfo){
-    debugger
     UserUtil.createUserAccount(userInfo, this.receiveNewUser);
   },
 

@@ -1,0 +1,5 @@
+module.exports = {
+  POSTS_RECEIVED: "POSTS_RECEIVED",
+  POST_CREATED: "POST_CREATED",
+
+}

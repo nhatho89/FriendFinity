@@ -25,6 +25,10 @@ var Navbar = React.createClass({
 
   userChange: function() {
     this.setState({ user: SessionStore.currentUser() });
+    if (this.state.user.id) {
+
+      this.history.push({pathname: "home/"});
+    }
   },
 
   render: function() {

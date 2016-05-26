@@ -1,24 +1,157 @@
 var React = require('react');
+var SessionActions = require('../actions/sessionAction');
+
 
 var SignUp = React.createClass({
+
+  getInitialState: function() {
+    return ({
+      firstName: "",
+      lastName: "",
+      password: "",
+      passwordConfirm: "",
+      email: "",
+      gender: "",
+      day: 0,
+      month: "",
+      year: 0,
+      errors: []
+    });
+  },
+
   handleSubmit: function() {
+    this.errors = [];
+    this.validateInputs()
+    // this.props.closeModal();
+    console.log(this.errors);
+    if (this.errors.length > 0){
+      this.setState({
+        errors: this.errors
+      });
+    } else {
+      SessionActions.signUp({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        gender: this.state.gender,
+        day: this.state.day,
+        month: this.state.month,
+        year: this.state.year
+
+      });
+
+    }
 
   },
 
-  handleDemo: function() {
+  validateInputs: function() {
+    var password = this.state.password;
+    var passwordConfirm = this.state.passwordConfirm
+    debugger
+    if (password.length < 6){
+      this.errors.push("Password length too short (minimum: 6 characters)!");
+    }
+    if (password !== passwordConfirm) {
+      this.errors.push("Password confirmation and Password must match!");
+    }
+    // if (this.state.email.) {
+    //
+    // }
+  },
 
+  handleDemo: function(e) {
+    e.preventDefault();
+    debugger
+  },
+
+  handleFirstName: function(e) {
+    e.preventDefault();
+    // debugger
+    this.setState({
+      firstName: e.target.value
+    })
+  },
+
+  handleLastName: function(e) {
+    e.preventDefault();
+    this.setState({
+      lastName: e.target.value
+    })
+  },
+
+  handleEmail: function(e) {
+    e.preventDefault();
+    this.setState({
+      email: e.target.value
+    })
+  },
+
+  handlePassword: function(e) {
+    e.preventDefault();
+    this.setState({
+      password: e.target.value
+    })
+  },
+
+  handlePasswordConfirm: function(e) {
+    e.preventDefault();
+    this.setState({
+      passwordConfirm: e.target.value
+    })
+  },
+
+  handleGender: function(e) {
+    e.preventDefault();
+    // debugger
+    this.setState({
+      gender: e.target.value
+    })
+  },
+
+  handleDay: function(e) {
+    e.preventDefault();
+    this.setState({
+      day: e.target.value
+    })
+  },
+
+  handleMonth: function(e) {
+    e.preventDefault();
+    this.setState({
+      month: e.target.value
+    })
+  },
+
+  handleYear: function(e) {
+    e.preventDefault();
+    this.setState({
+      year: e.target.value
+    })
   },
 
   render: function() {
+    var alert = this.state.errors.map(function(error, idx){
+        return (
+          <div
+            key={"error"+idx}
+            className="alert alert-danger"
+            role="alert">
+            <strong>{error}</strong>
+          </div>
+        );
+      });
+
     return (
       <div className="signup-container col">
-
+        {alert}
         <form className='form-auth' onSubmit={this.handleSubmit}>
         <div className="auth-input row">
             <input
                 type="text"
                 id="firstname"
                 className="auth-control"
+                onChange={this.handleFirstName}
                 placeholder='First name'
                 required
                 autoFocus
@@ -27,6 +160,7 @@ var SignUp = React.createClass({
                 type="text"
                 id="lastname"
                 className="auth-control"
+                onChange={this.handleLastName}
                 placeholder='Last name'
                 required
                 autoFocus
@@ -38,6 +172,7 @@ var SignUp = React.createClass({
               type="email"
               id="email"
               className="auth-control"
+              onChange={this.handleEmail}
               placeholder='Email'
               required
               />
@@ -48,6 +183,7 @@ var SignUp = React.createClass({
               type="password"
               id="password"
               className="auth-control"
+              onChange={this.handlePassword}
               placeholder='Password'
               required
               />
@@ -56,6 +192,7 @@ var SignUp = React.createClass({
               type="password"
               id="passwordConfirmation"
               className="auth-control"
+              onChange={this.handlePasswordConfirm}
               placeholder='Confirm Password'
               required
               />
@@ -65,6 +202,7 @@ var SignUp = React.createClass({
             <input
               type="radio"
               value="male"
+              onClick={this.handleGender}
               required
               >Male</input>
 
@@ -73,6 +211,7 @@ var SignUp = React.createClass({
             <input
               type="radio"
               value="female"
+              onClick={this.handleGender}
               required
               >Female</input>
 
@@ -85,21 +224,24 @@ var SignUp = React.createClass({
                 id="month"
                 className="auth-control"
                 placeholder='month'
+                onChange={this.handleMonth}
                 required
                 autoFocus
             />
             <input
-                type="text"
+                type="integer"
                 id="day"
                 className="auth-control"
+                onChange={this.handleDay}
                 placeholder='day'
                 required
                 autoFocus
             />
             <input
-                type="text"
+                type="integer"
                 id="year"
                 className="auth-control"
+                onChange={this.handleYear}
                 placeholder='year'
                 required
                 autoFocus

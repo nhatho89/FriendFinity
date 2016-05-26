@@ -1,0 +1,7 @@
+var SessionConstants = {
+  RECEIVENEWUSER: "RECEIVENEWUSER",
+  RECEIVEUSER: "RECEIVEUSER",
+  REMOVECURRENTUSER: "REMOVECURRENTUSER"
+};
+
+module.exports = SessionConstants;

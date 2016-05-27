@@ -37,7 +37,9 @@ var Navbar = React.createClass({
 
         <div id="navbar" className="row space-between">
 
-          <NavBarLeft/>
+          <NavBarLeft
+            user={this.state.user}
+            />
 
           <NavBarRight
             user={this.state.user}/>

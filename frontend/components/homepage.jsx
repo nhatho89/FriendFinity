@@ -1,17 +1,31 @@
 var React = require('react');
 var LeftNavigation = require('./leftNavigation');
 var Newsfeed = require('./newsfeed');
+var SessionStore = require('../stores/sessionStore');
 
 var Homepage = React.createClass({
+  getInitialState: function() {
+    return ({
+      user: SessionStore.currentUser()
+    })
+  },
+
+  componentDidMount: function() {
+    this.userListener = SessionStore.addListener(this.userChange);
+  },
+
+  userChange: function() {
+    this.setState({ user: SessionStore.currentUser() });
+  },
 
   render: function() {
     return (
       <div className="home-page-container row">
         <div className="left-navigation">
-          <LeftNavigation/>
+          <LeftNavigation user={this.state.user}/>
         </div>
         <div className="newsfeed">
-          <Newsfeed/>
+          <Newsfeed user={this.state.user}/>
         </div>
       </div>
     );

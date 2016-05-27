@@ -12,41 +12,28 @@ var NavBarRight = React.createClass({
     this.history.push({pathname: "/"});
   },
 
-  redirectUserProfile: function() {
-    this.history.push({pathname: "users/" + this.props.user.id});
-  },
-
-  redirectHostProfile: function() {
-    this.history.push({pathname: "host/"})
-  },
-
-  // <a onClick={this.redirectHostProfile}>My Rooms</a>
   render: function() {
-
-    // <img className="profile-pic" src={this.props.user.profile_pic}></img>
-    var display;
+    // <div className="one">
+    //   <img className="nav-profile-pic" src={this.props.user.profile_pic}></img>
+    // </div>
+    // <div className="two">
+    //   <p>{this.props.user.first_name}</p>
+    // </div>
     if (this.props.user.first_name) {
-      display = (
-        <div className="signInUp">
-          <div>
-            <p>{this.props.user.first_name}</p>
+      return (
+        <div className="row">
+          <div className="three">
             <p onClick={this.handleSignOut}>Sign out</p>
           </div>
-
         </div>
       )
     } else {
-      display = (
+      return (
         <div className="signed-out-container">
           <Signin/>
         </div>
       )
     }
-    return (
-      <div className="navbar-right col center">
-        {display}
-      </div>
-    );
   }
 
 });

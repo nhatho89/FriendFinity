@@ -55,3 +55,16 @@
 .demo-auth-button {
   margin-right: 52px;
 }
+
+.navbar-search {
+  position: absolute;
+  top: 10px;
+  left: 65px;
+}
+
+.search {
+  width: 400px;
+  height: 25px;
+  padding-left: 10px;
+  font-size: 12px;
+}

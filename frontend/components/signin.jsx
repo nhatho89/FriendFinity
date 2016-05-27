@@ -32,12 +32,8 @@ var LoginModalForm = React.createClass({
       email: 'joey@friends.com',
       password: 'qweasd'
     });
-
-    // this.props.closeModal();
-
   },
 
-  // <img className="email-icon" src="/assets/icons/social.png"></img>
   render: function() {
     return(
       <form

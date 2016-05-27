@@ -1,7 +1,11 @@
 var React = require('react');
 var SignUp = require('./signup');
+var SessionStore = require('../stores/sessionStore');
+var History = require('react-router').History;
+
 
 var LandingPage = React.createClass({
+  mixins: History,
 
   render: function() {
     return (

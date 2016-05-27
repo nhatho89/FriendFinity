@@ -24084,7 +24084,9 @@
 	    return React.createElement(
 	      'div',
 	      { id: 'navbar', className: 'row space-between' },
-	      React.createElement(NavBarLeft, null),
+	      React.createElement(NavBarLeft, {
+	        user: this.state.user
+	      }),
 	      React.createElement(NavBarRight, {
 	        user: this.state.user })
 	    );
@@ -24133,11 +24135,8 @@
 	      email: 'joey@friends.com',
 	      password: 'qweasd'
 	    });
-	
-	    // this.props.closeModal();
 	  },
 	
-	  // <img className="email-icon" src="/assets/icons/social.png"></img>
 	  render: function () {
 	    return React.createElement(
 	      'form',
@@ -31397,31 +31396,20 @@
 	    this.history.push({ pathname: "/" });
 	  },
 	
-	  redirectUserProfile: function () {
-	    this.history.push({ pathname: "users/" + this.props.user.id });
-	  },
-	
-	  redirectHostProfile: function () {
-	    this.history.push({ pathname: "host/" });
-	  },
-	
-	  // <a onClick={this.redirectHostProfile}>My Rooms</a>
 	  render: function () {
-	
-	    // <img className="profile-pic" src={this.props.user.profile_pic}></img>
-	    var display;
+	    // <div className="one">
+	    //   <img className="nav-profile-pic" src={this.props.user.profile_pic}></img>
+	    // </div>
+	    // <div className="two">
+	    //   <p>{this.props.user.first_name}</p>
+	    // </div>
 	    if (this.props.user.first_name) {
-	      display = React.createElement(
+	      return React.createElement(
 	        'div',
-	        { className: 'signInUp' },
+	        { className: 'row' },
 	        React.createElement(
 	          'div',
-	          null,
-	          React.createElement(
-	            'p',
-	            null,
-	            this.props.user.first_name
-	          ),
+	          { className: 'three' },
 	          React.createElement(
 	            'p',
 	            { onClick: this.handleSignOut },
@@ -31430,17 +31418,12 @@
 	        )
 	      );
 	    } else {
-	      display = React.createElement(
+	      return React.createElement(
 	        'div',
 	        { className: 'signed-out-container' },
 	        React.createElement(Signin, null)
 	      );
 	    }
-	    return React.createElement(
-	      'div',
-	      { className: 'navbar-right col center' },
-	      display
-	    );
 	  }
 	
 	});
@@ -33417,6 +33400,7 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(159).History;
+	var SessionStore = __webpack_require__(220);
 	
 	var NavBarLeft = React.createClass({
 	  displayName: 'NavBarLeft',
@@ -33430,7 +33414,36 @@
 	  },
 	
 	  render: function () {
-	
+	    var display;
+	    if (this.props.user.first_name) {
+	      display = React.createElement(
+	        'div',
+	        { className: 'navbar-search' },
+	        React.createElement(
+	          'form',
+	          { className: 'row' },
+	          React.createElement('input', {
+	            type: 'text',
+	            className: 'search',
+	            placeholder: 'Search FriendFinity',
+	            required: true,
+	            autoFocus: true }),
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'auth-button',
+	              type: 'submit' },
+	            'Search'
+	          )
+	        )
+	      );
+	    } else {
+	      display = React.createElement(
+	        'p1',
+	        { className: 'logo-text', onClick: this.handleHomeClick },
+	        'riendFinity'
+	      );
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'navbar-left' },
@@ -33439,11 +33452,7 @@
 	        { className: 'absolute-logo' },
 	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
 	      ),
-	      React.createElement(
-	        'p1',
-	        { className: 'logo-text', onClick: this.handleHomeClick },
-	        'riendFinity'
-	      )
+	      display
 	    );
 	  }
 	
@@ -33458,10 +33467,24 @@
 	var React = __webpack_require__(1);
 	var LeftNavigation = __webpack_require__(262);
 	var Newsfeed = __webpack_require__(263);
+	var SessionStore = __webpack_require__(220);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
 	
+	  getInitialState: function () {
+	    return {
+	      user: SessionStore.currentUser()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.userListener = SessionStore.addListener(this.userChange);
+	  },
+	
+	  userChange: function () {
+	    this.setState({ user: SessionStore.currentUser() });
+	  },
 	
 	  render: function () {
 	    return React.createElement(
@@ -33470,12 +33493,12 @@
 	      React.createElement(
 	        'div',
 	        { className: 'left-navigation' },
-	        React.createElement(LeftNavigation, null)
+	        React.createElement(LeftNavigation, { user: this.state.user })
 	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'newsfeed' },
-	        React.createElement(Newsfeed, null)
+	        React.createElement(Newsfeed, { user: this.state.user })
 	      )
 	    );
 	  }
@@ -33495,6 +33518,12 @@
 	
 	
 	  render: function () {
+	    var name = "";
+	    var profilePic = "";
+	    if (this.props.user.first_name) {
+	      name = this.props.user.first_name + " " + this.props.user.last_name;
+	      profilePic = this.props.user.profile_pic;
+	    }
 	    return React.createElement(
 	      "div",
 	      { className: "leftnav" },
@@ -33509,16 +33538,38 @@
 	            null,
 	            React.createElement(
 	              "div",
-	              { className: "proflistitemcontentwrapper" },
+	              { className: "row" },
 	              React.createElement(
 	                "div",
 	                { className: "leftcontentwrapper" },
-	                "User Photo"
+	                React.createElement("img", { className: "nav-profile-pic", src: profilePic })
 	              ),
 	              React.createElement(
 	                "div",
-	                { className: "click" },
-	                "User Name"
+	                { className: "col center" },
+	                name
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            "li",
+	            null,
+	            React.createElement(
+	              "div",
+	              { className: "row" },
+	              React.createElement(
+	                "div",
+	                null,
+	                React.createElement("i", { className: "fa fa-pencil-square-o space-right", "aria-hidden": "true" })
+	              ),
+	              React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                  "p1",
+	                  null,
+	                  "Edit Profile"
+	                )
 	              )
 	            )
 	          )
@@ -33543,18 +33594,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "newsfeed" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-newspaper-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "newsfeed noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "NewsFeed"
 	                  )
@@ -33566,18 +33616,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "messages" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-comments-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "messages noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Messages"
 	                  )
@@ -33589,20 +33638,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "events" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-calendar space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "events noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
-	                    "Events"
+	                    " Events"
 	                  )
 	                )
 	              )
@@ -33612,20 +33660,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "saved" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-bookmark-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "saved noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
-	                    "Saved"
+	                    " Saved"
 	                  )
 	                )
 	              )
@@ -33635,20 +33682,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "salegroups noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-tag space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "sale noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
-	                    "Sale Groups"
+	                    "Sale Group"
 	                  )
 	                )
 	              )
@@ -33675,18 +33721,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "likepages noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-thumbs-o-up space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "likepages noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Like Pages"
 	                  )
@@ -33698,18 +33743,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "pagesfeed noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-flag-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "pagefeed noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Pages Feed"
 	                  )
@@ -33721,43 +33765,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "createpage noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-calendar-plus-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "createpage noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Create Page"
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              "li",
-	              null,
-	              React.createElement(
-	                "div",
-	                { className: "proflistitemcontentwrapper" },
-	                React.createElement(
-	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "createad noclick" })
-	                ),
-	                React.createElement(
-	                  "a",
-	                  { title: "createad noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
-	                  React.createElement(
-	                    "div",
-	                    null,
-	                    "Create Ad"
 	                  )
 	                )
 	              )
@@ -33784,18 +33804,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "creategroup noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-calendar-plus-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "creategroup noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Create Group"
 	                  )
@@ -33807,20 +33826,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "newgroups noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-eye space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "newgroup noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
-	                    "New Groups"
+	                    "Discover Groups"
 	                  )
 	                )
 	              )
@@ -33847,18 +33865,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "family noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-home space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "closelist noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Family"
 	                  )
@@ -33870,18 +33887,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "closefriends noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-star-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "closelist noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Close Friends"
 	                  )
@@ -33910,18 +33926,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "pokes noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-hand-pointer-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "pokes noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Pokes"
 	                  )
@@ -33933,18 +33948,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "photos noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-picture-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "photos noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Photos"
 	                  )
@@ -33956,18 +33970,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "gamesfeed noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-gamepad space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "gamefeed noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Games Feed"
 	                  )
@@ -33996,20 +34009,19 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "pagesandpublic noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-file-text-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "pagepublic noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
-	                    "Pages and Public ..."
+	                    "Pages and Public"
 	                  )
 	                )
 	              )
@@ -34036,18 +34048,17 @@
 	              null,
 	              React.createElement(
 	                "div",
-	                { className: "proflistitemcontentwrapper" },
+	                { className: "row" },
 	                React.createElement(
 	                  "div",
-	                  { className: "leftcontentwrapper" },
-	                  React.createElement("a", { className: "createevent noclick" })
+	                  null,
+	                  React.createElement("i", { className: "fa fa-calendar-plus-o space-right", "aria-hidden": "true" })
 	                ),
 	                React.createElement(
-	                  "a",
-	                  { title: "createevent noclick" },
-	                  React.createElement("span", { className: "leftnavimagewrap" }),
+	                  "div",
+	                  null,
 	                  React.createElement(
-	                    "div",
+	                    "p1",
 	                    null,
 	                    "Create Event"
 	                  )
@@ -34079,9 +34090,8 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Newsfeed',
-	      React.createElement(StatusUpdate, null),
+	      { className: 'newsfeed-container' },
+	      React.createElement(StatusUpdate, { user: this.props.user }),
 	      React.createElement(Feed, null)
 	    );
 	  }
@@ -34096,7 +34106,7 @@
 
 	var React = __webpack_require__(1);
 	var PostAction = __webpack_require__(271);
-	var SessionStore = __webpack_require__(220);
+	// var SessionStore = require('../stores/sessionStore');
 	
 	var StatusUpdate = React.createClass({
 	  displayName: 'StatusUpdate',
@@ -34111,7 +34121,7 @@
 	
 	    e.preventDefault();
 	    PostAction.createNewPost({
-	      authorId: SessionStore.currentUser().id,
+	      authorId: this.props.user.id,
 	      body: this.state.body
 	    });
 	  },
@@ -34125,21 +34135,37 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'status-update-container row' },
 	      React.createElement(
-	        'form',
-	        { className: 'status-auth', onSubmit: this.handleSubmit },
+	        'div',
+	        null,
+	        React.createElement('img', { className: 'status-profile', src: this.props.user.profile_pic })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col center' },
 	        React.createElement(
-	          'div',
-	          { className: 'status-udate' },
-	          React.createElement('input', {
-	            type: 'text',
-	            id: 'status',
-	            placeholder: 'What\'s on your mind?',
-	            onChange: this.statusHandler,
-	            required: true,
-	            autoFocus: true
-	          })
+	          'form',
+	          { className: 'status-form', onSubmit: this.handleSubmit },
+	          React.createElement(
+	            'div',
+	            { className: 'status-update' },
+	            React.createElement('input', {
+	              type: 'text',
+	              className: 'status',
+	              placeholder: 'What\'s on your mind?',
+	              onChange: this.statusHandler,
+	              required: true,
+	              autoFocus: true
+	            })
+	          ),
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'auth-button sub-auth-button',
+	              type: 'submit' },
+	            'Post'
+	          )
 	        )
 	      )
 	    );
@@ -34207,10 +34233,13 @@
 
 	var React = __webpack_require__(1);
 	var SignUp = __webpack_require__(267);
+	var SessionStore = __webpack_require__(220);
+	var History = __webpack_require__(159).History;
 	
 	var LandingPage = React.createClass({
 	  displayName: 'LandingPage',
 	
+	  mixins: History,
 	
 	  render: function () {
 	    return React.createElement(

@@ -1,6 +1,6 @@
 var React = require('react');
 var PostAction = require('../actions/postAction');
-var SessionStore = require('../stores/sessionStore');
+// var SessionStore = require('../stores/sessionStore');
 
 var StatusUpdate = React.createClass({
   getInitialState: function() {
@@ -10,10 +10,10 @@ var StatusUpdate = React.createClass({
   },
 
   handleSubmit: function(e) {
-    
+
     e.preventDefault();
     PostAction.createNewPost({
-      authorId: SessionStore.currentUser().id,
+      authorId: this.props.user.id,
       body: this.state.body
     })
   },
@@ -26,19 +26,29 @@ var StatusUpdate = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <form className='status-auth' onSubmit={this.handleSubmit}>
-          <div className="status-udate">
-            <input
-              type="text"
-              id="status"
-              placeholder="What's on your mind?"
-              onChange={this.statusHandler}
-              required
-              autoFocus
-            />
-          </div>
-        </form>
+      <div className="status-update-container row">
+        <div>
+          <img className="status-profile" src={this.props.user.profile_pic}></img>
+        </div>
+        <div className="col center">
+          <form className='status-form' onSubmit={this.handleSubmit}>
+            <div className="status-update">
+              <input
+                type="text"
+                className="status"
+                placeholder="What's on your mind?"
+                onChange={this.statusHandler}
+                required
+                autoFocus
+                />
+            </div>
+            <button
+               className="auth-button sub-auth-button"
+               type="submit">
+               Post
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

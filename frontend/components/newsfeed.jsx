@@ -6,9 +6,8 @@ var Newsfeed = React.createClass({
 
   render: function() {
     return (
-      <div>
-        Newsfeed
-        <StatusUpdate/>
+      <div className="newsfeed-container">
+        <StatusUpdate user={this.props.user}/>
         <Feed/>
       </div>
     );

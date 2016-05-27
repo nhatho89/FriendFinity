@@ -13,3 +13,20 @@
   margin: 0px;
   background-color: #E9EBEE;
 }
+
+.people-nav {
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  border: 1px black solid;
+}
+
+.people-navigation {
+  max-width: 400px;
+}
+
+.people-nav-title {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 18px;
+}

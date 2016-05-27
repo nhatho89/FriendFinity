@@ -2,6 +2,8 @@ var React = require('react');
 var LeftNavigation = require('./leftNavigation');
 var Newsfeed = require('./newsfeed');
 var SessionStore = require('../stores/sessionStore');
+var PeopleNavigation = require('./peopleNavigation');
+
 
 var Homepage = React.createClass({
   getInitialState: function() {
@@ -26,6 +28,10 @@ var Homepage = React.createClass({
         </div>
         <div className="newsfeed">
           <Newsfeed user={this.state.user}/>
+        </div>
+        <div>
+
+          <PeopleNavigation/>
         </div>
       </div>
     );

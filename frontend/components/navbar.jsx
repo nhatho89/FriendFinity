@@ -26,9 +26,12 @@ var Navbar = React.createClass({
   userChange: function() {
     this.setState({ user: SessionStore.currentUser() });
     if (this.state.user.id) {
-
       this.history.push({pathname: "home/"});
     }
+  },
+
+  componentWillUnmount: function() {
+    this.userListener.remove();
   },
 
   render: function() {

@@ -17,10 +17,23 @@ li {
 }
 
 .center {
+  display: flex;
   justify-content: center;
 }
 
 .space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.max-width {
+  width: 400px;
+}
+
+.low-width {
+  width: 325px;
 }

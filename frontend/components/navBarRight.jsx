@@ -21,15 +21,15 @@ var NavBarRight = React.createClass({
     // </div>
     if (this.props.user.first_name) {
       return (
-        <div className="row">
-          <div className="three">
+        <div className="navbar-right-signout">
+          <div className="auth-button">
             <p onClick={this.handleSignOut}>Sign out</p>
           </div>
         </div>
       )
     } else {
       return (
-        <div className="signed-out-container">
+        <div className="navbar-right col center">
           <Signin/>
         </div>
       )

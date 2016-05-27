@@ -20,8 +20,9 @@ var Feed = React.createClass({
   },
 
   _onChange: function () {
-
-    this.setState({feed: PostStore.allPosts()})
+    this.setState({
+      feed: PostStore.allPosts()
+    })
   },
 
   render: function() {

@@ -1,4 +1,4 @@
-class FriendRequestsController < ApplicationController
+class Api::FriendRequestsController < ApplicationController
   def index
       @user = User.where(id: params[:user_id]).to_a.first
       @req = @user.received_requests

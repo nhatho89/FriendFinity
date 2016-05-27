@@ -38,9 +38,9 @@ var LeftNavigation = React.createClass({
           </ul>
 
           <div className="favlistwrapper">
-            <h4>
-              <span className="leftnavesectionheader">FAVORITES</span>
-            </h4>
+            <p1>
+              FAVORITES
+            </p1>
               <ul className="favlist">
 
                 <li>
@@ -100,9 +100,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="pagelistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">PAGES</span>
-              </h4>
+              <p1>
+                PAGES
+              </p1>
               <ul className="pagelist">
 
                 <li>
@@ -141,9 +141,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="grouplistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">GROUPS</span>
-              </h4>
+              <p1>
+                GROUPS
+              </p1>
               <ul className="grouplist">
                 <li>
                   <div className="row">
@@ -170,9 +170,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="firendlistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">FRIENDS</span>
-              </h4>
+              <p1>
+                FRIENDS
+              </p1>
               <ul className="friendlist">
                 <li>
                   <div className="row">
@@ -199,9 +199,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="applistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">APPS</span>
-              </h4>
+              <p1>
+                APPS
+              </p1>
               <ul className="applist">
                 <li>
                   <div className="row">
@@ -242,9 +242,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="interestlistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">INTERESTS</span>
-              </h4>
+              <p1>
+                INTERESTS
+              </p1>
               <ul className="insterestlist">
                 <li>
                   <div className="row">
@@ -260,9 +260,9 @@ var LeftNavigation = React.createClass({
               </ul>
           </div>
           <div className="eventlistwrapper">
-              <h4>
-                <span className="leftnavesectionheader">EVENTS</span>
-              </h4>
+              <p1>
+                EVENTS
+              </p1>
             <ul className="eventlist">
 
               <li>

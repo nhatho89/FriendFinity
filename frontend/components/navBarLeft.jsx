@@ -1,14 +1,16 @@
 var React = require('react');
 var History = require('react-router').History;
-var SessionStore = require('../stores/sessionStore');
 
 var NavBarLeft = React.createClass({
   mixins: [History],
 
   handleHomeClick: function(e) {
     e.preventDefault();
-
-    this.history.pushState(null, "/#");
+    if (this.props.user.first_name) {
+      this.history.pushState(null, "/home");
+    } else {
+      this.history.pushState(null, "/");
+    }
   },
 
   render: function() {

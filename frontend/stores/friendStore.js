@@ -1,7 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatchers/dispatcher');
-var PostConstants = require('../constants/postConstants');
-var PostStore = new Store(AppDispatcher);
+var FriendConstants = require('../constants/friendConstants');
+var FriendStore = new Store(AppDispatcher);
 
 var _friends = [];
 var _friend = [];

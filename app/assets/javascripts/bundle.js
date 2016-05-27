@@ -54,8 +54,8 @@
 	var Redirect = ReactRouter.Redirect;
 	var App = __webpack_require__(206);
 	var Homepage = __webpack_require__(261);
-	var LandingPage = __webpack_require__(266);
-	var FriendsIndex = __webpack_require__(268);
+	var LandingPage = __webpack_require__(275);
+	var FriendsIndex = __webpack_require__(277);
 	
 	var routes = React.createElement(
 	  Route,
@@ -24074,9 +24074,12 @@
 	  userChange: function () {
 	    this.setState({ user: SessionStore.currentUser() });
 	    if (this.state.user.id) {
-	
 	      this.history.push({ pathname: "home/" });
 	    }
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.userListener.remove();
 	  },
 	
 	  render: function () {
@@ -31406,10 +31409,10 @@
 	    if (this.props.user.first_name) {
 	      return React.createElement(
 	        'div',
-	        { className: 'row' },
+	        { className: 'navbar-right-signout' },
 	        React.createElement(
 	          'div',
-	          { className: 'three' },
+	          { className: 'auth-button' },
 	          React.createElement(
 	            'p',
 	            { onClick: this.handleSignOut },
@@ -31420,7 +31423,7 @@
 	    } else {
 	      return React.createElement(
 	        'div',
-	        { className: 'signed-out-container' },
+	        { className: 'navbar-right col center' },
 	        React.createElement(Signin, null)
 	      );
 	    }
@@ -33400,7 +33403,6 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(159).History;
-	var SessionStore = __webpack_require__(220);
 	
 	var NavBarLeft = React.createClass({
 	  displayName: 'NavBarLeft',
@@ -33409,8 +33411,11 @@
 	
 	  handleHomeClick: function (e) {
 	    e.preventDefault();
-	
-	    this.history.pushState(null, "/#");
+	    if (this.props.user.first_name) {
+	      this.history.pushState(null, "/home");
+	    } else {
+	      this.history.pushState(null, "/");
+	    }
 	  },
 	
 	  render: function () {
@@ -33468,6 +33473,7 @@
 	var LeftNavigation = __webpack_require__(262);
 	var Newsfeed = __webpack_require__(263);
 	var SessionStore = __webpack_require__(220);
+	var PeopleNavigation = __webpack_require__(278);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
@@ -33499,6 +33505,11 @@
 	        'div',
 	        { className: 'newsfeed' },
 	        React.createElement(Newsfeed, { user: this.state.user })
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(PeopleNavigation, null)
 	      )
 	    );
 	  }
@@ -33578,13 +33589,9 @@
 	          "div",
 	          { className: "favlistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "FAVORITES"
-	            )
+	            "FAVORITES"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -33705,13 +33712,9 @@
 	          "div",
 	          { className: "pagelistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "PAGES"
-	            )
+	            "PAGES"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -33788,13 +33791,9 @@
 	          "div",
 	          { className: "grouplistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "GROUPS"
-	            )
+	            "GROUPS"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -33849,13 +33848,9 @@
 	          "div",
 	          { className: "firendlistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "FRIENDS"
-	            )
+	            "FRIENDS"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -33910,13 +33905,9 @@
 	          "div",
 	          { className: "applistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "APPS"
-	            )
+	            "APPS"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -33993,13 +33984,9 @@
 	          "div",
 	          { className: "interestlistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "INTERESTS"
-	            )
+	            "INTERESTS"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -34032,13 +34019,9 @@
 	          "div",
 	          { className: "eventlistwrapper" },
 	          React.createElement(
-	            "h4",
+	            "p1",
 	            null,
-	            React.createElement(
-	              "span",
-	              { className: "leftnavesectionheader" },
-	              "EVENTS"
-	            )
+	            "EVENTS"
 	          ),
 	          React.createElement(
 	            "ul",
@@ -34081,7 +34064,7 @@
 
 	var React = __webpack_require__(1);
 	var StatusUpdate = __webpack_require__(264);
-	var Feed = __webpack_require__(265);
+	var Feed = __webpack_require__(268);
 	
 	var Newsfeed = React.createClass({
 	  displayName: 'Newsfeed',
@@ -34105,7 +34088,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var PostAction = __webpack_require__(271);
+	var PostAction = __webpack_require__(265);
 	// var SessionStore = require('../stores/sessionStore');
 	
 	var StatusUpdate = React.createClass({
@@ -34179,9 +34162,101 @@
 /* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var PostUtil = __webpack_require__(266);
+	var PostConstants = __webpack_require__(267);
+	var AppDispatcher = __webpack_require__(214);
+	
+	var PostAction = {
+	
+	  getAllPosts: function (userId) {
+	    PostUtil.fetchAllPosts(userId, this.receiveAllPosts);
+	  },
+	
+	  createNewPost: function (post) {
+	
+	    PostUtil.createNewPost(post, this.receiveNewPost);
+	  },
+	
+	  receiveAllPosts: function (posts) {
+	    AppDispatcher.dispatch({
+	      actionType: PostConstants.POSTS_RECEIVED,
+	      posts: posts
+	    });
+	  },
+	
+	  receiveNewPost: function (post) {
+	    AppDispatcher.dispatch({
+	      actionType: PostConstants.POST_CREATED,
+	      post: post
+	    });
+	  }
+	
+	};
+	
+	module.exports = PostAction;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports) {
+
+	var PostUtil = {
+	
+	  fetchAllPosts: function (userId, receiveAllPosts) {
+	    //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
+	
+	    $.ajax({
+	      url: "api/posts",
+	      method: "get",
+	      data: { post: {
+	          author_id: userId,
+	          body: ""
+	        }
+	      },
+	      success: function (posts) {
+	
+	        receiveAllPosts(posts);
+	      },
+	      error: function (error, status) {}
+	    });
+	  },
+	
+	  createNewPost: function (post, receiveNewPost) {
+	
+	    $.ajax({
+	      url: "api/posts",
+	      method: "post",
+	      data: { post: {
+	          author_id: post.authorId,
+	          body: post.body
+	        }
+	      },
+	      success: function (posts) {
+	
+	        receiveNewPost(posts);
+	      },
+	      error: function (error, status) {}
+	    });
+	  }
+	};
+	module.exports = PostUtil;
+
+/***/ },
+/* 267 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  POSTS_RECEIVED: "POSTS_RECEIVED",
+	  POST_CREATED: "POST_CREATED"
+	
+	};
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var React = __webpack_require__(1);
 	var PostStore = __webpack_require__(269);
-	var PostAction = __webpack_require__(271);
+	var PostAction = __webpack_require__(265);
 	var SessionStore = __webpack_require__(220);
 	
 	var Feed = React.createClass({
@@ -34203,8 +34278,9 @@
 	  },
 	
 	  _onChange: function () {
-	
-	    this.setState({ feed: PostStore.allPosts() });
+	    this.setState({
+	      feed: PostStore.allPosts()
+	    });
 	  },
 	
 	  render: function () {
@@ -34246,11 +34322,245 @@
 	module.exports = Feed;
 
 /***/ },
-/* 266 */
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(221).Store;
+	var AppDispatcher = __webpack_require__(214);
+	var PostConstants = __webpack_require__(267);
+	var PostStore = new Store(AppDispatcher);
+	
+	var _posts = [];
+	
+	PostStore.allPosts = function () {
+	  return _posts;
+	};
+	
+	PostStore.find = function (postId) {
+	  var foundPost;
+	  _posts.forEach(function (post) {
+	    if (post.id === postId) {
+	      foundPost = post;
+	    }
+	  });
+	  return foundPost;
+	};
+	
+	resetPosts = function (posts) {
+	  _posts = posts;
+	};
+	
+	addPost = function (post) {
+	  _posts = [post].concat(_posts);
+	};
+	
+	PostStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case PostConstants.POSTS_RECEIVED:
+	      resetPosts(payload.posts);
+	      PostStore.__emitChange();
+	      break;
+	    case PostConstants.POST_CREATED:
+	      addPost(payload.post);
+	      PostStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = PostStore;
+
+/***/ },
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var SignUp = __webpack_require__(267);
+	var PeopleYouMayKnowStore = __webpack_require__(271);
+	var PeopleYouMayKnowAction = __webpack_require__(273);
+	
+	var PeopleYouMayKnow = React.createClass({
+	  displayName: 'PeopleYouMayKnow',
+	
+	  getInitialState: function () {
+	    return {
+	      people: PeopleYouMayKnowStore.allPeople()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.peopleListener = PeopleYouMayKnowStore.addListener(this.onChange);
+	    PeopleYouMayKnowAction.getPeopleYouMayKnow();
+	  },
+	
+	  onChange: function () {
+	    this.setState({
+	      people: PeopleYouMayKnowStore.allPeople()
+	    });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.peopleListener.remove();
+	  },
+	
+	  render: function () {
+	    var people;
+	    if (this.state.people.length > 0) {
+	
+	      people = this.state.people.map(function (person) {
+	        return React.createElement(
+	          'div',
+	          null,
+	          React.createElement('img', { className: 'people-nav', src: person.profile_pic, onMouseEnter: this.mouseEnter, nMouseLeave: this.mouseLeave })
+	        );
+	      });
+	    } else {
+	      people = React.createElement(
+	        'p1',
+	        null,
+	        'You are friends with everyone!'
+	      );
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'col wrap' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'People You May Know'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          people
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleYouMayKnow;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(221).Store;
+	var AppDispatcher = __webpack_require__(214);
+	var PeopleYouMayKnowConstants = __webpack_require__(272);
+	
+	var PeopleYouMayKnow = new Store(AppDispatcher);
+	
+	var _peopleYouMayKnow = [];
+	
+	PeopleYouMayKnow.allPeople = function () {
+	  return _peopleYouMayKnow;
+	};
+	
+	resetPeople = function (peopleYouMayKnow) {
+	  _peopleYouMayKnow = peopleYouMayKnow;
+	};
+	
+	PeopleYouMayKnow.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case PeopleYouMayKnowConstants.PEOPLE_RECEIVED:
+	      resetPeople(payload.peopleYouMayKnow);
+	      PeopleYouMayKnow.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = PeopleYouMayKnow;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  PEOPLE_RECEIVED: "PEOPLE_RECEIVED"
+	
+	};
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PeopleYouMayKnowUtil = __webpack_require__(274);
+	var PeopleYouMayKnowConstants = __webpack_require__(272);
+	var FriendConstants = __webpack_require__(281);
+	var AppDispatcher = __webpack_require__(214);
+	
+	var PeopleYouMayKnowAction = {
+	
+	  getPeopleYouMayKnow: function () {
+	    PeopleYouMayKnowUtil.fetchPeopleYouMayKnow(this.receivePeopleYouMayKnow);
+	  },
+	
+	  receivePeopleYouMayKnow: function (peopleYouMayKnow) {
+	    AppDispatcher.dispatch({
+	      actionType: PeopleYouMayKnowConstants.PEOPLE_RECEIVED,
+	      peopleYouMayKnow: peopleYouMayKnow
+	    });
+	  },
+	
+	  getAllFriends: function () {
+	    PeopleYouMayKnowUtil.fetchFriends(this.receiveFriends);
+	  },
+	
+	  receiveFriends: function (friends) {
+	    AppDispatcher.dispatch({
+	      actionType: FriendConstants.FRIENDS_RECEIVED,
+	      friends: friends
+	    });
+	  }
+	
+	};
+	
+	module.exports = PeopleYouMayKnowAction;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	var PeopleYouMayKnowUtil = {
+	
+	  fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
+	
+	    $.ajax({
+	      url: "api/people",
+	      method: "get",
+	      success: function (people) {
+	
+	        receivePeopleYouMayKnow(people);
+	      },
+	      error: function (error, status) {}
+	    });
+	  },
+	
+	  fetchFriends: function (receiveFriends) {
+	
+	    $.ajax({
+	      url: "api/friendships",
+	      method: "get",
+	      success: function (friends) {
+	
+	        receiveFriends(friends);
+	      },
+	      error: function (error, status) {}
+	    });
+	  }
+	};
+	
+	module.exports = PeopleYouMayKnowUtil;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var SignUp = __webpack_require__(276);
 	var SessionStore = __webpack_require__(220);
 	var History = __webpack_require__(159).History;
 	
@@ -34324,7 +34634,7 @@
 	module.exports = LandingPage;
 
 /***/ },
-/* 267 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -34660,7 +34970,7 @@
 	module.exports = SignUp;
 
 /***/ },
-/* 268 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -34683,144 +34993,210 @@
 	module.exports = FriendsIndex;
 
 /***/ },
-/* 269 */
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PeopleYouMayKnow = __webpack_require__(270);
+	var Friends = __webpack_require__(279);
+	
+	var PeopleNavigation = React.createClass({
+	  displayName: 'PeopleNavigation',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'people-navigation' },
+	      React.createElement(Friends, null),
+	      React.createElement(PeopleYouMayKnow, null)
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleNavigation;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(280);
+	var PeopleYouMayKnowAction = __webpack_require__(273);
+	
+	var Friends = React.createClass({
+	  displayName: 'Friends',
+	
+	
+	  getInitialState: function () {
+	    return {
+	      friends: FriendStore.allFriends()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.friendsListener = FriendStore.addListener(this.friendsChange);
+	    PeopleYouMayKnowAction.getAllFriends();
+	  },
+	
+	  friendsChange: function () {
+	    this.setState({ friends: FriendStore.allFriends() });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.friendsListener.remove();
+	  },
+	
+	  render: function () {
+	    var friends;
+	    if (this.state.friends.length > 0) {
+	
+	      friends = this.state.friends.map(function (friend) {
+	        return React.createElement(
+	          'div',
+	          null,
+	          React.createElement('img', { className: 'people-nav', src: friend.profile_pic })
+	        );
+	      });
+	    } else {
+	      friends = React.createElement(
+	        'p1',
+	        null,
+	        'You have no friends! =['
+	      );
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'col' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'Friends'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          friends
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Friends;
+
+/***/ },
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Store = __webpack_require__(221).Store;
 	var AppDispatcher = __webpack_require__(214);
-	var PostConstants = __webpack_require__(270);
-	var PostStore = new Store(AppDispatcher);
+	var FriendConstants = __webpack_require__(281);
+	var FriendStore = new Store(AppDispatcher);
 	
-	var _posts = [];
+	var _friends = [];
+	var _friend = [];
 	
-	PostStore.allPosts = function () {
-	  return _posts;
+	var _requests = [];
+	
+	resetFriends = function (friends) {
+	  _friends = friends;
 	};
 	
-	PostStore.find = function (postId) {
-	  var foundPost;
-	  _posts.forEach(function (post) {
-	    if (post.id === postId) {
-	      foundPost = post;
+	removeFriend = function (friend) {
+	  var friends = [];
+	  _friends.forEach(function (el, idx) {
+	    if (el.id !== friend.friendship.user_id && el.id !== friend.friendship.user_id) {
+	      friends.push(el);
 	    }
 	  });
-	  return foundPost;
+	  resetFriends(friends);
 	};
 	
-	resetPosts = function (posts) {
-	  _posts = posts;
+	removeRequest = function (friend) {
+	  var requests = [];
+	  _requests.forEach(function (el, idx) {
+	    if (el.user.id !== friend.friendship.friend_id) {
+	      requests.push(el);
+	    }
+	  });
+	  resetRequests(requests);
 	};
 	
-	addPost = function (post) {
-	  _posts = [post].concat(_posts);
+	addFriend = function (friend) {
+	  _friends = [friend].concat(_friends);
 	};
 	
-	PostStore.__onDispatch = function (payload) {
+	resetRequests = function (requests) {
+	  _requests = requests;
+	};
+	
+	FriendStore.allRequests = function () {
+	  return _requests;
+	};
+	
+	FriendStore.allFriends = function () {
+	  return _friends;
+	};
+	
+	FriendStore.areFriends = function (friendId) {
+	  var rf = false;
+	  _friends.forEach(function (friend, idx) {
+	    if (friend.id === parseInt(friendId)) {
+	      rf = true;
+	    }
+	  });
+	  return rf;
+	};
+	
+	FriendStore.find = function (friendId) {
+	  var foundFriend;
+	  _friends.forEach(function (friend) {
+	    if (friend.id === friendId) {
+	      foundFriend = friend;
+	    }
+	  });
+	  return foundFriend;
+	};
+	
+	FriendStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
-	    case PostConstants.POSTS_RECEIVED:
-	      resetPosts(payload.posts);
-	      PostStore.__emitChange();
+	    case FriendConstants.REQUESTS_RECEIVED:
+	      resetRequests(payload.requests);
+	      FriendStore.__emitChange();
 	      break;
-	    case PostConstants.POST_CREATED:
-	      addPost(payload.post);
-	      PostStore.__emitChange();
+	    case FriendConstants.FRIENDS_RECEIVED:
+	      resetFriends(payload.friends);
+	      FriendStore.__emitChange();
+	      break;
+	    case FriendConstants.REMOVE_FRIEND:
+	      removeFriend(payload.friendship);
+	      removeRequest(payload.friendship);
+	      FriendStore.__emitChange();
+	      break;
+	    case FriendConstants.FRIENDSHIP_APPROVED:
+	      resetFriends(payload.friends);
+	      resetRequests(payload.requests);
+	      FriendStore.__emitChange();
 	      break;
 	  }
 	};
 	
-	module.exports = PostStore;
+	module.exports = FriendStore;
 
 /***/ },
-/* 270 */
+/* 281 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  POSTS_RECEIVED: "POSTS_RECEIVED",
-	  POST_CREATED: "POST_CREATED"
+	  FRIENDS_RECEIVED: "FRIENDS_RECEIVED"
 	
 	};
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var PostUtil = __webpack_require__(272);
-	var PostConstants = __webpack_require__(270);
-	var AppDispatcher = __webpack_require__(214);
-	
-	var PostAction = {
-	
-	  getAllPosts: function (userId) {
-	    PostUtil.fetchAllPosts(userId, this.receiveAllPosts);
-	  },
-	
-	  createNewPost: function (post) {
-	
-	    PostUtil.createNewPost(post, this.receiveNewPost);
-	  },
-	
-	  receiveAllPosts: function (posts) {
-	    AppDispatcher.dispatch({
-	      actionType: PostConstants.POSTS_RECEIVED,
-	      posts: posts
-	    });
-	  },
-	
-	  receiveNewPost: function (post) {
-	    AppDispatcher.dispatch({
-	      actionType: PostConstants.POST_CREATED,
-	      post: post
-	    });
-	  }
-	
-	};
-	
-	module.exports = PostAction;
-
-/***/ },
-/* 272 */
-/***/ function(module, exports) {
-
-	var PostUtil = {
-	
-	  fetchAllPosts: function (userId, receiveAllPosts) {
-	    //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
-	
-	    $.ajax({
-	      url: "api/posts",
-	      method: "get",
-	      data: { post: {
-	          author_id: userId,
-	          body: ""
-	        }
-	      },
-	      success: function (posts) {
-	
-	        receiveAllPosts(posts);
-	      },
-	      error: function (error, status) {}
-	    });
-	  },
-	
-	  createNewPost: function (post, receiveNewPost) {
-	
-	    $.ajax({
-	      url: "api/posts",
-	      method: "post",
-	      data: { post: {
-	          author_id: post.authorId,
-	          body: post.body
-	        }
-	      },
-	      success: function (posts) {
-	
-	        receiveNewPost(posts);
-	      },
-	      error: function (error, status) {}
-	    });
-	  }
-	};
-	module.exports = PostUtil;
 
 /***/ }
 /******/ ]);

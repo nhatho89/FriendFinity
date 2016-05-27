@@ -81,10 +81,49 @@ User.create!(
   profile_pic: 'assets/Profile/ross.jpg'
   )
 
+User.create!(
+  email: "nhat@friends.com",
+  password: "qweasd",
+  first_name: "Nhat",
+  last_name: "Ho",
+  day: 1,
+  month: "May",
+  year: 1970,
+  gender: "M",
+  cover_pic: 'assets/Cover/cover7.jpg',
+  profile_pic: 'assets/Profile/nhat.jpg'
+  )
+
 Post.create!(
-  body: "this app is pretty empty",
+  body: "OMG! Is Ross and Rachel still on a break? Is that why they're not friends?",
+  author_id: 3
+)
+
+Post.create!(
+  body: "How you doin?!",
   author_id: 1
 )
+
+Post.create!(
+body: "Ross is such a jerk.",
+author_id: 5
+)
+
+Post.create!(
+body: "WE WERE ON A BREAK!",
+author_id: 6
+)
+
+Post.create!(
+  body: "Can today BE anymore ridiculous?",
+  author_id: 2
+)
+
+Post.create!(
+  body: "Smelly cat smelly cat, what are they feeding you?",
+  author_id: 4
+)
+
 
 Friendship.create!(
   user_id: 1,

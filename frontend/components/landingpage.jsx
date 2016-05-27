@@ -7,6 +7,7 @@ var LandingPage = React.createClass({
     return (
       <div className="landing-page-container row">
         <div className="left-page col">
+          <img className="landing-page-background-photo" src="/assets/background.png"></img>
           <div className="landing-slogan">
             <p className="slogan">
               Forge friendships that will last to infinity and beyond!

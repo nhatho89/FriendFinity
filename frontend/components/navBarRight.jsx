@@ -43,7 +43,7 @@ var NavBarRight = React.createClass({
       )
     }
     return (
-      <div className="navbar-right">
+      <div className="navbar-right col center">
         {display}
       </div>
     );

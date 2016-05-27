@@ -44,43 +44,30 @@ var LoginModalForm = React.createClass({
          className='form-auth'
          autoComplete="off"
          onSubmit={this.handleSubmit}>
-        <div className="auth-input">
-          <div className="email-icon-container">
-            <i className="fa fa-user fa-lg" aria-hidden="true"></i>
-          </div>
-            <input
-                type="text"
-                id="email"
-                className="auth-control"
-                valueLink={this.linkState("email")}
-                placeholder='Username'
-                required
-                autoFocus
-            />
-        </div>
-        <div className="auth-input">
-          <div className="email-icon-container">
-            <i className="fa fa-lock fa-lg" aria-hidden="true"></i>
-          </div>
-          <input
-            type="password"
-            id="inputPassword"
-            className="auth-control"
-            valueLink={this.linkState("password")}
-            placeholder='Password'
-            required
-            />
-        </div>
-        <div className="checkbox">
-          <div className="remember-me-container">
-
-            <label className="remember-me">
-              <input type="checkbox" value="remember-me"></input>
-              Remember me
-            </label>
-          </div>
+         <div className="row">
+           <div className="auth-input">
+             <input
+               type="text"
+               className="login-control"
+               valueLink={this.linkState("email")}
+               placeholder='Email'
+               required
+               autoFocus/>
+           </div>
+           <div className="auth-input">
+             <input
+               type="password"
+               id="inputPassword"
+               className="login-control"
+               valueLink={this.linkState("password")}
+               placeholder='Password'
+               required
+               />
+           </div>
+         </div>
+        <div className="submit-button">
           <button
-            className="demo-button"
+            className="auth-button demo-auth-button"
             type="button"
             style={{float: "right"}}
             onClick={this.fillOutLogin}>
@@ -88,7 +75,7 @@ var LoginModalForm = React.createClass({
           </button>
         </div>
         <button
-           className="auth-button"
+           className="auth-button sub-auth-button"
            type="submit">
            Sign In
         </button>

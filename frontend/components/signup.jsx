@@ -65,7 +65,7 @@ var SignUp = React.createClass({
 
   handleFirstName: function(e) {
     e.preventDefault();
-    
+
     this.setState({
       firstName: e.target.value
     })
@@ -101,7 +101,7 @@ var SignUp = React.createClass({
 
   handleGender: function(e) {
     e.preventDefault();
-    
+
     this.setState({
       gender: e.target.value
     })
@@ -143,12 +143,20 @@ var SignUp = React.createClass({
     return (
       <div className="signup-container col">
         {alert}
+        <div className="signup-title-container">
+          <div>
+            <h4 className="signup-title">Sign Up</h4>
+          </div>
+          <div className="signup-subtitle-inner-container">
+            <p1 className="signup-subtitle">It&#8217;s free and always will be</p1>
+          </div>
+        </div>
         <form className='form-auth' onSubmit={this.handleSubmit}>
-        <div className="auth-input row">
+        <div className="signup-input row">
             <input
                 type="text"
                 id="firstname"
-                className="auth-control"
+                className="signup-control"
                 onChange={this.handleFirstName}
                 placeholder='First name'
                 required
@@ -157,7 +165,7 @@ var SignUp = React.createClass({
             <input
                 type="text"
                 id="lastname"
-                className="auth-control"
+                className="signup-control"
                 onChange={this.handleLastName}
                 placeholder='Last name'
                 required
@@ -165,22 +173,22 @@ var SignUp = React.createClass({
             />
         </div>
 
-        <div className="auth-input">
+        <div className="signup-input">
             <input
               type="email"
               id="email"
-              className="auth-control"
+              className="signup-control"
               onChange={this.handleEmail}
               placeholder='Email'
               required
               />
         </div>
 
-        <div className="auth-input">
+        <div className="signup-input row">
             <input
               type="password"
               id="password"
-              className="auth-control"
+              className="signup-control"
               onChange={this.handlePassword}
               placeholder='Password'
               required
@@ -189,14 +197,45 @@ var SignUp = React.createClass({
             <input
               type="password"
               id="passwordConfirmation"
-              className="auth-control"
+              className="signup-control"
               onChange={this.handlePasswordConfirm}
               placeholder='Confirm Password'
               required
               />
         </div>
+
+        <div className="signup-input row">
+            <input
+                type="text"
+                id="month"
+                className="signup-control date-control"
+                placeholder='Month'
+                onChange={this.handleMonth}
+                required
+                autoFocus
+            />
+            <input
+                type="integer"
+                id="day"
+                className="signup-control date-control"
+                onChange={this.handleDay}
+                placeholder='Day'
+                required
+                autoFocus
+            />
+            <input
+                type="integer"
+                id="year"
+                className="signup-control date-control"
+                onChange={this.handleYear}
+                placeholder='Year'
+                required
+                autoFocus
+            />
+        </div>
+
         <div className="row">
-          <div className="auth-input">
+          <div className="signup-space">
             <input
               type="radio"
               value="male"
@@ -205,7 +244,7 @@ var SignUp = React.createClass({
               >Male</input>
 
           </div>
-          <div className="auth-input">
+          <div className="signup-space">
             <input
               type="radio"
               value="female"
@@ -216,40 +255,7 @@ var SignUp = React.createClass({
           </div>
         </div>
 
-        <div className="auth-input row">
-            <input
-                type="text"
-                id="month"
-                className="auth-control"
-                placeholder='month'
-                onChange={this.handleMonth}
-                required
-                autoFocus
-            />
-            <input
-                type="integer"
-                id="day"
-                className="auth-control"
-                onChange={this.handleDay}
-                placeholder='day'
-                required
-                autoFocus
-            />
-            <input
-                type="integer"
-                id="year"
-                className="auth-control"
-                onChange={this.handleYear}
-                placeholder='year'
-                required
-                autoFocus
-            />
-        </div>
-
-
-
-
-        <div className="checkbox" id="signUpCheckbox">
+        <div className="checkbox signup-space" id="signUpCheckbox">
           <div className="remember-me-container">
             <label className="remember-me">
               <input type="checkbox" value="agreement" required></input>
@@ -257,17 +263,19 @@ var SignUp = React.createClass({
             </label>
           </div>
         </div>
-        <button
-          className="auth-button"
-          type="submit">
-          Sign Up
-        </button>
-        <button
-          className="demo-button"
-          onClick={this.handleDemo}
-          type="button">
-          Demo
-        </button>
+        <div className="signup-button-container row space-between">
+          <button
+            className="signup-button"
+            type="submit">
+            Sign Up
+          </button>
+          <button
+            className="signup-button"
+            onClick={this.handleDemo}
+            type="button">
+            Demo
+          </button>
+        </div>
       </form>
       </div>
     );

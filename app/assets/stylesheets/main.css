@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  font-family: helvetica, arial, sans-serif;
 }
 
 li {
@@ -19,7 +20,7 @@ li {
   justify-content: center;
 }
 
-.space-around {
+.space-between {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }

@@ -1,3 +1,51 @@
 // Place all the styles related to the Auth controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.signup-control {
+  width: 200px;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #bdc7d8;
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.date-control {
+  width: 127.5px;
+}
+
+#email {
+  min-width: 418px;
+}
+
+.signup-space {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.signup-button-container {
+  width: 431px;
+}
+
+.signup-button {
+  background-color: #5D984A;
+  color: white;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 13px;
+  border:0px;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 10px;
+  width: 200px;
+  border-bottom-color: #888;
+  box-shadow: 2px 5px 2px rgba(0, 0, 0, .1);
+}

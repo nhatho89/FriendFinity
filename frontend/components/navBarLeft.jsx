@@ -17,7 +17,8 @@ var NavBarLeft = React.createClass({
       <div className="navbar-left">
         <li className="absolute-logo">
           <img id="friend-logo" src="/assets/logo.png" onClick={this.handleHomeClick}></img>
-          </li>
+        </li>
+        <p1 className="logo-text" onClick={this.handleHomeClick}>riendFinity</p1>
       </div>
     );
   }

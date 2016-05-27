@@ -24083,7 +24083,7 @@
 	
 	    return React.createElement(
 	      'div',
-	      { id: 'navbar', className: 'row' },
+	      { id: 'navbar', className: 'row space-between' },
 	      React.createElement(NavBarLeft, null),
 	      React.createElement(NavBarRight, {
 	        user: this.state.user })
@@ -24147,56 +24147,38 @@
 	        onSubmit: this.handleSubmit },
 	      React.createElement(
 	        'div',
-	        { className: 'auth-input' },
+	        { className: 'row' },
 	        React.createElement(
 	          'div',
-	          { className: 'email-icon-container' },
-	          React.createElement('i', { className: 'fa fa-user fa-lg', 'aria-hidden': 'true' })
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'text',
+	            className: 'login-control',
+	            valueLink: this.linkState("email"),
+	            placeholder: 'Email',
+	            required: true,
+	            autoFocus: true })
 	        ),
-	        React.createElement('input', {
-	          type: 'text',
-	          id: 'email',
-	          className: 'auth-control',
-	          valueLink: this.linkState("email"),
-	          placeholder: 'Username',
-	          required: true,
-	          autoFocus: true
-	        })
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'password',
+	            id: 'inputPassword',
+	            className: 'login-control',
+	            valueLink: this.linkState("password"),
+	            placeholder: 'Password',
+	            required: true
+	          })
+	        )
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'auth-input' },
-	        React.createElement(
-	          'div',
-	          { className: 'email-icon-container' },
-	          React.createElement('i', { className: 'fa fa-lock fa-lg', 'aria-hidden': 'true' })
-	        ),
-	        React.createElement('input', {
-	          type: 'password',
-	          id: 'inputPassword',
-	          className: 'auth-control',
-	          valueLink: this.linkState("password"),
-	          placeholder: 'Password',
-	          required: true
-	        })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'checkbox' },
-	        React.createElement(
-	          'div',
-	          { className: 'remember-me-container' },
-	          React.createElement(
-	            'label',
-	            { className: 'remember-me' },
-	            React.createElement('input', { type: 'checkbox', value: 'remember-me' }),
-	            'Remember me'
-	          )
-	        ),
+	        { className: 'submit-button' },
 	        React.createElement(
 	          'button',
 	          {
-	            className: 'demo-button',
+	            className: 'auth-button demo-auth-button',
 	            type: 'button',
 	            style: { float: "right" },
 	            onClick: this.fillOutLogin },
@@ -24206,7 +24188,7 @@
 	      React.createElement(
 	        'button',
 	        {
-	          className: 'auth-button',
+	          className: 'auth-button sub-auth-button',
 	          type: 'submit' },
 	        'Sign In'
 	      )
@@ -31456,7 +31438,7 @@
 	    }
 	    return React.createElement(
 	      'div',
-	      { className: 'navbar-right' },
+	      { className: 'navbar-right col center' },
 	      display
 	    );
 	  }
@@ -33456,6 +33438,11 @@
 	        'li',
 	        { className: 'absolute-logo' },
 	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
+	      ),
+	      React.createElement(
+	        'p1',
+	        { className: 'logo-text', onClick: this.handleHomeClick },
+	        'riendFinity'
 	      )
 	    );
 	  }
@@ -34232,6 +34219,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'left-page col' },
+	        React.createElement('img', { className: 'landing-page-background-photo', src: '/assets/background.png' }),
 	        React.createElement(
 	          'div',
 	          { className: 'landing-slogan' },
@@ -34442,15 +34430,37 @@
 	      { className: 'signup-container col' },
 	      alert,
 	      React.createElement(
+	        'div',
+	        { className: 'signup-title-container' },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'h4',
+	            { className: 'signup-title' },
+	            'Sign Up'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'signup-subtitle-inner-container' },
+	          React.createElement(
+	            'p1',
+	            { className: 'signup-subtitle' },
+	            'It’s free and always will be'
+	          )
+	        )
+	      ),
+	      React.createElement(
 	        'form',
 	        { className: 'form-auth', onSubmit: this.handleSubmit },
 	        React.createElement(
 	          'div',
-	          { className: 'auth-input row' },
+	          { className: 'signup-input row' },
 	          React.createElement('input', {
 	            type: 'text',
 	            id: 'firstname',
-	            className: 'auth-control',
+	            className: 'signup-control',
 	            onChange: this.handleFirstName,
 	            placeholder: 'First name',
 	            required: true,
@@ -34459,7 +34469,7 @@
 	          React.createElement('input', {
 	            type: 'text',
 	            id: 'lastname',
-	            className: 'auth-control',
+	            className: 'signup-control',
 	            onChange: this.handleLastName,
 	            placeholder: 'Last name',
 	            required: true,
@@ -34468,11 +34478,11 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'auth-input' },
+	          { className: 'signup-input' },
 	          React.createElement('input', {
 	            type: 'email',
 	            id: 'email',
-	            className: 'auth-control',
+	            className: 'signup-control',
 	            onChange: this.handleEmail,
 	            placeholder: 'Email',
 	            required: true
@@ -34480,11 +34490,11 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'auth-input' },
+	          { className: 'signup-input row' },
 	          React.createElement('input', {
 	            type: 'password',
 	            id: 'password',
-	            className: 'auth-control',
+	            className: 'signup-control',
 	            onChange: this.handlePassword,
 	            placeholder: 'Password',
 	            required: true
@@ -34492,7 +34502,7 @@
 	          React.createElement('input', {
 	            type: 'password',
 	            id: 'passwordConfirmation',
-	            className: 'auth-control',
+	            className: 'signup-control',
 	            onChange: this.handlePasswordConfirm,
 	            placeholder: 'Confirm Password',
 	            required: true
@@ -34500,10 +34510,41 @@
 	        ),
 	        React.createElement(
 	          'div',
+	          { className: 'signup-input row' },
+	          React.createElement('input', {
+	            type: 'text',
+	            id: 'month',
+	            className: 'signup-control date-control',
+	            placeholder: 'Month',
+	            onChange: this.handleMonth,
+	            required: true,
+	            autoFocus: true
+	          }),
+	          React.createElement('input', {
+	            type: 'integer',
+	            id: 'day',
+	            className: 'signup-control date-control',
+	            onChange: this.handleDay,
+	            placeholder: 'Day',
+	            required: true,
+	            autoFocus: true
+	          }),
+	          React.createElement('input', {
+	            type: 'integer',
+	            id: 'year',
+	            className: 'signup-control date-control',
+	            onChange: this.handleYear,
+	            placeholder: 'Year',
+	            required: true,
+	            autoFocus: true
+	          })
+	        ),
+	        React.createElement(
+	          'div',
 	          { className: 'row' },
 	          React.createElement(
 	            'div',
-	            { className: 'auth-input' },
+	            { className: 'signup-space' },
 	            React.createElement(
 	              'input',
 	              {
@@ -34517,7 +34558,7 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'auth-input' },
+	            { className: 'signup-space' },
 	            React.createElement(
 	              'input',
 	              {
@@ -34532,38 +34573,7 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'auth-input row' },
-	          React.createElement('input', {
-	            type: 'text',
-	            id: 'month',
-	            className: 'auth-control',
-	            placeholder: 'month',
-	            onChange: this.handleMonth,
-	            required: true,
-	            autoFocus: true
-	          }),
-	          React.createElement('input', {
-	            type: 'integer',
-	            id: 'day',
-	            className: 'auth-control',
-	            onChange: this.handleDay,
-	            placeholder: 'day',
-	            required: true,
-	            autoFocus: true
-	          }),
-	          React.createElement('input', {
-	            type: 'integer',
-	            id: 'year',
-	            className: 'auth-control',
-	            onChange: this.handleYear,
-	            placeholder: 'year',
-	            required: true,
-	            autoFocus: true
-	          })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'checkbox', id: 'signUpCheckbox' },
+	          { className: 'checkbox signup-space', id: 'signUpCheckbox' },
 	          React.createElement(
 	            'div',
 	            { className: 'remember-me-container' },
@@ -34576,19 +34586,23 @@
 	          )
 	        ),
 	        React.createElement(
-	          'button',
-	          {
-	            className: 'auth-button',
-	            type: 'submit' },
-	          'Sign Up'
-	        ),
-	        React.createElement(
-	          'button',
-	          {
-	            className: 'demo-button',
-	            onClick: this.handleDemo,
-	            type: 'button' },
-	          'Demo'
+	          'div',
+	          { className: 'signup-button-container row space-between' },
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'signup-button',
+	              type: 'submit' },
+	            'Sign Up'
+	          ),
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'signup-button',
+	              onClick: this.handleDemo,
+	              type: 'button' },
+	            'Demo'
+	          )
 	        )
 	      )
 	    );

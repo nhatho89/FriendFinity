@@ -25,14 +25,14 @@ var LoginModalForm = React.createClass({
   },
 
   fillOutLogin: function() {
-    var email = "test@gmail.com";
+    var email = "joey@friends.com";
     var password = "qweasd";
 
     SessionActions.logIn({
-      email: 'test@gmail.com',
+      email: 'joey@friends.com',
       password: 'qweasd'
     });
-    
+
     // this.props.closeModal();
 
   },

@@ -9,7 +9,7 @@ var PostAction = {
   },
 
   createNewPost: function(post) {
-    debugger
+    
     PostUtil.createNewPost(post, this.receiveNewPost);
   },
 

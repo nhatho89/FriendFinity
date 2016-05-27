@@ -65,7 +65,7 @@ var SignUp = React.createClass({
 
   handleFirstName: function(e) {
     e.preventDefault();
-    // debugger
+    
     this.setState({
       firstName: e.target.value
     })
@@ -101,7 +101,7 @@ var SignUp = React.createClass({
 
   handleGender: function(e) {
     e.preventDefault();
-    // debugger
+    
     this.setState({
       gender: e.target.value
     })

@@ -1,9 +1,11 @@
 class Api::PostsController < ApplicationController
   def index
+    
+    newsfeed_ids = friend_ids(current_user)
     @posts = Post.all
 
     if post_params[:author_id]
-      @posts = @posts.where(author_id: post_params[:author_id].to_i).order(created_at: :desc)
+      @posts = @posts.where(author_id: newsfeed_ids).order(created_at: :desc)
     end
   end
 
@@ -20,13 +22,22 @@ class Api::PostsController < ApplicationController
     end
   end
 
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    render :show
-  end
+  # def destroy
+  #   @post = Post.find(post_params[:author_id])
+  #   @post.destroy
+  #   render :show
+  # end
 
   private
+
+  def friend_ids(current_user)
+    ids = []
+    ids << current_user.id
+    current_user.friends.each do |friend|
+      ids << friend.id
+    end
+    ids
+  end
 
   def post_params
     params.require(:post).permit(:body, :author_id)

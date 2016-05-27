@@ -34,15 +34,15 @@ var Navbar = React.createClass({
   render: function() {
 
     return (
-      <div className="navbar">
-        <div id="navbar" className="navbar-collapse collapse">
+
+        <div id="navbar" className="row">
 
           <NavBarLeft/>
 
           <NavBarRight
             user={this.state.user}/>
         </div>
-      </div>
+
     );
   }
 

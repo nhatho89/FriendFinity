@@ -2,6 +2,10 @@ body {
   margin: 0px;
 }
 
+li {
+  list-style: none;
+}
+
 .row {
   display: flex;
 }
@@ -13,4 +17,9 @@ body {
 
 .center {
   justify-content: center;
+}
+
+.space-around {
+  display: flex;
+  justify-content: space-around;
 }

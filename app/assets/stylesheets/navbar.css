@@ -1,4 +1,22 @@
-.navbar {
-  background-color: #0769B7;
+#navbar {
+  background-color: #3B5998;
+  height: 70px;
+
+}
+
+#friend-logo {
   height: 50px;
+  width: auto;
+}
+
+.navbar-left {
+  position: relative;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-37%);
+}
+
+.navbar-right {
+  position: relative;
+  right: 0px;
 }

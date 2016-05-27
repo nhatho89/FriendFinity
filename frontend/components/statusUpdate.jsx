@@ -10,7 +10,7 @@ var StatusUpdate = React.createClass({
   },
 
   handleSubmit: function(e) {
-    debugger
+    
     e.preventDefault();
     PostAction.createNewPost({
       authorId: SessionStore.currentUser().id,

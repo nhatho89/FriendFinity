@@ -1,7 +1,9 @@
 var PostUtil = {
 
   fetchAllPosts: function (userId, receiveAllPosts) {
-    debugger
+    //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
+
+
     $.ajax({
       url: "api/posts",
       method: "get",
@@ -11,17 +13,17 @@ var PostUtil = {
         }
       },
       success: function (posts) {
-        debugger
+
         receiveAllPosts(posts);
       },
       error: function(error,status) {
-        debugger
+
       }
     })
   },
 
   createNewPost: function (post, receiveNewPost) {
-    debugger
+
     $.ajax({
       url: "api/posts",
       method: "post",
@@ -31,11 +33,11 @@ var PostUtil = {
         }
       },
       success: function (posts) {
-        debugger
+
         receiveNewPost(posts);
       },
       error: function(error,status) {
-        debugger
+
       }
     })
   }

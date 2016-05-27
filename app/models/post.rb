@@ -8,4 +8,6 @@ class Post < ActiveRecord::Base
   def author_name
     author.name
   end
+
+  
 end

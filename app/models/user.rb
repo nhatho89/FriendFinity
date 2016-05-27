@@ -12,6 +12,47 @@ class User < ActiveRecord::Base
     primary_key: :id,
     class_name: "Post"
 
+  has_many :requesting_friendships,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "Friendship"
+
+  has_many :receiving_friendships,
+    foreign_key: :friend_id,
+    primary_key: :id,
+    class_name: "Friendship"
+
+
+  def friends
+    requesting_friendships = self.requesting_friendships.where(confirmed: true).to_a
+    receiving_friendships = self.receiving_friendships.where(confirmed: true).to_a
+    all_friendships = requesting_friendships + receiving_friendships
+    all_friends = all_friendships.map do |friendship|
+      friendship.user_id == self.id ? friendship.receiving : friendship.giving
+    end
+    all_friends
+  end
+
+  def received_requests
+    receiving_friendships = self.receiving_friendships.where(confirmed: false, denied: false).to_a
+    incoming_requests = receiving_friendships.map do |request|
+      request.giving
+    end
+    incoming_requests
+  end
+
+  def made_requests
+    requesting_friendships = self.requesting_friendships.where(confirmed: false).to_a
+    outgoing_requests = requesting_friendships.map do |friendship|
+      friendship.user_id == self.id ? friendship.receiving : friendship.giving
+    end
+    outgoing_requests
+  end
+
+  def name
+    self.first_name + ' ' + self.last_name
+  end
+
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

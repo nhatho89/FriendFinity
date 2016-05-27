@@ -24083,14 +24083,10 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'navbar' },
-	      React.createElement(
-	        'div',
-	        { id: 'navbar', className: 'navbar-collapse collapse' },
-	        React.createElement(NavBarLeft, null),
-	        React.createElement(NavBarRight, {
-	          user: this.state.user })
-	      )
+	      { id: 'navbar', className: 'row' },
+	      React.createElement(NavBarLeft, null),
+	      React.createElement(NavBarRight, {
+	        user: this.state.user })
 	    );
 	  }
 	
@@ -24130,11 +24126,11 @@
 	  },
 	
 	  fillOutLogin: function () {
-	    var email = "test@gmail.com";
+	    var email = "joey@friends.com";
 	    var password = "qweasd";
 	
 	    SessionActions.logIn({
-	      email: 'test@gmail.com',
+	      email: 'joey@friends.com',
 	      password: 'qweasd'
 	    });
 	
@@ -31460,7 +31456,7 @@
 	    }
 	    return React.createElement(
 	      'div',
-	      { className: 'navBar-right' },
+	      { className: 'navbar-right' },
 	      display
 	    );
 	  }
@@ -33445,42 +33441,23 @@
 	
 	  mixins: [History],
 	
-	  // scrollToView: function() {
-	  //   var element = document.getElementById("explore-container");
-	  //   setTimeout(function(){
-	  //   $('html, body').animate({
-	  //     scrollTop: element.offsetTop}, "slow");
-	  //   }, 251);
-	  // },
+	  handleHomeClick: function (e) {
+	    e.preventDefault();
 	
-	  scrollToElement: function (e) {
-	    var element;
-	    if (e.target.id === "explore-dropdown-text") {
-	      element = document.getElementById("explore-container");
-	    } else if (e.target.id === "customers-dropdown-text") {
-	      element = document.getElementById("media-container");
-	    } else if (e.target.id === "connect-dropdown-text") {
-	      element = document.getElementById("bottom-container");
-	    } else if (e.target.id === "lairshare-logo-container") {
-	      element = document.getElementById("landing-page");
-	    }
-	
-	    if (element) {
-	      setTimeout(function () {
-	        $('html, body').animate({
-	          scrollTop: element.offsetTop - 30 }, "slow");
-	      }, 251);
-	    } else {
-	      // this.history.push({pathname: "/#"});
-	      this.history.pushState(null, "/#");
-	      // this.scrollToView();
-	    }
+	    this.history.pushState(null, "/#");
 	  },
 	
-	  // <a className="logo" href="/#/hostform">Be A Host</a>
 	  render: function () {
 	
-	    return React.createElement('div', { className: 'navbar-left' });
+	    return React.createElement(
+	      'div',
+	      { className: 'navbar-left' },
+	      React.createElement(
+	        'li',
+	        { className: 'absolute-logo' },
+	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
+	      )
+	    );
 	  }
 	
 	});
@@ -34144,7 +34121,7 @@
 	  },
 	
 	  handleSubmit: function (e) {
-	    debugger;
+	
 	    e.preventDefault();
 	    PostAction.createNewPost({
 	      authorId: SessionStore.currentUser().id,
@@ -34381,7 +34358,7 @@
 	
 	  handleFirstName: function (e) {
 	    e.preventDefault();
-	    // debugger
+	
 	    this.setState({
 	      firstName: e.target.value
 	    });
@@ -34417,7 +34394,7 @@
 	
 	  handleGender: function (e) {
 	    e.preventDefault();
-	    // debugger
+	
 	    this.setState({
 	      gender: e.target.value
 	    });
@@ -34717,7 +34694,7 @@
 	  },
 	
 	  createNewPost: function (post) {
-	    debugger;
+	
 	    PostUtil.createNewPost(post, this.receiveNewPost);
 	  },
 	
@@ -34746,7 +34723,8 @@
 	var PostUtil = {
 	
 	  fetchAllPosts: function (userId, receiveAllPosts) {
-	    debugger;
+	    //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
+	
 	    $.ajax({
 	      url: "api/posts",
 	      method: "get",
@@ -34756,17 +34734,15 @@
 	        }
 	      },
 	      success: function (posts) {
-	        debugger;
+	
 	        receiveAllPosts(posts);
 	      },
-	      error: function (error, status) {
-	        debugger;
-	      }
+	      error: function (error, status) {}
 	    });
 	  },
 	
 	  createNewPost: function (post, receiveNewPost) {
-	    debugger;
+	
 	    $.ajax({
 	      url: "api/posts",
 	      method: "post",
@@ -34776,12 +34752,10 @@
 	        }
 	      },
 	      success: function (posts) {
-	        debugger;
+	
 	        receiveNewPost(posts);
 	      },
-	      error: function (error, status) {
-	        debugger;
-	      }
+	      error: function (error, status) {}
 	    });
 	  }
 	};

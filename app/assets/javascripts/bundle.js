@@ -34210,8 +34210,26 @@
 	  render: function () {
 	    var feeds;
 	    if (this.state.feed.length > 0) {
+	
 	      feeds = this.state.feed.map(function (post) {
-	        return post.body;
+	        return React.createElement(
+	          'div',
+	          { className: 'status-update-container row' },
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement('img', { className: 'status-profile', src: post.profile_pic })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col center' },
+	            React.createElement(
+	              'p1',
+	              null,
+	              post.body
+	            )
+	          )
+	        );
 	      });
 	    } else {
 	      return React.createElement('div', null);

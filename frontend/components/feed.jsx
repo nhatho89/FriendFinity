@@ -27,8 +27,18 @@ var Feed = React.createClass({
   render: function() {
     var feeds;
     if (this.state.feed.length > 0) {
+
       feeds = this.state.feed.map(function(post) {
-        return post.body
+        return (
+          <div className="status-update-container row">
+            <div>
+              <img className="status-profile" src={post.profile_pic}/>
+            </div>
+            <div className="col center">
+              <p1>{post.body}</p1>
+            </div>
+          </div>
+        )
       })
     } else {
       return <div></div>

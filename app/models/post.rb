@@ -3,11 +3,12 @@ class Post < ActiveRecord::Base
 
   belongs_to :author,
     foreign_key: :author_id,
-    primary_key: :id
+    primary_key: :id,
+    class_name: "User"
 
   def author_name
     author.name
   end
 
-  
+
 end

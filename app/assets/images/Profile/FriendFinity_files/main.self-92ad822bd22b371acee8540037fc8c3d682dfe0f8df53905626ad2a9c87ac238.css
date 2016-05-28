@@ -42,7 +42,3 @@ li {
   z-index: -1;
   position: absolute;
 }*/
-
-.pointer:hover {
-  cursor: pointer;
-}

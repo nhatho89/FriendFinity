@@ -1,6 +1,6 @@
 var React = require('react');
 var FriendStore = require('../stores/friendStore');
-var PeopleYouMayKnowAction = require('../actions/peopleYouMayKnowAction');
+var FriendAction = require('../actions/friendshipActions');
 var FriendIndexItem = require('./friendIndexItem');
 
 var Friends = React.createClass({
@@ -13,12 +13,11 @@ var Friends = React.createClass({
 
   componentDidMount: function() {
     this.friendsListener = FriendStore.addListener(this.friendsChange);
-    PeopleYouMayKnowAction.getAllFriends();
+    FriendAction.getAllFriends();
   },
 
   friendsChange: function() {
     this.setState({ friends: FriendStore.allFriends() });
-
   },
 
   componentWillUnmount: function() {
@@ -39,7 +38,7 @@ var Friends = React.createClass({
       friends = <p1>You have no friends! =[</p1>
     }
     return (
-      <div className="col">
+      <div className="col status-update-container">
         <p1 className="people-nav-title center">Friends</p1>
         <div className="max-width center">
           <div className="low-width row wrap">

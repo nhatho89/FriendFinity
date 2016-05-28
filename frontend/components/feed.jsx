@@ -2,6 +2,7 @@ var React = require('react');
 var PostStore = require('../stores/postStore');
 var PostAction = require('../actions/postAction');
 var SessionStore = require('../stores/sessionStore');
+var FriendStore = require('../stores/friendStore');
 
 var Feed = React.createClass({
   getInitialState: function() {
@@ -12,17 +13,25 @@ var Feed = React.createClass({
 
   componentDidMount: function () {
     this.listener = PostStore.addListener(this._onChange);
+    this.friendListener = FriendStore.addListener(this.updatePosts)
     PostAction.getAllPosts(SessionStore.currentUser().id)
   },
 
   componentWillUnmount: function () {
     this.listener.remove();
+    this.friendListener.remove();
+  },
+
+  updatePosts: function() {
+
+    PostAction.getAllPosts(SessionStore.currentUser().id)
   },
 
   _onChange: function () {
     this.setState({
       feed: PostStore.allPosts()
     })
+
   },
 
   render: function() {

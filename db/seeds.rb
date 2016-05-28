@@ -124,6 +124,11 @@ Post.create!(
   author_id: 4
 )
 
+Post.create!(
+  body: "Hey thanks for adding me! You're my only friend right now. =[",
+  author_id: 7
+)
+
 
 Friendship.create!(
   user_id: 1,

@@ -4,42 +4,50 @@ var FriendConstants = require('../constants/friendConstants');
 var FriendStore = new Store(AppDispatcher);
 
 var _friends = [];
-var _friend = [];
+var _peopleYouMayKnow = [];
 
-var _requests = [];
+FriendStore.allPeople = function (){
+  return _peopleYouMayKnow
+};
+
+resetPeople = function (peopleYouMayKnow) {
+  _peopleYouMayKnow = peopleYouMayKnow;
+};
 
 resetFriends = function (friends) {
   _friends = friends
 };
 
-removeFriend = function(friend) {
+removePerson = function(friend) {
   var friends = [];
-  _friends.forEach(function(el, idx){
-    if (el.id !== friend.friendship.user_id && el.id !== friend.friendship.user_id){
+  _peopleYouMayKnow.forEach(function(el, idx){
+    if (el.id !== friend.id && el.id !== friend.id){
       friends.push(el)
     }
   })
-  resetFriends(friends)
+  resetPeople(friends)
 };
 
-removeRequest = function(friend) {
-  var requests = [];
-  _requests.forEach(function(el, idx){
-    if (el.user.id !== friend.friendship.friend_id){
-      requests.push(el)
+removeFriend = function(friend) {
+  var friends = [];
+  _friends.forEach(function(el, idx){
+    if (el.id !== friend.id && el.id !== friend.id){
+      friends.push(el)
+    } else {
+      _peopleYouMayKnow.concat(friend)
     }
   })
-  resetRequests(requests)
+  resetFriends(friends)
 };
 
 addFriend = function(friend) {
   _friends = _friends.concat(friend)
 };
 
-
-resetRequests = function(requests) {
-  _requests = requests
+addPerson = function(friend) {
+  _peopleYouMayKnow = _peopleYouMayKnow.concat(friend)
 };
+
 
 FriendStore.allRequests = function (){
   return _requests
@@ -82,11 +90,16 @@ FriendStore.__onDispatch = function(payload){
     break;
     case FriendConstants.REMOVE_FRIEND:
     removeFriend(payload.friend)
+    addPerson(payload.friend)
     FriendStore.__emitChange()
     break;
     case FriendConstants.FRIENDSHIP_APPROVED:
-    debugger
     addFriend(payload.request)
+    removePerson(payload.request)
+    FriendStore.__emitChange()
+    break;
+    case FriendConstants.PEOPLE_RECEIVED:
+    resetPeople(payload.peopleYouMayKnow)
     FriendStore.__emitChange()
     break;
   }

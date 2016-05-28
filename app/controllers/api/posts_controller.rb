@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
-    
+
     newsfeed_ids = friend_ids(current_user)
     @posts = Post.all
 
@@ -16,7 +16,10 @@ class Api::PostsController < ApplicationController
     )
 
     if @post.save!
-      render :show
+      render json: {
+        author_id: post_params[:author_id].to_i,
+        body: post_params[:body]
+      }
     else
       render json: @post.errors.full_messages
     end

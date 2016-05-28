@@ -8,14 +8,44 @@ var FriendUtil = {
   //     url: "api/requests",
   //     method: "get",
   //     success: function (requests) {
-  //       debugger
+  //       
   //       receiveFriendRequests(requests);
   //     },
   //     error: function(error,status) {
-  //       debugger
+  //       
   //     }
   //   })
   // },
+
+  fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
+
+    $.ajax({
+      url: "api/people",
+      method: "get",
+      success: function (people) {
+
+        receivePeopleYouMayKnow(people);
+      },
+      error: function(error,status) {
+
+      }
+    })
+  },
+
+  fetchFriends: function (receiveFriends) {
+
+    $.ajax({
+      url: "api/friendships",
+      method: "get",
+      success: function (friends) {
+
+        receiveFriends(friends);
+      },
+      error: function(error,status) {
+
+      }
+    })
+  },
 
   createFriendRequest: function (friendId, approveFriendRequest) {
 
@@ -27,11 +57,11 @@ var FriendUtil = {
         }
       },
       success: function (request) {
-        debugger
+        
         approveFriendRequest(request);
       },
       error: function(error,status) {
-        debugger
+        
 
       }
     })
@@ -47,11 +77,11 @@ var FriendUtil = {
         }
       },
       success: function (request) {
-        debugger
+        
         removeFriend(request);
       },
       error: function(error,status) {
-        debugger
+        
 
       }
     })

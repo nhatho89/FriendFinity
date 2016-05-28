@@ -235,8 +235,9 @@ var SignUp = React.createClass({
         </div>
 
         <div className="row">
-          <div className="signup-space">
+          <div className="signup-space pointer">
             <input
+              className="pointer"
               type="radio"
               value="male"
               onClick={this.handleGender}
@@ -244,8 +245,9 @@ var SignUp = React.createClass({
               >Male</input>
 
           </div>
-          <div className="signup-space">
+          <div className="signup-space pointer">
             <input
+              className="pointer"
               type="radio"
               value="female"
               onClick={this.handleGender}
@@ -257,20 +259,20 @@ var SignUp = React.createClass({
 
         <div className="checkbox signup-space" id="signUpCheckbox">
           <div className="remember-me-container">
-            <label className="remember-me">
-              <input type="checkbox" value="agreement" required></input>
+            <label className="remember-me pointer">
+              <input className="pointer" type="checkbox" value="agreement" required></input>
               I agree to the terms and conditions.
             </label>
           </div>
         </div>
         <div className="signup-button-container row space-between">
           <button
-            className="signup-button"
+            className="signup-button pointer"
             type="submit">
             Sign Up
           </button>
           <button
-            className="signup-button"
+            className="signup-button pointer"
             onClick={this.handleDemo}
             type="button">
             Demo

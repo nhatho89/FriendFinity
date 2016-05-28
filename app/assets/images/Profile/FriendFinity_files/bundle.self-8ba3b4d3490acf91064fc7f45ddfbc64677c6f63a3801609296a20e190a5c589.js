@@ -1,4 +1,5 @@
-/******/ (function(modules) { // webpackBootstrap
+/******/
+ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -24178,7 +24179,7 @@
 	        React.createElement(
 	          'button',
 	          {
-	            className: 'auth-button demo-auth-button pointer',
+	            className: 'auth-button demo-auth-button',
 	            type: 'button',
 	            style: { float: "right" },
 	            onClick: this.fillOutLogin },
@@ -24188,7 +24189,7 @@
 	      React.createElement(
 	        'button',
 	        {
-	          className: 'auth-button sub-auth-button pointer',
+	          className: 'auth-button sub-auth-button',
 	          type: 'submit' },
 	        'Sign In'
 	      )
@@ -31410,7 +31411,7 @@
 	        { className: 'navbar-right-signout col center' },
 	        React.createElement(
 	          'div',
-	          { className: 'auth-button center pointer' },
+	          { className: 'auth-button center' },
 	          React.createElement(
 	            'p',
 	            { onClick: this.handleSignOut },
@@ -33434,7 +33435,7 @@
 	          React.createElement(
 	            'button',
 	            {
-	              className: 'auth-button pointer',
+	              className: 'auth-button',
 	              type: 'submit' },
 	            'Search'
 	          )
@@ -33443,7 +33444,7 @@
 	    } else {
 	      display = React.createElement(
 	        'p1',
-	        { className: 'logo-text pointer', onClick: this.handleHomeClick },
+	        { className: 'logo-text', onClick: this.handleHomeClick },
 	        'riendFinity'
 	      );
 	    }
@@ -33452,7 +33453,7 @@
 	      { className: 'navbar-left' },
 	      React.createElement(
 	        'li',
-	        { className: 'absolute-logo pointer' },
+	        { className: 'absolute-logo' },
 	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
 	      ),
 	      display
@@ -34088,7 +34089,6 @@
 	var React = __webpack_require__(1);
 	var PostAction = __webpack_require__(265);
 	// var SessionStore = require('../stores/sessionStore');
-	var PostStore = __webpack_require__(269);
 	
 	var StatusUpdate = React.createClass({
 	  displayName: 'StatusUpdate',
@@ -34100,13 +34100,12 @@
 	  },
 	
 	  handleSubmit: function (e) {
+	
 	    e.preventDefault();
 	    PostAction.createNewPost({
 	      authorId: this.props.user.id,
 	      body: this.state.body
 	    });
-	    PostAction.getAllPosts(this.props.user.id);
-	    $('.status')[0].value = "";
 	  },
 	
 	  statusHandler: function (e) {
@@ -34116,7 +34115,6 @@
 	  },
 	
 	  render: function () {
-	
 	    return React.createElement(
 	      'div',
 	      { className: 'status-update-container row' },
@@ -34146,7 +34144,7 @@
 	          React.createElement(
 	            'button',
 	            {
-	              className: 'auth-button sub-auth-button pointer',
+	              className: 'auth-button sub-auth-button',
 	              type: 'submit' },
 	            'Post'
 	          )
@@ -34272,7 +34270,7 @@
 	
 	  componentDidMount: function () {
 	    this.listener = PostStore.addListener(this._onChange);
-	    this.friendListener = FriendStore.addListener(this.updatePosts);
+	    this.friendListener = FriendStore.addListener(this._onChange);
 	    PostAction.getAllPosts(SessionStore.currentUser().id);
 	  },
 	
@@ -34281,12 +34279,8 @@
 	    this.friendListener.remove();
 	  },
 	
-	  updatePosts: function () {
-	
-	    PostAction.getAllPosts(SessionStore.currentUser().id);
-	  },
-	
 	  _onChange: function () {
+	    PostAction.getAllPosts(SessionStore.currentUser().id);
 	    this.setState({
 	      feed: PostStore.allPosts()
 	    });
@@ -35022,11 +35016,10 @@
 	          { className: 'row' },
 	          React.createElement(
 	            'div',
-	            { className: 'signup-space pointer' },
+	            { className: 'signup-space' },
 	            React.createElement(
 	              'input',
 	              {
-	                className: 'pointer',
 	                type: 'radio',
 	                value: 'male',
 	                onClick: this.handleGender,
@@ -35037,11 +35030,10 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'signup-space pointer' },
+	            { className: 'signup-space' },
 	            React.createElement(
 	              'input',
 	              {
-	                className: 'pointer',
 	                type: 'radio',
 	                value: 'female',
 	                onClick: this.handleGender,
@@ -35059,8 +35051,8 @@
 	            { className: 'remember-me-container' },
 	            React.createElement(
 	              'label',
-	              { className: 'remember-me pointer' },
-	              React.createElement('input', { className: 'pointer', type: 'checkbox', value: 'agreement', required: true }),
+	              { className: 'remember-me' },
+	              React.createElement('input', { type: 'checkbox', value: 'agreement', required: true }),
 	              'I agree to the terms and conditions.'
 	            )
 	          )
@@ -35071,14 +35063,14 @@
 	          React.createElement(
 	            'button',
 	            {
-	              className: 'signup-button pointer',
+	              className: 'signup-button',
 	              type: 'submit' },
 	            'Sign Up'
 	          ),
 	          React.createElement(
 	            'button',
 	            {
-	              className: 'signup-button pointer',
+	              className: 'signup-button',
 	              onClick: this.handleDemo,
 	              type: 'button' },
 	            'Demo'
@@ -35276,6 +35268,7 @@
 	  },
 	
 	  mouseEnter: function (e) {
+	
 	    e.preventDefault();
 	    $("#addfriend" + e.target.id).css('z-index', 2);
 	    $("#" + e.target.id).css('opacity', .4);
@@ -35290,10 +35283,10 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'pointer' },
+	      null,
 	      React.createElement(
 	        'i',
-	        { className: 'fa fa-plus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'green', paddingTop: '10', paddingLeft: '35' } },
+	        { className: 'fa fa-plus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'green' } },
 	        'Add Friend'
 	      ),
 	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })
@@ -35335,10 +35328,10 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'pointer' },
+	      null,
 	      React.createElement(
 	        'i',
-	        { className: 'fa fa-minus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'red', paddingTop: '10', paddingLeft: '40' } },
+	        { className: 'fa fa-minus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'red' } },
 	        'Unfriend'
 	      ),
 	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })

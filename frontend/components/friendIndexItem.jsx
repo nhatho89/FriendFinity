@@ -21,10 +21,11 @@ var FriendIndexItem = React.createClass({
     $("#" + e.target.id).css('opacity', 1);
   },
 
+
   render: function() {
     return (
-      <div>
-        <i className="fa fa-minus-circle " aria-hidden="true" id={"addfriend" + this.props.friend.id} style={{zIndex: '-3', position: 'absolute', color: 'red'}}>Add Friend</i>
+      <div className="pointer">
+        <i className="fa fa-minus-circle " aria-hidden="true" id={"addfriend" + this.props.friend.id} style={{zIndex: '-3', position: 'absolute', color: 'red', paddingTop: '10',paddingLeft: '40'}}>Unfriend</i>
         <img className="people-nav" id={this.props.friend.id} src={this.props.friend.profile_pic} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} onClick={this.handleClick}/>
       </div>
     );

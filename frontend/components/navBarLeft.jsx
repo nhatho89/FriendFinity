@@ -26,7 +26,7 @@ var NavBarLeft = React.createClass({
               required
               autoFocus/>
             <button
-               className="auth-button"
+               className="auth-button pointer"
                type="submit">
                Search
             </button>
@@ -35,12 +35,12 @@ var NavBarLeft = React.createClass({
       )
     } else {
       display = (
-        <p1 className="logo-text" onClick={this.handleHomeClick}>riendFinity</p1>
+        <p1 className="logo-text pointer" onClick={this.handleHomeClick}>riendFinity</p1>
       )
     }
     return (
       <div className="navbar-left">
-        <li className="absolute-logo">
+        <li className="absolute-logo pointer">
           <img id="friend-logo" src="/assets/logo.png" onClick={this.handleHomeClick}></img>
         </li>
         {display}

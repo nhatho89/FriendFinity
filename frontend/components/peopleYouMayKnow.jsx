@@ -1,23 +1,23 @@
 var React = require('react');
-var PeopleYouMayKnowStore = require('../stores/peopleYouMayKnowStore');
-var PeopleYouMayKnowAction = require('../actions/peopleYouMayKnowAction');
+var FriendStore = require('../stores/friendStore');
+var FriendActions = require('../actions/friendshipActions');
 var PeopleYouMayKnowIndexItem = require('./peopleYouMayKnowIndexItem');
 
 var PeopleYouMayKnow = React.createClass({
   getInitialState: function() {
     return ({
-      people: PeopleYouMayKnowStore.allPeople()
+      people: FriendStore.allPeople()
     })
   },
 
   componentDidMount: function() {
-    this.peopleListener = PeopleYouMayKnowStore.addListener(this.onChange)
-    PeopleYouMayKnowAction.getPeopleYouMayKnow();
+    this.peopleListener = FriendStore.addListener(this.onChange)
+    FriendActions.getPeopleYouMayKnow();
   },
 
   onChange: function() {
     this.setState({
-      people: PeopleYouMayKnowStore.allPeople()
+      people: FriendStore.allPeople()
     })
   },
 
@@ -39,7 +39,7 @@ var PeopleYouMayKnow = React.createClass({
     }
 
     return (
-      <div className="col wrap">
+      <div className="col wrap status-update-container">
         <p1 className="people-nav-title center">People You May Know</p1>
           <div className="max-width center">
             <div className="low-width row wrap">

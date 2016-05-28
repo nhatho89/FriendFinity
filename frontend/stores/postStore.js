@@ -17,7 +17,7 @@ PostStore.find = function (postId) {
     }
   })
   return foundPost
-}
+};
 
 resetPosts = function (posts) {
   _posts = posts;

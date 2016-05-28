@@ -1,21 +1,24 @@
 var React = require('react');
 var PostAction = require('../actions/postAction');
 // var SessionStore = require('../stores/sessionStore');
+var PostStore = require('../stores/postStore');
 
 var StatusUpdate = React.createClass({
   getInitialState: function() {
     return {
-      body: "Something is wrong"
+      body: "Something is wrong",
     }
   },
 
   handleSubmit: function(e) {
-
     e.preventDefault();
     PostAction.createNewPost({
       authorId: this.props.user.id,
       body: this.state.body
     })
+    PostAction.getAllPosts(this.props.user.id)
+    $('.status')[0].value = ""
+
   },
 
   statusHandler: function(e) {
@@ -25,6 +28,7 @@ var StatusUpdate = React.createClass({
   },
 
   render: function() {
+
     return (
       <div className="status-update-container row">
         <div>
@@ -43,7 +47,7 @@ var StatusUpdate = React.createClass({
                 />
             </div>
             <button
-               className="auth-button sub-auth-button"
+               className="auth-button sub-auth-button pointer"
                type="submit">
                Post
             </button>

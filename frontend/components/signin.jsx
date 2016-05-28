@@ -63,7 +63,7 @@ var LoginModalForm = React.createClass({
          </div>
         <div className="submit-button">
           <button
-            className="auth-button demo-auth-button"
+            className="auth-button demo-auth-button pointer"
             type="button"
             style={{float: "right"}}
             onClick={this.fillOutLogin}>
@@ -71,7 +71,7 @@ var LoginModalForm = React.createClass({
           </button>
         </div>
         <button
-           className="auth-button sub-auth-button"
+           className="auth-button sub-auth-button pointer"
            type="submit">
            Sign In
         </button>

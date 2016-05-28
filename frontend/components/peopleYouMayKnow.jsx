@@ -1,6 +1,7 @@
 var React = require('react');
 var PeopleYouMayKnowStore = require('../stores/peopleYouMayKnowStore');
 var PeopleYouMayKnowAction = require('../actions/peopleYouMayKnowAction');
+var PeopleYouMayKnowIndexItem = require('./peopleYouMayKnowIndexItem');
 
 var PeopleYouMayKnow = React.createClass({
   getInitialState: function() {
@@ -30,14 +31,13 @@ var PeopleYouMayKnow = React.createClass({
 
       people = this.state.people.map(function(person) {
         return (
-          <div>
-            <img className="people-nav" src={person.profile_pic} onMouseEnter={this.mouseEnter} nMouseLeave={this.mouseLeave}/>
-          </div>
+          <PeopleYouMayKnowIndexItem friend={person}/>
         )
       })
     } else {
       people = <p1>You are friends with everyone!</p1>
     }
+
     return (
       <div className="col wrap">
         <p1 className="people-nav-title center">People You May Know</p1>

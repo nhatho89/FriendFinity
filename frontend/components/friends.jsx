@@ -1,6 +1,7 @@
 var React = require('react');
 var FriendStore = require('../stores/friendStore');
 var PeopleYouMayKnowAction = require('../actions/peopleYouMayKnowAction');
+var FriendIndexItem = require('./friendIndexItem');
 
 var Friends = React.createClass({
 
@@ -26,13 +27,12 @@ var Friends = React.createClass({
 
   render: function() {
     var friends;
-    if (this.state.friends.length > 0) {
+
+    if (this.state.friends && this.state.friends.length > 0) {
 
       friends = this.state.friends.map(function(friend) {
         return (
-          <div>
-            <img className="people-nav" src={friend.profile_pic}/>
-          </div>
+          <FriendIndexItem friend={friend}/>
         )
       })
     } else {

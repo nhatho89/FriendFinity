@@ -37,3 +37,8 @@ li {
 .low-width {
   width: 325px;
 }
+
+/*.addfriend {
+  z-index: -1;
+  position: absolute;
+}*/

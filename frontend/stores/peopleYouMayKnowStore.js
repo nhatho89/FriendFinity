@@ -14,6 +14,16 @@ resetPeople = function (peopleYouMayKnow) {
   _peopleYouMayKnow = peopleYouMayKnow;
 };
 
+PeopleYouMayKnow.find = function (friendId) {
+  var foundFriend;
+  _peopleYouMayKnow.forEach(function (friend) {
+    if (friend.id === friendId){
+      foundFriend = friend
+    }
+  })
+  return foundFriend
+}
+
 PeopleYouMayKnow.__onDispatch = function(payload){
   switch(payload.actionType) {
     case PeopleYouMayKnowConstants.PEOPLE_RECEIVED:

@@ -33,7 +33,7 @@ removeRequest = function(friend) {
 };
 
 addFriend = function(friend) {
-  _friends = [friend].concat(_friends)
+  _friends = _friends.concat(friend)
 };
 
 
@@ -81,13 +81,12 @@ FriendStore.__onDispatch = function(payload){
     FriendStore.__emitChange()
     break;
     case FriendConstants.REMOVE_FRIEND:
-    removeFriend(payload.friendship)
-    removeRequest(payload.friendship)
+    removeFriend(payload.friend)
     FriendStore.__emitChange()
     break;
     case FriendConstants.FRIENDSHIP_APPROVED:
-    resetFriends(payload.friends)
-    resetRequests(payload.requests)
+    debugger
+    addFriend(payload.request)
     FriendStore.__emitChange()
     break;
   }

@@ -33,26 +33,6 @@ class User < ActiveRecord::Base
     all_friends
   end
 
-  def received_requests
-    receiving_friendships = self.receiving_friendships.where(confirmed: false, denied: false).to_a
-    incoming_requests = receiving_friendships.map do |request|
-      request.giving
-    end
-    incoming_requests
-  end
-
-  def made_requests
-    requesting_friendships = self.requesting_friendships.where(confirmed: false).to_a
-    outgoing_requests = requesting_friendships.map do |friendship|
-      friendship.user_id == self.id ? friendship.receiving : friendship.giving
-    end
-    outgoing_requests
-  end
-
-  def name
-    self.first_name + ' ' + self.last_name
-  end
-
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

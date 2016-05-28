@@ -9,13 +9,11 @@ var Redirect = ReactRouter.Redirect;
 var App = require('./components/app');
 var Homepage = require('./components/homepage.jsx');
 var LandingPage = require('./components/landingpage.jsx');
-var FriendsIndex = require('./components/friendsIndex.jsx');
 
 var routes = (
   <Route component={App} path="/">
     <IndexRoute component={LandingPage}/>
     <Route path="home" component={Homepage}/>
-    <Route path="friends" component={FriendsIndex}/>
   </Route>
 );
 

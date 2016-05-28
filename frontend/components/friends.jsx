@@ -13,6 +13,7 @@ var Friends = React.createClass({
 
   componentDidMount: function() {
     this.friendsListener = FriendStore.addListener(this.friendsChange);
+    debugger
     FriendAction.getAllFriends();
   },
 

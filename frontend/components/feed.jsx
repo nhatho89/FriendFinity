@@ -14,6 +14,7 @@ var Feed = React.createClass({
   componentDidMount: function () {
     this.listener = PostStore.addListener(this._onChange);
     this.friendListener = FriendStore.addListener(this.updatePosts)
+    debugger
     PostAction.getAllPosts(SessionStore.currentUser().id)
   },
 

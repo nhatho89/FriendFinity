@@ -39,6 +39,11 @@ group :development, :test do
 
 end
 
+group :production do
+  gem 'newrelic_rpm'
+  gem 'rails_12factor' # error feedback
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'better_errors'

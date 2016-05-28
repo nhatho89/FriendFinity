@@ -16,9 +16,8 @@ var StatusUpdate = React.createClass({
       authorId: this.props.user.id,
       body: this.state.body
     })
-    PostAction.getAllPosts(this.props.user.id)
     $('.status')[0].value = ""
-
+    PostAction.getAllPosts(this.props.user.id)
   },
 
   statusHandler: function(e) {

@@ -54,7 +54,7 @@
 	var Redirect = ReactRouter.Redirect;
 	var App = __webpack_require__(206);
 	var Homepage = __webpack_require__(261);
-	var LandingPage = __webpack_require__(278);
+	var LandingPage = __webpack_require__(279);
 	
 	var routes = React.createElement(
 	  Route,
@@ -33471,7 +33471,7 @@
 	var LeftNavigation = __webpack_require__(262);
 	var Newsfeed = __webpack_require__(263);
 	var SessionStore = __webpack_require__(220);
-	var PeopleNavigation = __webpack_require__(270);
+	var PeopleNavigation = __webpack_require__(272);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
@@ -34062,7 +34062,7 @@
 
 	var React = __webpack_require__(1);
 	var StatusUpdate = __webpack_require__(264);
-	var Feed = __webpack_require__(268);
+	var Feed = __webpack_require__(269);
 	
 	var Newsfeed = React.createClass({
 	  displayName: 'Newsfeed',
@@ -34088,7 +34088,7 @@
 	var React = __webpack_require__(1);
 	var PostAction = __webpack_require__(265);
 	// var SessionStore = require('../stores/sessionStore');
-	var PostStore = __webpack_require__(269);
+	var PostStore = __webpack_require__(268);
 	
 	var StatusUpdate = React.createClass({
 	  displayName: 'StatusUpdate',
@@ -34105,8 +34105,8 @@
 	      authorId: this.props.user.id,
 	      body: this.state.body
 	    });
-	    PostAction.getAllPosts(this.props.user.id);
 	    $('.status')[0].value = "";
+	    PostAction.getAllPosts(this.props.user.id);
 	  },
 	
 	  statusHandler: function (e) {
@@ -34255,11 +34255,59 @@
 /* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var Store = __webpack_require__(221).Store;
+	var AppDispatcher = __webpack_require__(214);
+	var PostConstants = __webpack_require__(267);
+	var PostStore = new Store(AppDispatcher);
+	
+	var _posts = [];
+	
+	PostStore.allPosts = function () {
+	  return _posts;
+	};
+	
+	PostStore.find = function (postId) {
+	  var foundPost;
+	  _posts.forEach(function (post) {
+	    if (post.id === postId) {
+	      foundPost = post;
+	    }
+	  });
+	  return foundPost;
+	};
+	
+	resetPosts = function (posts) {
+	  _posts = posts;
+	};
+	
+	addPost = function (post) {
+	  _posts = [post].concat(_posts);
+	};
+	
+	PostStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case PostConstants.POSTS_RECEIVED:
+	      resetPosts(payload.posts);
+	      PostStore.__emitChange();
+	      break;
+	    case PostConstants.POST_CREATED:
+	      addPost(payload.post);
+	      PostStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = PostStore;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var React = __webpack_require__(1);
-	var PostStore = __webpack_require__(269);
+	var PostStore = __webpack_require__(268);
 	var PostAction = __webpack_require__(265);
 	var SessionStore = __webpack_require__(220);
-	var FriendStore = __webpack_require__(273);
+	var FriendStore = __webpack_require__(270);
 	
 	var Feed = React.createClass({
 	  displayName: 'Feed',
@@ -34331,228 +34379,12 @@
 	module.exports = Feed;
 
 /***/ },
-/* 269 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(221).Store;
-	var AppDispatcher = __webpack_require__(214);
-	var PostConstants = __webpack_require__(267);
-	var PostStore = new Store(AppDispatcher);
-	
-	var _posts = [];
-	
-	PostStore.allPosts = function () {
-	  return _posts;
-	};
-	
-	PostStore.find = function (postId) {
-	  var foundPost;
-	  _posts.forEach(function (post) {
-	    if (post.id === postId) {
-	      foundPost = post;
-	    }
-	  });
-	  return foundPost;
-	};
-	
-	resetPosts = function (posts) {
-	  _posts = posts;
-	};
-	
-	addPost = function (post) {
-	  _posts = [post].concat(_posts);
-	};
-	
-	PostStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case PostConstants.POSTS_RECEIVED:
-	      resetPosts(payload.posts);
-	      PostStore.__emitChange();
-	      break;
-	    case PostConstants.POST_CREATED:
-	      addPost(payload.post);
-	      PostStore.__emitChange();
-	      break;
-	  }
-	};
-	
-	module.exports = PostStore;
-
-/***/ },
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	var PeopleYouMayKnow = __webpack_require__(271);
-	var Friends = __webpack_require__(272);
-	
-	var PeopleNavigation = React.createClass({
-	  displayName: 'PeopleNavigation',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'people-navigation' },
-	      React.createElement(Friends, null),
-	      React.createElement(PeopleYouMayKnow, null)
-	    );
-	  }
-	
-	});
-	
-	module.exports = PeopleNavigation;
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendStore = __webpack_require__(273);
-	var FriendActions = __webpack_require__(283);
-	var PeopleYouMayKnowIndexItem = __webpack_require__(285);
-	
-	var PeopleYouMayKnow = React.createClass({
-	  displayName: 'PeopleYouMayKnow',
-	
-	  getInitialState: function () {
-	    return {
-	      people: FriendStore.allPeople()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.peopleListener = FriendStore.addListener(this.onChange);
-	    FriendActions.getPeopleYouMayKnow();
-	  },
-	
-	  onChange: function () {
-	    this.setState({
-	      people: FriendStore.allPeople()
-	    });
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.peopleListener.remove();
-	  },
-	
-	  render: function () {
-	    var people;
-	    if (this.state.people.length > 0) {
-	
-	      people = this.state.people.map(function (person) {
-	        return React.createElement(PeopleYouMayKnowIndexItem, { friend: person });
-	      });
-	    } else {
-	      people = React.createElement(
-	        'p1',
-	        null,
-	        'You are friends with everyone!'
-	      );
-	    }
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'col wrap status-update-container' },
-	      React.createElement(
-	        'p1',
-	        { className: 'people-nav-title center' },
-	        'People You May Know'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'max-width center' },
-	        React.createElement(
-	          'div',
-	          { className: 'low-width row wrap' },
-	          people
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = PeopleYouMayKnow;
-
-/***/ },
-/* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendStore = __webpack_require__(273);
-	var FriendAction = __webpack_require__(283);
-	var FriendIndexItem = __webpack_require__(286);
-	
-	var Friends = React.createClass({
-	  displayName: 'Friends',
-	
-	
-	  getInitialState: function () {
-	    return {
-	      friends: FriendStore.allFriends()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.friendsListener = FriendStore.addListener(this.friendsChange);
-	    FriendAction.getAllFriends();
-	  },
-	
-	  friendsChange: function () {
-	    this.setState({ friends: FriendStore.allFriends() });
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.friendsListener.remove();
-	  },
-	
-	  render: function () {
-	    var friends;
-	
-	    if (this.state.friends && this.state.friends.length > 0) {
-	
-	      friends = this.state.friends.map(function (friend) {
-	        return React.createElement(FriendIndexItem, { friend: friend });
-	      });
-	    } else {
-	      friends = React.createElement(
-	        'p1',
-	        null,
-	        'You have no friends! =['
-	      );
-	    }
-	    return React.createElement(
-	      'div',
-	      { className: 'col status-update-container' },
-	      React.createElement(
-	        'p1',
-	        { className: 'people-nav-title center' },
-	        'Friends'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'max-width center' },
-	        React.createElement(
-	          'div',
-	          { className: 'low-width row wrap' },
-	          friends
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Friends;
-
-/***/ },
-/* 273 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var Store = __webpack_require__(221).Store;
 	var AppDispatcher = __webpack_require__(214);
-	var FriendConstants = __webpack_require__(274);
+	var FriendConstants = __webpack_require__(271);
 	var FriendStore = new Store(AppDispatcher);
 	
 	var _friends = [];
@@ -34658,7 +34490,7 @@
 	module.exports = FriendStore;
 
 /***/ },
-/* 274 */
+/* 271 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -34674,14 +34506,433 @@
 	};
 
 /***/ },
-/* 275 */,
-/* 276 */,
-/* 277 */,
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PeopleYouMayKnow = __webpack_require__(273);
+	var Friends = __webpack_require__(277);
+	
+	var PeopleNavigation = React.createClass({
+	  displayName: 'PeopleNavigation',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'people-navigation' },
+	      React.createElement(Friends, null),
+	      React.createElement(PeopleYouMayKnow, null)
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleNavigation;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(270);
+	var FriendActions = __webpack_require__(274);
+	var PeopleYouMayKnowIndexItem = __webpack_require__(276);
+	
+	var PeopleYouMayKnow = React.createClass({
+	  displayName: 'PeopleYouMayKnow',
+	
+	  getInitialState: function () {
+	    return {
+	      people: FriendStore.allPeople()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.peopleListener = FriendStore.addListener(this.onChange);
+	    FriendActions.getPeopleYouMayKnow();
+	  },
+	
+	  onChange: function () {
+	    this.setState({
+	      people: FriendStore.allPeople()
+	    });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.peopleListener.remove();
+	  },
+	
+	  render: function () {
+	    var people;
+	    if (this.state.people.length > 0) {
+	
+	      people = this.state.people.map(function (person) {
+	        return React.createElement(PeopleYouMayKnowIndexItem, { friend: person });
+	      });
+	    } else {
+	      people = React.createElement(
+	        'p1',
+	        null,
+	        'You are friends with everyone!'
+	      );
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'col wrap status-update-container' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'People You May Know'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          people
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleYouMayKnow;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var FriendUtil = __webpack_require__(275);
+	var FriendConstants = __webpack_require__(271);
+	var AppDispatcher = __webpack_require__(214);
+	
+	var FriendActions = {
+	
+	  getPeopleYouMayKnow: function () {
+	    FriendUtil.fetchPeopleYouMayKnow(this.receivePeopleYouMayKnow);
+	  },
+	
+	  receivePeopleYouMayKnow: function (peopleYouMayKnow) {
+	    AppDispatcher.dispatch({
+	      actionType: FriendConstants.PEOPLE_RECEIVED,
+	      peopleYouMayKnow: peopleYouMayKnow
+	    });
+	  },
+	
+	  getAllFriends: function () {
+	    FriendUtil.fetchFriends(this.receiveFriends);
+	  },
+	
+	  receiveFriends: function (friends) {
+	    AppDispatcher.dispatch({
+	      actionType: FriendConstants.FRIENDS_RECEIVED,
+	      friends: friends
+	    });
+	  },
+	
+	  // getFriendRequests: function(){
+	  //   FriendUtil.fetchFriendRequests(this.receiveAllRequests);
+	  // },
+	
+	  createFriend: function (friendId) {
+	    FriendUtil.createFriendRequest(friendId, this.approveFriendRequest);
+	  },
+	
+	  unfriend: function (friendId) {
+	    FriendUtil.removeFriendRequest(friendId, this.removeFriend);
+	  },
+	
+	  // receiveAllRequests: function (requests) {
+	  //   Dispatcher.dispatch({
+	  //     actionType: Constants.REQUESTS_RECEIVED,
+	  //     requests: requests
+	  //   });
+	  // },
+	
+	  approveFriendRequest: function (data) {
+	    AppDispatcher.dispatch({
+	      actionType: FriendConstants.FRIENDSHIP_APPROVED,
+	      request: data
+	    });
+	  },
+	
+	  removeFriend: function (friend) {
+	
+	    AppDispatcher.dispatch({
+	      actionType: FriendConstants.REMOVE_FRIEND,
+	      friend: friend
+	    });
+	  }
+	
+	};
+	
+	// sendFriendRequest: function(friendRequest){
+	//   AppDispatcher.dispatch({
+	//     actionType: FriendConstants.REQUEST_FRIEND,
+	//     friendRequest: friendRequest
+	//   });
+	// }
+	
+	module.exports = FriendActions;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports) {
+
+	var FriendUtil = {
+	
+	  // fetchFriendRequests: function (receiveFriendRequests) {
+	  //   //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
+	  //
+	  //
+	  //   $.ajax({
+	  //     url: "api/requests",
+	  //     method: "get",
+	  //     success: function (requests) {
+	  //      
+	  //       receiveFriendRequests(requests);
+	  //     },
+	  //     error: function(error,status) {
+	  //      
+	  //     }
+	  //   })
+	  // },
+	
+	  fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
+	
+	    $.ajax({
+	      url: "api/people",
+	      method: "get",
+	      success: function (people) {
+	
+	        receivePeopleYouMayKnow(people);
+	      },
+	      error: function (error, status) {}
+	    });
+	  },
+	
+	  fetchFriends: function (receiveFriends) {
+	
+	    $.ajax({
+	      url: "api/friendships",
+	      method: "get",
+	      success: function (friends) {
+	
+	        receiveFriends(friends);
+	      },
+	      error: function (error, status) {}
+	    });
+	  },
+	
+	  createFriendRequest: function (friendId, approveFriendRequest) {
+	
+	    $.ajax({
+	      url: "api/friendships",
+	      method: "post",
+	      data: { friend: {
+	          friend_id: friendId
+	        }
+	      },
+	      success: function (request) {
+	
+	        approveFriendRequest(request);
+	      },
+	      error: function (error, status) {}
+	    });
+	  },
+	
+	  removeFriendRequest: function (friendId, removeFriend) {
+	
+	    $.ajax({
+	      url: "api/friendships/destroy",
+	      method: "delete",
+	      data: { friend: {
+	          friend_id: friendId
+	        }
+	      },
+	      success: function (request) {
+	
+	        removeFriend(request);
+	      },
+	      error: function (error, status) {}
+	    });
+	  }
+	
+	};
+	module.exports = FriendUtil;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(270);
+	var FriendshipActions = __webpack_require__(274);
+	
+	var PeopleYouMayKnowIndexItem = React.createClass({
+	  displayName: 'PeopleYouMayKnowIndexItem',
+	
+	
+	  handleClick: function (e) {
+	    e.preventDefault();
+	    FriendshipActions.createFriend(this.props.friend.id);
+	  },
+	
+	  mouseEnter: function (e) {
+	    e.preventDefault();
+	    $("#addfriend" + e.target.id).css('z-index', 2);
+	    $("#" + e.target.id).css('opacity', .4);
+	  },
+	
+	  mouseLeave: function (e) {
+	    e.preventDefault();
+	    $("#addfriend" + e.target.id).css('z-index', -1);
+	    $("#" + e.target.id).css('opacity', 1);
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'pointer' },
+	      React.createElement(
+	        'i',
+	        { className: 'fa fa-plus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'green', paddingTop: '10', paddingLeft: '35' } },
+	        'Add Friend'
+	      ),
+	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleYouMayKnowIndexItem;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(270);
+	var FriendAction = __webpack_require__(274);
+	var FriendIndexItem = __webpack_require__(278);
+	
+	var Friends = React.createClass({
+	  displayName: 'Friends',
+	
+	
+	  getInitialState: function () {
+	    return {
+	      friends: FriendStore.allFriends()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.friendsListener = FriendStore.addListener(this.friendsChange);
+	    FriendAction.getAllFriends();
+	  },
+	
+	  friendsChange: function () {
+	    this.setState({ friends: FriendStore.allFriends() });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.friendsListener.remove();
+	  },
+	
+	  render: function () {
+	    var friends;
+	
+	    if (this.state.friends && this.state.friends.length > 0) {
+	
+	      friends = this.state.friends.map(function (friend) {
+	        return React.createElement(FriendIndexItem, { friend: friend });
+	      });
+	    } else {
+	      friends = React.createElement(
+	        'p1',
+	        null,
+	        'You have no friends! =['
+	      );
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'col status-update-container' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'Friends'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          friends
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Friends;
+
+/***/ },
 /* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var SignUp = __webpack_require__(279);
+	var FriendshipActions = __webpack_require__(274);
+	
+	var FriendIndexItem = React.createClass({
+	  displayName: 'FriendIndexItem',
+	
+	  handleClick: function (e) {
+	    e.preventDefault();
+	    FriendshipActions.unfriend(this.props.friend.id);
+	  },
+	
+	  mouseEnter: function (e) {
+	
+	    e.preventDefault();
+	    $("#addfriend" + e.target.id).css('z-index', 2);
+	    $("#" + e.target.id).css('opacity', .4);
+	  },
+	
+	  mouseLeave: function (e) {
+	    e.preventDefault();
+	    $("#addfriend" + e.target.id).css('z-index', -1);
+	    $("#" + e.target.id).css('opacity', 1);
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'pointer' },
+	      React.createElement(
+	        'i',
+	        { className: 'fa fa-minus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'red', paddingTop: '10', paddingLeft: '40' } },
+	        'Unfriend'
+	      ),
+	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })
+	    );
+	  }
+	
+	});
+	
+	module.exports = FriendIndexItem;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var SignUp = __webpack_require__(280);
 	var SessionStore = __webpack_require__(220);
 	var History = __webpack_require__(159).History;
 	
@@ -34755,7 +35006,7 @@
 	module.exports = LandingPage;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -35091,263 +35342,6 @@
 	});
 	
 	module.exports = SignUp;
-
-/***/ },
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var FriendUtil = __webpack_require__(284);
-	var FriendConstants = __webpack_require__(274);
-	var AppDispatcher = __webpack_require__(214);
-	
-	var FriendActions = {
-	
-	  getPeopleYouMayKnow: function () {
-	    FriendUtil.fetchPeopleYouMayKnow(this.receivePeopleYouMayKnow);
-	  },
-	
-	  receivePeopleYouMayKnow: function (peopleYouMayKnow) {
-	    AppDispatcher.dispatch({
-	      actionType: FriendConstants.PEOPLE_RECEIVED,
-	      peopleYouMayKnow: peopleYouMayKnow
-	    });
-	  },
-	
-	  getAllFriends: function () {
-	    FriendUtil.fetchFriends(this.receiveFriends);
-	  },
-	
-	  receiveFriends: function (friends) {
-	    AppDispatcher.dispatch({
-	      actionType: FriendConstants.FRIENDS_RECEIVED,
-	      friends: friends
-	    });
-	  },
-	
-	  // getFriendRequests: function(){
-	  //   FriendUtil.fetchFriendRequests(this.receiveAllRequests);
-	  // },
-	
-	  createFriend: function (friendId) {
-	    FriendUtil.createFriendRequest(friendId, this.approveFriendRequest);
-	  },
-	
-	  unfriend: function (friendId) {
-	    FriendUtil.removeFriendRequest(friendId, this.removeFriend);
-	  },
-	
-	  // receiveAllRequests: function (requests) {
-	  //   Dispatcher.dispatch({
-	  //     actionType: Constants.REQUESTS_RECEIVED,
-	  //     requests: requests
-	  //   });
-	  // },
-	
-	  approveFriendRequest: function (data) {
-	    AppDispatcher.dispatch({
-	      actionType: FriendConstants.FRIENDSHIP_APPROVED,
-	      request: data
-	    });
-	  },
-	
-	  removeFriend: function (friend) {
-	
-	    AppDispatcher.dispatch({
-	      actionType: FriendConstants.REMOVE_FRIEND,
-	      friend: friend
-	    });
-	  }
-	
-	};
-	
-	// sendFriendRequest: function(friendRequest){
-	//   AppDispatcher.dispatch({
-	//     actionType: FriendConstants.REQUEST_FRIEND,
-	//     friendRequest: friendRequest
-	//   });
-	// }
-	
-	module.exports = FriendActions;
-
-/***/ },
-/* 284 */
-/***/ function(module, exports) {
-
-	var FriendUtil = {
-	
-	  // fetchFriendRequests: function (receiveFriendRequests) {
-	  //   //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
-	  //
-	  //
-	  //   $.ajax({
-	  //     url: "api/requests",
-	  //     method: "get",
-	  //     success: function (requests) {
-	  //      
-	  //       receiveFriendRequests(requests);
-	  //     },
-	  //     error: function(error,status) {
-	  //      
-	  //     }
-	  //   })
-	  // },
-	
-	  fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
-	
-	    $.ajax({
-	      url: "api/people",
-	      method: "get",
-	      success: function (people) {
-	
-	        receivePeopleYouMayKnow(people);
-	      },
-	      error: function (error, status) {}
-	    });
-	  },
-	
-	  fetchFriends: function (receiveFriends) {
-	
-	    $.ajax({
-	      url: "api/friendships",
-	      method: "get",
-	      success: function (friends) {
-	
-	        receiveFriends(friends);
-	      },
-	      error: function (error, status) {}
-	    });
-	  },
-	
-	  createFriendRequest: function (friendId, approveFriendRequest) {
-	
-	    $.ajax({
-	      url: "api/friendships",
-	      method: "post",
-	      data: { friend: {
-	          friend_id: friendId
-	        }
-	      },
-	      success: function (request) {
-	
-	        approveFriendRequest(request);
-	      },
-	      error: function (error, status) {}
-	    });
-	  },
-	
-	  removeFriendRequest: function (friendId, removeFriend) {
-	
-	    $.ajax({
-	      url: "api/friendships/destroy",
-	      method: "delete",
-	      data: { friend: {
-	          friend_id: friendId
-	        }
-	      },
-	      success: function (request) {
-	
-	        removeFriend(request);
-	      },
-	      error: function (error, status) {}
-	    });
-	  }
-	
-	};
-	module.exports = FriendUtil;
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendStore = __webpack_require__(273);
-	var FriendshipActions = __webpack_require__(283);
-	
-	var PeopleYouMayKnowIndexItem = React.createClass({
-	  displayName: 'PeopleYouMayKnowIndexItem',
-	
-	
-	  handleClick: function (e) {
-	    e.preventDefault();
-	    FriendshipActions.createFriend(this.props.friend.id);
-	  },
-	
-	  mouseEnter: function (e) {
-	    e.preventDefault();
-	    $("#addfriend" + e.target.id).css('z-index', 2);
-	    $("#" + e.target.id).css('opacity', .4);
-	  },
-	
-	  mouseLeave: function (e) {
-	    e.preventDefault();
-	    $("#addfriend" + e.target.id).css('z-index', -1);
-	    $("#" + e.target.id).css('opacity', 1);
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'pointer' },
-	      React.createElement(
-	        'i',
-	        { className: 'fa fa-plus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'green', paddingTop: '10', paddingLeft: '35' } },
-	        'Add Friend'
-	      ),
-	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })
-	    );
-	  }
-	
-	});
-	
-	module.exports = PeopleYouMayKnowIndexItem;
-
-/***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendshipActions = __webpack_require__(283);
-	
-	var FriendIndexItem = React.createClass({
-	  displayName: 'FriendIndexItem',
-	
-	  handleClick: function (e) {
-	    e.preventDefault();
-	    FriendshipActions.unfriend(this.props.friend.id);
-	  },
-	
-	  mouseEnter: function (e) {
-	
-	    e.preventDefault();
-	    $("#addfriend" + e.target.id).css('z-index', 2);
-	    $("#" + e.target.id).css('opacity', .4);
-	  },
-	
-	  mouseLeave: function (e) {
-	    e.preventDefault();
-	    $("#addfriend" + e.target.id).css('z-index', -1);
-	    $("#" + e.target.id).css('opacity', 1);
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'pointer' },
-	      React.createElement(
-	        'i',
-	        { className: 'fa fa-minus-circle ', 'aria-hidden': 'true', id: "addfriend" + this.props.friend.id, style: { zIndex: '-3', position: 'absolute', color: 'red', paddingTop: '10', paddingLeft: '40' } },
-	        'Unfriend'
-	      ),
-	      React.createElement('img', { className: 'people-nav', id: this.props.friend.id, src: this.props.friend.profile_pic, onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave, onClick: this.handleClick })
-	    );
-	  }
-	
-	});
-	
-	module.exports = FriendIndexItem;
 
 /***/ }
 /******/ ]);

@@ -31,7 +31,7 @@ var PeopleYouMayKnow = React.createClass({
 
       people = this.state.people.map(function(person) {
         return (
-          <PeopleYouMayKnowIndexItem friend={person}/>
+          <PeopleYouMayKnowIndexItem friend={person} key={person.id}/>
         )
       })
     } else {

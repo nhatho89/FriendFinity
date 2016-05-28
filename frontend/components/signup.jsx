@@ -22,7 +22,6 @@ var SignUp = React.createClass({
   handleSubmit: function() {
     this.errors = [];
     this.validateInputs()
-    // this.props.closeModal();
     console.log(this.errors);
     if (this.errors.length > 0){
       this.setState({
@@ -54,13 +53,18 @@ var SignUp = React.createClass({
     if (password !== passwordConfirm) {
       this.errors.push("Password confirmation and Password must match!");
     }
-    // if (this.state.email.) {
-    //
-    // }
+
   },
 
   handleDemo: function(e) {
     e.preventDefault();
+    var email = "joey@friends.com";
+    var password = "qweasd";
+
+    SessionActions.logIn({
+      email: 'joey@friends.com',
+      password: 'qweasd'
+    });
   },
 
   handleFirstName: function(e) {
@@ -129,20 +133,20 @@ var SignUp = React.createClass({
   },
 
   render: function() {
-    var alert = this.state.errors.map(function(error, idx){
-        return (
-          <div
-            key={"error"+idx}
-            className="alert alert-danger"
-            role="alert">
-            <strong>{error}</strong>
-          </div>
-        );
-      });
+    // var alert = this.state.errors.map(function(error, idx){
+    //     return (
+    //       <div
+    //         key={"error"+idx}
+    //         className="alert alert-danger"
+    //         role="alert">
+    //         <strong>{error}</strong>
+    //       </div>
+    //     );
+    //   });
 
+    // {alert}
     return (
       <div className="signup-container col">
-        {alert}
         <div className="signup-title-container">
           <div>
             <h4 className="signup-title">Sign Up</h4>

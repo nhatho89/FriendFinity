@@ -7,13 +7,13 @@ var Friends = React.createClass({
 
   getInitialState: function() {
     return ({
-      friends: FriendStore.allFriends()
+      friends: FriendAction.getAllFriends()
     })
   },
 
   componentDidMount: function() {
     this.friendsListener = FriendStore.addListener(this.friendsChange);
-    FriendAction.getAllFriends();
+
   },
 
   friendsChange: function() {
@@ -31,7 +31,7 @@ var Friends = React.createClass({
 
       friends = this.state.friends.map(function(friend) {
         return (
-          <FriendIndexItem friend={friend}/>
+          <FriendIndexItem friend={friend} key={friend.id}/>
         )
       })
     } else {

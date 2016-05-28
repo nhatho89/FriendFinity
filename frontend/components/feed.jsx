@@ -23,7 +23,6 @@ var Feed = React.createClass({
   },
 
   updatePosts: function() {
-
     PostAction.getAllPosts(SessionStore.currentUser().id)
   },
 
@@ -31,7 +30,6 @@ var Feed = React.createClass({
     this.setState({
       feed: PostStore.allPosts()
     })
-
   },
 
   render: function() {

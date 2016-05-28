@@ -16,6 +16,10 @@ var Homepage = React.createClass({
     this.userListener = SessionStore.addListener(this.userChange);
   },
 
+  componentWillUnmount: function() {
+    this.userListener.remove();
+  },
+
   userChange: function() {
     this.setState({ user: SessionStore.currentUser() });
   },
@@ -30,7 +34,6 @@ var Homepage = React.createClass({
           <Newsfeed user={this.state.user}/>
         </div>
         <div>
-
           <PeopleNavigation/>
         </div>
       </div>

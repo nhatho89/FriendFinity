@@ -75,6 +75,11 @@
   position: relative;
 }
 
+.signout {
+  margin: 0px;
+  padding: 12px;
+}
+
 /*.navbar-right-signout:hover {
   cursor: pointer;
 }

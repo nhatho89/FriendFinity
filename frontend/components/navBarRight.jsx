@@ -23,7 +23,7 @@ var NavBarRight = React.createClass({
       return (
         <div className="navbar-right-signout col center">
           <div className="auth-button center pointer">
-            <p onClick={this.handleSignOut}>Sign out</p>
+            <p className="signout" onClick={this.handleSignOut}>Sign out</p>
           </div>
         </div>
       )

@@ -31413,7 +31413,7 @@
 	          { className: 'auth-button center pointer' },
 	          React.createElement(
 	            'p',
-	            { onClick: this.handleSignOut },
+	            { className: 'signout', onClick: this.handleSignOut },
 	            'Sign out'
 	          )
 	        )

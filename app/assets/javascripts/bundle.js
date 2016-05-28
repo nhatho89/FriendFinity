@@ -34493,12 +34493,13 @@
 	
 	  getInitialState: function () {
 	    return {
-	      friends: FriendAction.getAllFriends()
+	      friends: FriendStore.allFriends()
 	    };
 	  },
 	
 	  componentDidMount: function () {
 	    this.friendsListener = FriendStore.addListener(this.friendsChange);
+	    FriendAction.getAllFriends();
 	  },
 	
 	  friendsChange: function () {

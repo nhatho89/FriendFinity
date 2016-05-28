@@ -244,6 +244,7 @@ var SignUp = React.createClass({
               className="pointer"
               type="radio"
               value="male"
+              checked="checked"
               onClick={this.handleGender}
               required
               >Male</input>

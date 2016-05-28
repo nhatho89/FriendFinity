@@ -35014,6 +35014,7 @@
 	                className: 'pointer',
 	                type: 'radio',
 	                value: 'male',
+	                checked: 'checked',
 	                onClick: this.handleGender,
 	                required: true
 	              },

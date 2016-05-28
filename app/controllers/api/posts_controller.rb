@@ -3,22 +3,21 @@ class Api::PostsController < ApplicationController
 
     newsfeed_ids = friend_ids(current_user)
     @posts = Post.all
-
-    if post_params[:author_id]
+    if params[:post][:author_id]
       @posts = @posts.where(author_id: newsfeed_ids).order(created_at: :desc)
     end
   end
 
   def create
     @post = Post.new(
-      author_id: post_params[:author_id].to_i,
-      body: post_params[:body]
+      author_id: params[:post][:author_id].to_i,
+      body: params[:post][:body]
     )
 
     if @post.save!
       render json: {
-        author_id: post_params[:author_id].to_i,
-        body: post_params[:body]
+        author_id: params[:post][:author_id].to_i,
+        body: params[:post][:body]
       }
     else
       render json: @post.errors.full_messages

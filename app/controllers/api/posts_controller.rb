@@ -24,12 +24,6 @@ class Api::PostsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @post = Post.find(post_params[:author_id])
-  #   @post.destroy
-  #   render :show
-  # end
-
   private
 
   def friend_ids(current_user)

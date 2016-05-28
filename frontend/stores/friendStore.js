@@ -58,16 +58,6 @@ FriendStore.allFriends = function (){
   return _friends
 };
 
-FriendStore.areFriends = function (friendId){
-  var rf = false
-  _friends.forEach(function(friend, idx){
-    if (friend.id === parseInt(friendId)){
-      rf = true
-    }
-  })
-  return rf
-};
-
 FriendStore.find = function (friendId) {
   var foundFriend;
   _friends.forEach(function (friend) {
@@ -80,10 +70,6 @@ FriendStore.find = function (friendId) {
 
 FriendStore.__onDispatch = function(payload){
   switch(payload.actionType) {
-    case FriendConstants.REQUESTS_RECEIVED:
-    resetRequests(payload.requests)
-    FriendStore.__emitChange()
-    break;
     case FriendConstants.FRIENDS_RECEIVED:
     resetFriends(payload.friends)
     FriendStore.__emitChange()

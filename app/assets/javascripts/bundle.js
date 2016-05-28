@@ -34207,7 +34207,6 @@
 	var PostUtil = {
 	
 	  fetchAllPosts: function (userId, receiveAllPosts) {
-	    //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
 	
 	    $.ajax({
 	      url: "api/posts",
@@ -34277,7 +34276,6 @@
 	  componentDidMount: function () {
 	    this.listener = PostStore.addListener(this._onChange);
 	    this.friendListener = FriendStore.addListener(this.updatePosts);
-	    debugger;
 	    PostAction.getAllPosts(SessionStore.currentUser().id);
 	  },
 	
@@ -34500,7 +34498,6 @@
 	
 	  componentDidMount: function () {
 	    this.friendsListener = FriendStore.addListener(this.friendsChange);
-	    debugger;
 	    FriendAction.getAllFriends();
 	  },
 	
@@ -34613,16 +34610,6 @@
 	  return _friends;
 	};
 	
-	FriendStore.areFriends = function (friendId) {
-	  var rf = false;
-	  _friends.forEach(function (friend, idx) {
-	    if (friend.id === parseInt(friendId)) {
-	      rf = true;
-	    }
-	  });
-	  return rf;
-	};
-	
 	FriendStore.find = function (friendId) {
 	  var foundFriend;
 	  _friends.forEach(function (friend) {
@@ -34635,10 +34622,6 @@
 	
 	FriendStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
-	    case FriendConstants.REQUESTS_RECEIVED:
-	      resetRequests(payload.requests);
-	      FriendStore.__emitChange();
-	      break;
 	    case FriendConstants.FRIENDS_RECEIVED:
 	      resetFriends(payload.friends);
 	      FriendStore.__emitChange();
@@ -34667,10 +34650,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  // FRIEND_RECEIVED: "FRIEND_RECEIVED",
 	  FRIENDS_RECEIVED: "FRIENDS_RECEIVED",
 	  FRIEND_CREATED: "FRIEND_CREATED",
-	  // FRIEND_DELETED: "FRIEND_DELETED",
 	  REMOVE_FRIEND: "REMOVE_FRIEND",
 	
 	  REQUESTS_RECEIVED: "REQUESTS_RECEIVED",
@@ -35181,23 +35162,6 @@
 /***/ function(module, exports) {
 
 	var FriendUtil = {
-	
-	  // fetchFriendRequests: function (receiveFriendRequests) {
-	  //   //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
-	  //
-	  //
-	  //   $.ajax({
-	  //     url: "api/requests",
-	  //     method: "get",
-	  //     success: function (requests) {
-	  //      
-	  //       receiveFriendRequests(requests);
-	  //     },
-	  //     error: function(error,status) {
-	  //      
-	  //     }
-	  //   })
-	  // },
 	
 	  fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
 	

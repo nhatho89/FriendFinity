@@ -1,22 +1,5 @@
 var FriendUtil = {
 
-  // fetchFriendRequests: function (receiveFriendRequests) {
-  //   //userId = [userId] Need to add friend's id into this array so they can be selected in ActiveRecord
-  //
-  //
-  //   $.ajax({
-  //     url: "api/requests",
-  //     method: "get",
-  //     success: function (requests) {
-  //       
-  //       receiveFriendRequests(requests);
-  //     },
-  //     error: function(error,status) {
-  //       
-  //     }
-  //   })
-  // },
-
   fetchPeopleYouMayKnow: function (receivePeopleYouMayKnow) {
 
     $.ajax({
@@ -57,11 +40,11 @@ var FriendUtil = {
         }
       },
       success: function (request) {
-        
+
         approveFriendRequest(request);
       },
       error: function(error,status) {
-        
+
 
       }
     })
@@ -77,11 +60,11 @@ var FriendUtil = {
         }
       },
       success: function (request) {
-        
+
         removeFriend(request);
       },
       error: function(error,status) {
-        
+
 
       }
     })

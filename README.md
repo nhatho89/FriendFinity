@@ -16,3 +16,5 @@ FriendFinity is a single-page application built on Rails and React.js, with many
 
 - [Backend Technology](./docs/backend.md)
 - [Frontend technology](./docs/frontend.md)
+
+![alt text](./assets/landing.png "Landing Page")

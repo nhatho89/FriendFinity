@@ -1,6 +1,6 @@
 var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
-var SessionActions = require('../actions/sessionAction.js');
+var SessionActions = require('../../actions/sessionAction.js');
 var History = require('react-router').History;
 
 var LoginModalForm = React.createClass({

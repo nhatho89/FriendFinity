@@ -20,5 +20,6 @@ FriendFinity is a single-page application built on Rails and React.js, with many
 
 ## Images
 
-![FriendFinity Home Page](./docs/landing.png)
+![FriendFinity Landing Page](./docs/landing.png)
+
 ![FriendFinity Home Page](./docs/home.png)

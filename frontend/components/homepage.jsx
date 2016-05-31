@@ -1,8 +1,8 @@
 var React = require('react');
 var LeftNavigation = require('./leftNavigation');
-var Newsfeed = require('./newsfeed');
+var Newsfeed = require('./newsfeed/newsfeed');
 var SessionStore = require('../stores/sessionStore');
-var PeopleNavigation = require('./peopleNavigation');
+var PeopleNavigation = require('./friends/peopleNavigation');
 
 
 var Homepage = React.createClass({

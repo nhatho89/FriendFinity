@@ -1,8 +1,8 @@
 var React = require('react');
-var PostStore = require('../stores/postStore');
-var PostAction = require('../actions/postAction');
-var SessionStore = require('../stores/sessionStore');
-var FriendStore = require('../stores/friendStore');
+var PostStore = require('../../stores/postStore');
+var PostAction = require('../../actions/postAction');
+var SessionStore = require('../../stores/sessionStore');
+var FriendStore = require('../../stores/friendStore');
 
 var Feed = React.createClass({
   getInitialState: function() {

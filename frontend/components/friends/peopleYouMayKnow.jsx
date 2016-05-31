@@ -1,6 +1,6 @@
 var React = require('react');
-var FriendStore = require('../stores/friendStore');
-var FriendActions = require('../actions/friendshipActions');
+var FriendStore = require('../../stores/friendStore');
+var FriendActions = require('../../actions/friendshipActions');
 var PeopleYouMayKnowIndexItem = require('./peopleYouMayKnowIndexItem');
 
 var PeopleYouMayKnow = React.createClass({

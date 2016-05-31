@@ -24018,7 +24018,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Navbar = __webpack_require__(207);
+	var Navbar = __webpack_require__(287);
 	var SessionStore = __webpack_require__(220);
 	var SessionActions = __webpack_require__(213);
 	
@@ -24039,164 +24039,8 @@
 	module.exports = App;
 
 /***/ },
-/* 207 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var History = __webpack_require__(159).History;
-	var Signin = __webpack_require__(208);
-	var NavbarRight = __webpack_require__(238);
-	var SessionStore = __webpack_require__(220);
-	var NavBarLeft = __webpack_require__(260);
-	var NavBarRight = __webpack_require__(238);
-	var SessionActions = __webpack_require__(213);
-	
-	var Navbar = React.createClass({
-	  displayName: 'Navbar',
-	
-	  mixins: [History],
-	
-	  getInitialState: function () {
-	    return {
-	      user: SessionStore.currentUser()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.userListener = SessionStore.addListener(this.userChange);
-	    SessionActions.fetchSession();
-	  },
-	
-	  userChange: function () {
-	    this.setState({ user: SessionStore.currentUser() });
-	    if (this.state.user.id) {
-	      this.history.push({ pathname: "home/" });
-	    }
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.userListener.remove();
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { id: 'navbar', className: 'row space-between' },
-	      React.createElement(NavBarLeft, {
-	        user: this.state.user
-	      }),
-	      React.createElement(NavBarRight, {
-	        user: this.state.user })
-	    );
-	  }
-	
-	});
-	
-	module.exports = Navbar;
-
-/***/ },
-/* 208 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var LinkedStateMixin = __webpack_require__(209);
-	var SessionActions = __webpack_require__(213);
-	var History = __webpack_require__(159).History;
-	
-	var LoginModalForm = React.createClass({
-	  displayName: 'LoginModalForm',
-	
-	  mixins: [History],
-	  mixins: [LinkedStateMixin],
-	
-	  getInitialState: function () {
-	    return {
-	      email: "",
-	      password: ""
-	    };
-	  },
-	
-	  handleSubmit: function (e) {
-	    e.preventDefault();
-	    // this.props.closeModal();
-	    SessionActions.logIn({
-	      email: this.state.email,
-	      password: this.state.password
-	    });
-	  },
-	
-	  fillOutLogin: function () {
-	    var email = "joey@friends.com";
-	    var password = "qweasd";
-	
-	    SessionActions.logIn({
-	      email: 'joey@friends.com',
-	      password: 'qweasd'
-	    });
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'form',
-	      {
-	        className: 'form-auth',
-	        autoComplete: 'off',
-	        onSubmit: this.handleSubmit },
-	      React.createElement(
-	        'div',
-	        { className: 'row' },
-	        React.createElement(
-	          'div',
-	          { className: 'auth-input' },
-	          React.createElement('input', {
-	            type: 'text',
-	            className: 'login-control',
-	            valueLink: this.linkState("email"),
-	            placeholder: 'Email',
-	            required: true,
-	            autoFocus: true })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'auth-input' },
-	          React.createElement('input', {
-	            type: 'password',
-	            id: 'inputPassword',
-	            className: 'login-control',
-	            valueLink: this.linkState("password"),
-	            placeholder: 'Password',
-	            required: true
-	          })
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'submit-button' },
-	        React.createElement(
-	          'button',
-	          {
-	            className: 'auth-button demo-auth-button pointer',
-	            type: 'button',
-	            style: { float: "right" },
-	            onClick: this.fillOutLogin },
-	          'Demo Account'
-	        )
-	      ),
-	      React.createElement(
-	        'button',
-	        {
-	          className: 'auth-button sub-auth-button pointer',
-	          type: 'submit' },
-	        'Sign In'
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = LoginModalForm;
-
-/***/ },
+/* 207 */,
+/* 208 */,
 /* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31376,59 +31220,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var SessionActions = __webpack_require__(213);
-	var History = __webpack_require__(159).History;
-	var Signin = __webpack_require__(208);
-	
-	var NavBarRight = React.createClass({
-	  displayName: 'NavBarRight',
-	
-	  mixins: [History],
-	
-	  handleSignOut: function () {
-	    SessionActions.logOut();
-	    this.history.push({ pathname: "/" });
-	  },
-	
-	  render: function () {
-	    // <div className="one">
-	    //   <img className="nav-profile-pic" src={this.props.user.profile_pic}></img>
-	    // </div>
-	    // <div className="two">
-	    //   <p>{this.props.user.first_name}</p>
-	    // </div>
-	    if (this.props.user.first_name) {
-	      return React.createElement(
-	        'div',
-	        { className: 'navbar-right-signout col center' },
-	        React.createElement(
-	          'div',
-	          { className: 'auth-button center pointer' },
-	          React.createElement(
-	            'p',
-	            { className: 'signout', onClick: this.handleSignOut },
-	            'Sign out'
-	          )
-	        )
-	      );
-	    } else {
-	      return React.createElement(
-	        'div',
-	        { className: 'navbar-right col center' },
-	        React.createElement(Signin, null)
-	      );
-	    }
-	  }
-	
-	});
-	
-	module.exports = NavBarRight;
-
-/***/ },
+/* 238 */,
 /* 239 */,
 /* 240 */,
 /* 241 */,
@@ -31450,82 +31242,15 @@
 /* 257 */,
 /* 258 */,
 /* 259 */,
-/* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var History = __webpack_require__(159).History;
-	
-	var NavBarLeft = React.createClass({
-	  displayName: 'NavBarLeft',
-	
-	  mixins: [History],
-	
-	  handleHomeClick: function (e) {
-	    e.preventDefault();
-	    if (this.props.user.first_name) {
-	      this.history.pushState(null, "/home");
-	    } else {
-	      this.history.pushState(null, "/");
-	    }
-	  },
-	
-	  render: function () {
-	    var display;
-	    if (this.props.user.first_name) {
-	      display = React.createElement(
-	        'div',
-	        { className: 'navbar-search' },
-	        React.createElement(
-	          'form',
-	          { className: 'row' },
-	          React.createElement('input', {
-	            type: 'text',
-	            className: 'search',
-	            placeholder: 'Search FriendFinity',
-	            required: true,
-	            autoFocus: true }),
-	          React.createElement(
-	            'button',
-	            {
-	              className: 'auth-button pointer',
-	              type: 'submit' },
-	            'Search'
-	          )
-	        )
-	      );
-	    } else {
-	      display = React.createElement(
-	        'p1',
-	        { className: 'logo-text pointer', onClick: this.handleHomeClick },
-	        'riendFinity'
-	      );
-	    }
-	    return React.createElement(
-	      'div',
-	      { className: 'navbar-left' },
-	      React.createElement(
-	        'li',
-	        { className: 'absolute-logo pointer' },
-	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
-	      ),
-	      display
-	    );
-	  }
-	
-	});
-	
-	module.exports = NavBarLeft;
-
-/***/ },
+/* 260 */,
 /* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var LeftNavigation = __webpack_require__(262);
-	var Newsfeed = __webpack_require__(263);
+	var Newsfeed = __webpack_require__(296);
 	var SessionStore = __webpack_require__(220);
-	var PeopleNavigation = __webpack_require__(270);
+	var PeopleNavigation = __webpack_require__(291);
 	
 	var Homepage = React.createClass({
 	  displayName: 'Homepage',
@@ -32116,108 +31841,8 @@
 	module.exports = LeftNavigation;
 
 /***/ },
-/* 263 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var StatusUpdate = __webpack_require__(264);
-	var Feed = __webpack_require__(268);
-	
-	var Newsfeed = React.createClass({
-	  displayName: 'Newsfeed',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'newsfeed-container' },
-	      React.createElement(StatusUpdate, { user: this.props.user }),
-	      React.createElement(Feed, null)
-	    );
-	  }
-	});
-	
-	module.exports = Newsfeed;
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var PostAction = __webpack_require__(265);
-	// var SessionStore = require('../stores/sessionStore');
-	var PostStore = __webpack_require__(269);
-	
-	var StatusUpdate = React.createClass({
-	  displayName: 'StatusUpdate',
-	
-	  getInitialState: function () {
-	    return {
-	      body: "Something is wrong"
-	    };
-	  },
-	
-	  handleSubmit: function (e) {
-	    e.preventDefault();
-	    PostAction.createNewPost({
-	      authorId: this.props.user.id,
-	      body: this.state.body
-	    });
-	    $('.status')[0].value = "";
-	    PostAction.getAllPosts(this.props.user.id);
-	  },
-	
-	  statusHandler: function (e) {
-	    this.setState({
-	      body: e.target.value
-	    });
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'status-update-container row' },
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement('img', { className: 'status-profile', src: this.props.user.profile_pic })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col center' },
-	        React.createElement(
-	          'form',
-	          { className: 'status-form', onSubmit: this.handleSubmit },
-	          React.createElement(
-	            'div',
-	            { className: 'status-update' },
-	            React.createElement('input', {
-	              type: 'text',
-	              className: 'status',
-	              placeholder: 'What\'s on your mind?',
-	              onChange: this.statusHandler,
-	              required: true,
-	              autoFocus: true
-	            })
-	          ),
-	          React.createElement(
-	            'button',
-	            {
-	              className: 'auth-button sub-auth-button pointer',
-	              type: 'submit' },
-	            'Post'
-	          )
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = StatusUpdate;
-
-/***/ },
+/* 263 */,
+/* 264 */,
 /* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32308,84 +31933,7 @@
 	};
 
 /***/ },
-/* 268 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var PostStore = __webpack_require__(269);
-	var PostAction = __webpack_require__(265);
-	var SessionStore = __webpack_require__(220);
-	var FriendStore = __webpack_require__(273);
-	
-	var Feed = React.createClass({
-	  displayName: 'Feed',
-	
-	  getInitialState: function () {
-	    return {
-	      feed: PostStore.allPosts()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.listener = PostStore.addListener(this._onChange);
-	    this.friendListener = FriendStore.addListener(this.updatePosts);
-	    PostAction.getAllPosts(SessionStore.currentUser().id);
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.listener.remove();
-	    this.friendListener.remove();
-	  },
-	
-	  updatePosts: function () {
-	    PostAction.getAllPosts(SessionStore.currentUser().id);
-	  },
-	
-	  _onChange: function () {
-	    this.setState({
-	      feed: PostStore.allPosts()
-	    });
-	  },
-	
-	  render: function () {
-	    var feeds;
-	    if (this.state.feed.length > 0) {
-	
-	      feeds = this.state.feed.map(function (post) {
-	        return React.createElement(
-	          'div',
-	          { className: 'status-update-container row' },
-	          React.createElement(
-	            'div',
-	            null,
-	            React.createElement('img', { className: 'status-profile', src: post.profile_pic })
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'col center' },
-	            React.createElement(
-	              'p1',
-	              null,
-	              post.body
-	            )
-	          )
-	        );
-	      });
-	    } else {
-	      return React.createElement('div', null);
-	    }
-	    return React.createElement(
-	      'div',
-	      null,
-	      feeds
-	    );
-	  }
-	
-	});
-	
-	module.exports = Feed;
-
-/***/ },
+/* 268 */,
 /* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32434,170 +31982,9 @@
 	module.exports = PostStore;
 
 /***/ },
-/* 270 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var PeopleYouMayKnow = __webpack_require__(271);
-	var Friends = __webpack_require__(272);
-	
-	var PeopleNavigation = React.createClass({
-	  displayName: 'PeopleNavigation',
-	
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'people-navigation' },
-	      React.createElement(Friends, null),
-	      React.createElement(PeopleYouMayKnow, null)
-	    );
-	  }
-	});
-	
-	module.exports = PeopleNavigation;
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendStore = __webpack_require__(273);
-	var FriendActions = __webpack_require__(283);
-	var PeopleYouMayKnowIndexItem = __webpack_require__(285);
-	
-	var PeopleYouMayKnow = React.createClass({
-	  displayName: 'PeopleYouMayKnow',
-	
-	  getInitialState: function () {
-	    return {
-	      people: FriendStore.allPeople()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.peopleListener = FriendStore.addListener(this.onChange);
-	    FriendActions.getPeopleYouMayKnow();
-	  },
-	
-	  onChange: function () {
-	    this.setState({
-	      people: FriendStore.allPeople()
-	    });
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.peopleListener.remove();
-	  },
-	
-	  render: function () {
-	    var people;
-	    if (this.state.people.length > 0) {
-	      people = this.state.people.map(function (person) {
-	        return React.createElement(PeopleYouMayKnowIndexItem, { friend: person, key: person.id });
-	      });
-	    } else {
-	      people = React.createElement(
-	        'p1',
-	        null,
-	        'You are friends with everyone!'
-	      );
-	    }
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'col wrap status-update-container' },
-	      React.createElement(
-	        'p1',
-	        { className: 'people-nav-title center' },
-	        'People You May Know'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'max-width center' },
-	        React.createElement(
-	          'div',
-	          { className: 'low-width row wrap' },
-	          people
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = PeopleYouMayKnow;
-
-/***/ },
-/* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var FriendStore = __webpack_require__(273);
-	var FriendAction = __webpack_require__(283);
-	var FriendIndexItem = __webpack_require__(286);
-	
-	var Friends = React.createClass({
-	  displayName: 'Friends',
-	
-	
-	  getInitialState: function () {
-	    return {
-	      friends: FriendStore.allFriends()
-	    };
-	  },
-	
-	  componentDidMount: function () {
-	    this.friendsListener = FriendStore.addListener(this.friendsChange);
-	    FriendAction.getAllFriends();
-	  },
-	
-	  friendsChange: function () {
-	    this.setState({ friends: FriendStore.allFriends() });
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.friendsListener.remove();
-	  },
-	
-	  render: function () {
-	    var friends;
-	    if (this.state.friends && this.state.friends.length > 0) {
-	      friends = this.state.friends.map(function (friend) {
-	        return React.createElement(FriendIndexItem, { friend: friend, key: friend.id });
-	      });
-	    } else {
-	      friends = React.createElement(
-	        'p1',
-	        null,
-	        'You have no friends! =['
-	      );
-	    }
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'col status-update-container' },
-	      React.createElement(
-	        'p1',
-	        { className: 'people-nav-title center' },
-	        'Friends'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'max-width center' },
-	        React.createElement(
-	          'div',
-	          { className: 'low-width row wrap' },
-	          friends
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = Friends;
-
-/***/ },
+/* 270 */,
+/* 271 */,
+/* 272 */,
 /* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -33259,7 +32646,383 @@
 	module.exports = FriendUtil;
 
 /***/ },
-/* 285 */
+/* 285 */,
+/* 286 */,
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(159).History;
+	var Signin = __webpack_require__(288);
+	var NavbarRight = __webpack_require__(289);
+	var SessionStore = __webpack_require__(220);
+	var NavBarLeft = __webpack_require__(290);
+	var NavBarRight = __webpack_require__(289);
+	var SessionActions = __webpack_require__(213);
+	
+	var Navbar = React.createClass({
+	  displayName: 'Navbar',
+	
+	  mixins: [History],
+	
+	  getInitialState: function () {
+	    return {
+	      user: SessionStore.currentUser()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.userListener = SessionStore.addListener(this.userChange);
+	    SessionActions.fetchSession();
+	  },
+	
+	  userChange: function () {
+	    this.setState({ user: SessionStore.currentUser() });
+	    if (this.state.user.id) {
+	      this.history.push({ pathname: "home/" });
+	    }
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.userListener.remove();
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { id: 'navbar', className: 'row space-between' },
+	      React.createElement(NavBarLeft, {
+	        user: this.state.user
+	      }),
+	      React.createElement(NavBarRight, {
+	        user: this.state.user })
+	    );
+	  }
+	
+	});
+	
+	module.exports = Navbar;
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var LinkedStateMixin = __webpack_require__(209);
+	var SessionActions = __webpack_require__(213);
+	var History = __webpack_require__(159).History;
+	
+	var LoginModalForm = React.createClass({
+	  displayName: 'LoginModalForm',
+	
+	  mixins: [History],
+	  mixins: [LinkedStateMixin],
+	
+	  getInitialState: function () {
+	    return {
+	      email: "",
+	      password: ""
+	    };
+	  },
+	
+	  handleSubmit: function (e) {
+	    e.preventDefault();
+	    // this.props.closeModal();
+	    SessionActions.logIn({
+	      email: this.state.email,
+	      password: this.state.password
+	    });
+	  },
+	
+	  fillOutLogin: function () {
+	    var email = "joey@friends.com";
+	    var password = "qweasd";
+	
+	    SessionActions.logIn({
+	      email: 'joey@friends.com',
+	      password: 'qweasd'
+	    });
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'form',
+	      {
+	        className: 'form-auth',
+	        autoComplete: 'off',
+	        onSubmit: this.handleSubmit },
+	      React.createElement(
+	        'div',
+	        { className: 'row' },
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'text',
+	            className: 'login-control',
+	            valueLink: this.linkState("email"),
+	            placeholder: 'Email',
+	            required: true,
+	            autoFocus: true })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'auth-input' },
+	          React.createElement('input', {
+	            type: 'password',
+	            id: 'inputPassword',
+	            className: 'login-control',
+	            valueLink: this.linkState("password"),
+	            placeholder: 'Password',
+	            required: true
+	          })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'submit-button' },
+	        React.createElement(
+	          'button',
+	          {
+	            className: 'auth-button demo-auth-button pointer',
+	            type: 'button',
+	            style: { float: "right" },
+	            onClick: this.fillOutLogin },
+	          'Demo Account'
+	        )
+	      ),
+	      React.createElement(
+	        'button',
+	        {
+	          className: 'auth-button sub-auth-button pointer',
+	          type: 'submit' },
+	        'Sign In'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = LoginModalForm;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var SessionActions = __webpack_require__(213);
+	var History = __webpack_require__(159).History;
+	var Signin = __webpack_require__(288);
+	
+	var NavBarRight = React.createClass({
+	  displayName: 'NavBarRight',
+	
+	  mixins: [History],
+	
+	  handleSignOut: function () {
+	    SessionActions.logOut();
+	    this.history.push({ pathname: "/" });
+	  },
+	
+	  render: function () {
+	    // <div className="one">
+	    //   <img className="nav-profile-pic" src={this.props.user.profile_pic}></img>
+	    // </div>
+	    // <div className="two">
+	    //   <p>{this.props.user.first_name}</p>
+	    // </div>
+	    if (this.props.user.first_name) {
+	      return React.createElement(
+	        'div',
+	        { className: 'navbar-right-signout col center' },
+	        React.createElement(
+	          'div',
+	          { className: 'auth-button center pointer' },
+	          React.createElement(
+	            'p',
+	            { className: 'signout', onClick: this.handleSignOut },
+	            'Sign out'
+	          )
+	        )
+	      );
+	    } else {
+	      return React.createElement(
+	        'div',
+	        { className: 'navbar-right col center' },
+	        React.createElement(Signin, null)
+	      );
+	    }
+	  }
+	
+	});
+	
+	module.exports = NavBarRight;
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(159).History;
+	
+	var NavBarLeft = React.createClass({
+	  displayName: 'NavBarLeft',
+	
+	  mixins: [History],
+	
+	  handleHomeClick: function (e) {
+	    e.preventDefault();
+	    if (this.props.user.first_name) {
+	      this.history.pushState(null, "/home");
+	    } else {
+	      this.history.pushState(null, "/");
+	    }
+	  },
+	
+	  render: function () {
+	    var display;
+	    if (this.props.user.first_name) {
+	      display = React.createElement(
+	        'div',
+	        { className: 'navbar-search' },
+	        React.createElement(
+	          'form',
+	          { className: 'row' },
+	          React.createElement('input', {
+	            type: 'text',
+	            className: 'search',
+	            placeholder: 'Search FriendFinity',
+	            required: true,
+	            autoFocus: true }),
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'auth-button pointer',
+	              type: 'submit' },
+	            'Search'
+	          )
+	        )
+	      );
+	    } else {
+	      display = React.createElement(
+	        'p1',
+	        { className: 'logo-text pointer', onClick: this.handleHomeClick },
+	        'riendFinity'
+	      );
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'navbar-left' },
+	      React.createElement(
+	        'li',
+	        { className: 'absolute-logo pointer' },
+	        React.createElement('img', { id: 'friend-logo', src: '/assets/logo.png', onClick: this.handleHomeClick })
+	      ),
+	      display
+	    );
+	  }
+	
+	});
+	
+	module.exports = NavBarLeft;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PeopleYouMayKnow = __webpack_require__(292);
+	var Friends = __webpack_require__(294);
+	
+	var PeopleNavigation = React.createClass({
+	  displayName: 'PeopleNavigation',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'people-navigation' },
+	      React.createElement(Friends, null),
+	      React.createElement(PeopleYouMayKnow, null)
+	    );
+	  }
+	});
+	
+	module.exports = PeopleNavigation;
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(273);
+	var FriendActions = __webpack_require__(283);
+	var PeopleYouMayKnowIndexItem = __webpack_require__(293);
+	
+	var PeopleYouMayKnow = React.createClass({
+	  displayName: 'PeopleYouMayKnow',
+	
+	  getInitialState: function () {
+	    return {
+	      people: FriendStore.allPeople()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.peopleListener = FriendStore.addListener(this.onChange);
+	    FriendActions.getPeopleYouMayKnow();
+	  },
+	
+	  onChange: function () {
+	    this.setState({
+	      people: FriendStore.allPeople()
+	    });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.peopleListener.remove();
+	  },
+	
+	  render: function () {
+	    var people;
+	    if (this.state.people.length > 0) {
+	      people = this.state.people.map(function (person) {
+	        return React.createElement(PeopleYouMayKnowIndexItem, { friend: person, key: person.id });
+	      });
+	    } else {
+	      people = React.createElement(
+	        'p1',
+	        null,
+	        'You are friends with everyone!'
+	      );
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'col wrap status-update-container' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'People You May Know'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          people
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = PeopleYouMayKnow;
+
+/***/ },
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -33304,7 +33067,76 @@
 	module.exports = PeopleYouMayKnowIndexItem;
 
 /***/ },
-/* 286 */
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var FriendStore = __webpack_require__(273);
+	var FriendAction = __webpack_require__(283);
+	var FriendIndexItem = __webpack_require__(295);
+	
+	var Friends = React.createClass({
+	  displayName: 'Friends',
+	
+	
+	  getInitialState: function () {
+	    return {
+	      friends: FriendStore.allFriends()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.friendsListener = FriendStore.addListener(this.friendsChange);
+	    FriendAction.getAllFriends();
+	  },
+	
+	  friendsChange: function () {
+	    this.setState({ friends: FriendStore.allFriends() });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.friendsListener.remove();
+	  },
+	
+	  render: function () {
+	    var friends;
+	    if (this.state.friends && this.state.friends.length > 0) {
+	      friends = this.state.friends.map(function (friend) {
+	        return React.createElement(FriendIndexItem, { friend: friend, key: friend.id });
+	      });
+	    } else {
+	      friends = React.createElement(
+	        'p1',
+	        null,
+	        'You have no friends! =['
+	      );
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'col status-update-container' },
+	      React.createElement(
+	        'p1',
+	        { className: 'people-nav-title center' },
+	        'Friends'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'max-width center' },
+	        React.createElement(
+	          'div',
+	          { className: 'low-width row wrap' },
+	          friends
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Friends;
+
+/***/ },
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -33347,6 +33179,185 @@
 	});
 	
 	module.exports = FriendIndexItem;
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StatusUpdate = __webpack_require__(297);
+	var Feed = __webpack_require__(298);
+	
+	var Newsfeed = React.createClass({
+	  displayName: 'Newsfeed',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'newsfeed-container' },
+	      React.createElement(StatusUpdate, { user: this.props.user }),
+	      React.createElement(Feed, null)
+	    );
+	  }
+	});
+	
+	module.exports = Newsfeed;
+
+/***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PostAction = __webpack_require__(265);
+	var PostStore = __webpack_require__(269);
+	
+	var StatusUpdate = React.createClass({
+	  displayName: 'StatusUpdate',
+	
+	  getInitialState: function () {
+	    return {
+	      body: "Something is wrong"
+	    };
+	  },
+	
+	  handleSubmit: function (e) {
+	    e.preventDefault();
+	    PostAction.createNewPost({
+	      authorId: this.props.user.id,
+	      body: this.state.body
+	    });
+	    $('.status')[0].value = "";
+	    PostAction.getAllPosts(this.props.user.id);
+	  },
+	
+	  statusHandler: function (e) {
+	    this.setState({
+	      body: e.target.value
+	    });
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'status-update-container row' },
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement('img', { className: 'status-profile', src: this.props.user.profile_pic })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col center' },
+	        React.createElement(
+	          'form',
+	          { className: 'status-form', onSubmit: this.handleSubmit },
+	          React.createElement(
+	            'div',
+	            { className: 'status-update' },
+	            React.createElement('input', {
+	              type: 'text',
+	              className: 'status',
+	              placeholder: 'What\'s on your mind?',
+	              onChange: this.statusHandler,
+	              required: true,
+	              autoFocus: true
+	            })
+	          ),
+	          React.createElement(
+	            'button',
+	            {
+	              className: 'auth-button sub-auth-button pointer',
+	              type: 'submit' },
+	            'Post'
+	          )
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = StatusUpdate;
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PostStore = __webpack_require__(269);
+	var PostAction = __webpack_require__(265);
+	var SessionStore = __webpack_require__(220);
+	var FriendStore = __webpack_require__(273);
+	
+	var Feed = React.createClass({
+	  displayName: 'Feed',
+	
+	  getInitialState: function () {
+	    return {
+	      feed: PostStore.allPosts()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.listener = PostStore.addListener(this._onChange);
+	    this.friendListener = FriendStore.addListener(this.updatePosts);
+	    PostAction.getAllPosts(SessionStore.currentUser().id);
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listener.remove();
+	    this.friendListener.remove();
+	  },
+	
+	  updatePosts: function () {
+	    PostAction.getAllPosts(SessionStore.currentUser().id);
+	  },
+	
+	  _onChange: function () {
+	    this.setState({
+	      feed: PostStore.allPosts()
+	    });
+	  },
+	
+	  render: function () {
+	    var feeds;
+	    if (this.state.feed.length > 0) {
+	
+	      feeds = this.state.feed.map(function (post) {
+	        return React.createElement(
+	          'div',
+	          { className: 'status-update-container row' },
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement('img', { className: 'status-profile', src: post.profile_pic })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col center' },
+	            React.createElement(
+	              'p1',
+	              null,
+	              post.body
+	            )
+	          )
+	        );
+	      });
+	    } else {
+	      return React.createElement('div', null);
+	    }
+	    return React.createElement(
+	      'div',
+	      null,
+	      feeds
+	    );
+	  }
+	
+	});
+	
+	module.exports = Feed;
 
 /***/ }
 /******/ ]);

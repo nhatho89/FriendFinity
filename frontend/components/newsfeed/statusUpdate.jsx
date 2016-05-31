@@ -1,7 +1,6 @@
 var React = require('react');
-var PostAction = require('../actions/postAction');
-// var SessionStore = require('../stores/sessionStore');
-var PostStore = require('../stores/postStore');
+var PostAction = require('../../actions/postAction');
+var PostStore = require('../../stores/postStore');
 
 var StatusUpdate = React.createClass({
   getInitialState: function() {

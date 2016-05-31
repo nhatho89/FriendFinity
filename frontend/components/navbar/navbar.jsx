@@ -2,10 +2,10 @@ var React = require('react');
 var History = require('react-router').History;
 var Signin = require('./signin');
 var NavbarRight = require('./navBarRight');
-var SessionStore = require('../stores/sessionStore');
+var SessionStore = require('../../stores/sessionStore');
 var NavBarLeft = require('./navBarLeft');
 var NavBarRight = require('./navBarRight');
-var SessionActions = require('../actions/sessionAction');
+var SessionActions = require('../../actions/sessionAction');
 
 var Navbar = React.createClass({
   mixins: [History],

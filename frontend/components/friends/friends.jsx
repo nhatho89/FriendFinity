@@ -1,6 +1,6 @@
 var React = require('react');
-var FriendStore = require('../stores/friendStore');
-var FriendAction = require('../actions/friendshipActions');
+var FriendStore = require('../../stores/friendStore');
+var FriendAction = require('../../actions/friendshipActions');
 var FriendIndexItem = require('./friendIndexItem');
 
 var Friends = React.createClass({
@@ -35,7 +35,7 @@ var Friends = React.createClass({
     } else {
       friends = <p1>You have no friends! =[</p1>
     }
-    
+
     return (
       <div className="col status-update-container">
         <p1 className="people-nav-title center">Friends</p1>

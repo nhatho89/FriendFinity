@@ -1,5 +1,5 @@
 var React = require('react');
-var SessionActions = require('../actions/sessionAction');
+var SessionActions = require('../../actions/sessionAction');
 var History = require('react-router').History;
 var Signin = require('./signin');
 

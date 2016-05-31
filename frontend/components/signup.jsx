@@ -133,18 +133,17 @@ var SignUp = React.createClass({
   },
 
   render: function() {
-    // var alert = this.state.errors.map(function(error, idx){
-    //     return (
-    //       <div
-    //         key={"error"+idx}
-    //         className="alert alert-danger"
-    //         role="alert">
-    //         <strong>{error}</strong>
-    //       </div>
-    //     );
-    //   });
+    var alert = this.state.errors.map(function(error, idx){
+        return (
+          <div
+            key={"error"+idx}
+            className="alert alert-danger"
+            role="alert">
+            <strong>{error}</strong>
+          </div>
+        );
+      });
 
-    // {alert}
     return (
       <div className="signup-container col">
         <div className="signup-title-container">
@@ -155,6 +154,7 @@ var SignUp = React.createClass({
             <p1 className="signup-subtitle">It&#8217;s free and always will be</p1>
           </div>
         </div>
+        {alert}
         <form className='form-auth' onSubmit={this.handleSubmit}>
         <div className="signup-input row">
             <input

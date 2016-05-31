@@ -1,7 +1,6 @@
 var React = require('react');
 var FriendshipActions = require('../actions/friendshipActions');
 
-
 var FriendIndexItem = React.createClass({
   handleClick: function(e) {
     e.preventDefault();

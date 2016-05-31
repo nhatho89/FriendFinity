@@ -28,7 +28,6 @@ var PeopleYouMayKnow = React.createClass({
   render: function() {
     var people;
     if (this.state.people.length > 0) {
-
       people = this.state.people.map(function(person) {
         return (
           <PeopleYouMayKnowIndexItem friend={person} key={person.id}/>

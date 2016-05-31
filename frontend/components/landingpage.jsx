@@ -29,7 +29,6 @@ var LandingPage = React.createClass({
             </p>
           </div>
         </div>
-
         <div className="right-page">
           <SignUp/>
         </div>

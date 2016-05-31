@@ -13,7 +13,6 @@ var Newsfeed = React.createClass({
       </div>
     );
   }
-
 });
 
 module.exports = Newsfeed;

@@ -25,7 +25,6 @@ class Api::FriendshipsController < ApplicationController
     else
       render json: {}, status: 420
     end
-
   end
 
   def destroy

@@ -3,8 +3,6 @@ var History = require('react-router').History;
 var Signin = require('./signin');
 var NavbarRight = require('./navBarRight');
 var SessionStore = require('../stores/sessionStore');
-var Modal = require('react-modal');
-var authModalStyle = require('./authModalStyle.jsx');
 var NavBarLeft = require('./navBarLeft');
 var NavBarRight = require('./navBarRight');
 var SessionActions = require('../actions/sessionAction');
@@ -37,17 +35,13 @@ var Navbar = React.createClass({
   render: function() {
 
     return (
-
         <div id="navbar" className="row space-between">
-
           <NavBarLeft
             user={this.state.user}
             />
-
           <NavBarRight
             user={this.state.user}/>
         </div>
-
     );
   }
 

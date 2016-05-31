@@ -6,9 +6,4 @@ class Post < ActiveRecord::Base
     primary_key: :id,
     class_name: "User"
 
-  def author_name
-    author.name
-  end
-
-
 end

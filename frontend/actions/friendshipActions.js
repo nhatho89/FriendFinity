@@ -26,10 +26,6 @@ var FriendActions = {
     });
   },
 
-  // getFriendRequests: function(){
-  //   FriendUtil.fetchFriendRequests(this.receiveAllRequests);
-  // },
-
   createFriend: function(friendId) {
     FriendUtil.createFriendRequest(friendId, this.approveFriendRequest);
   },
@@ -37,13 +33,6 @@ var FriendActions = {
   unfriend: function(friendId) {
     FriendUtil.removeFriendRequest(friendId, this.removeFriend);
   },
-
-  // receiveAllRequests: function (requests) {
-  //   Dispatcher.dispatch({
-  //     actionType: Constants.REQUESTS_RECEIVED,
-  //     requests: requests
-  //   });
-  // },
 
   approveFriendRequest: function (data) {
     AppDispatcher.dispatch({
@@ -53,19 +42,11 @@ var FriendActions = {
   },
 
   removeFriend: function(friend){
-    
     AppDispatcher.dispatch({
       actionType: FriendConstants.REMOVE_FRIEND,
       friend: friend
     });
   },
-
-  // sendFriendRequest: function(friendRequest){
-  //   AppDispatcher.dispatch({
-  //     actionType: FriendConstants.REQUEST_FRIEND,
-  //     friendRequest: friendRequest
-  //   });
-  // }
 
 };
 

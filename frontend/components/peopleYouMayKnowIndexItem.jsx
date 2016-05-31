@@ -29,7 +29,6 @@ var PeopleYouMayKnowIndexItem = React.createClass({
       </div>
     );
   }
-
 });
 
 module.exports = PeopleYouMayKnowIndexItem;

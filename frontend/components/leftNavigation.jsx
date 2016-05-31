@@ -9,13 +9,14 @@ var LeftNavigation = React.createClass({
       name = this.props.user.first_name + " " + this.props.user.last_name
       profilePic = this.props.user.profile_pic
     }
+
     return (
       <div className="leftnav">
-        <div className="proflistwrapper">
+        <div>
           <ul className="proflist">
             <li>
               <div className="row">
-                <div className="leftcontentwrapper">
+                <div>
                   <img className="nav-profile-pic" src={profilePic}></img>
                 </div>
                 <div className="col center">
@@ -37,7 +38,7 @@ var LeftNavigation = React.createClass({
 
           </ul>
 
-          <div className="favlistwrapper">
+          <div>
             <p1>
               FAVORITES
             </p1>
@@ -99,7 +100,7 @@ var LeftNavigation = React.createClass({
                 </li>
               </ul>
           </div>
-          <div className="pagelistwrapper">
+          <div>
               <p1>
                 PAGES
               </p1>
@@ -140,7 +141,7 @@ var LeftNavigation = React.createClass({
 
               </ul>
           </div>
-          <div className="grouplistwrapper">
+          <div>
               <p1>
                 GROUPS
               </p1>
@@ -169,7 +170,7 @@ var LeftNavigation = React.createClass({
 
               </ul>
           </div>
-          <div className="firendlistwrapper">
+          <div>
               <p1>
                 FRIENDS
               </p1>
@@ -198,7 +199,7 @@ var LeftNavigation = React.createClass({
 
               </ul>
           </div>
-          <div className="applistwrapper">
+          <div>
               <p1>
                 APPS
               </p1>
@@ -241,7 +242,7 @@ var LeftNavigation = React.createClass({
 
               </ul>
           </div>
-          <div className="interestlistwrapper">
+          <div>
               <p1>
                 INTERESTS
               </p1>
@@ -259,7 +260,7 @@ var LeftNavigation = React.createClass({
 
               </ul>
           </div>
-          <div className="eventlistwrapper">
+          <div>
               <p1>
                 EVENTS
               </p1>

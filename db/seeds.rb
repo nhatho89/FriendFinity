@@ -115,7 +115,7 @@ author_id: 6
 )
 
 Post.create!(
-  body: "Can today BE anymore ridiculous?",
+  body: "Can you two BE anymore ridiculous?",
   author_id: 2
 )
 

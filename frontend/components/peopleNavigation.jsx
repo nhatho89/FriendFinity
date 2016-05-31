@@ -12,7 +12,6 @@ var PeopleNavigation = React.createClass({
       </div>
     );
   }
-
 });
 
 module.exports = PeopleNavigation;

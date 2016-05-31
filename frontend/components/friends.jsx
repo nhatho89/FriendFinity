@@ -26,9 +26,7 @@ var Friends = React.createClass({
 
   render: function() {
     var friends;
-
     if (this.state.friends && this.state.friends.length > 0) {
-
       friends = this.state.friends.map(function(friend) {
         return (
           <FriendIndexItem friend={friend} key={friend.id}/>
@@ -37,6 +35,7 @@ var Friends = React.createClass({
     } else {
       friends = <p1>You have no friends! =[</p1>
     }
+    
     return (
       <div className="col status-update-container">
         <p1 className="people-nav-title center">Friends</p1>
@@ -48,7 +47,6 @@ var Friends = React.createClass({
       </div>
     );
   }
-
 });
 
 module.exports = Friends;

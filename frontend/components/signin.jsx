@@ -21,7 +21,6 @@ var LoginModalForm = React.createClass({
       email: this.state.email,
       password: this.state.password
     });
-
   },
 
   fillOutLogin: function() {

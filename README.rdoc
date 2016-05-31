@@ -1,28 +1,18 @@
-== README
+## FriendFinity
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[FriendFinity](http://friendfinity.herokuapp.com) is a web application for users to maintain relationship with close friends.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Features
+
+- User accounts with secure authentication
+- Adding and removal of friends results in real time
+- Status updates can be posted and only viewed by friends
+
+
+## Technology
+
+FriendFinity is a single-page application built on Rails and React.js, with many dependencies in both the backend and the frontend.
+
+- [Backend Technology](./docs/backend.md)
+- [Frontend technology](./docs/frontend.md)
